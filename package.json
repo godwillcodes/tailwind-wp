@@ -1,0 +1,16 @@
+{
+  "name": "piedmont-global",
+  "version": "1.0.0",
+  "description": "Custom WordPress theme powered by TailwindCSS. Built for speed, scalability, and real-world production workflows.",
+  "author": "PGLS DX Team",
+  "license": "GPL-2.0-or-later",
+  "scripts": {
+    "dev": "npx tailwindcss -i ./assets/css/input.css -o ./assets/css/output.css --watch",
+    "build": "npx tailwindcss -i ./assets/css/input.css -o ./assets/css/output.css --minify"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.0",
+    "postcss": "^8.4.0",
+    "tailwindcss": "^3.4.0"
+  }
+}
