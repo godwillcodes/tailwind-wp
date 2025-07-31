@@ -138,22 +138,58 @@ add_action( 'widgets_init', 'pg_widgets_init' );
  * Enqueue scripts and styles.
  */
 function pg_scripts() {
-	// Tailwind compiled CSS
-	$tailwind_css_path = get_template_directory() . '/assets/css/output.css';
-	$tailwind_css_uri = get_template_directory_uri() . '/assets/css/output.css';
+	// Tailwind CSS
+	$tailwind_path = get_template_directory() . '/assets/css/output.css';
+	$tailwind_uri  = get_template_directory_uri() . '/assets/css/output.css';
 
-	if ( file_exists( $tailwind_css_path ) ) {
-		wp_enqueue_style( 'pg-tailwind', $tailwind_css_uri, array(), filemtime( $tailwind_css_path ) );
+	if ( file_exists( $tailwind_path ) ) {
+		wp_enqueue_style(
+			'pg-tailwind',
+			$tailwind_uri,
+			array(),
+			filemtime( $tailwind_path )
+		);
+	} else {
+		if ( WP_DEBUG ) {
+			error_log( 'Missing Tailwind CSS: ' . $tailwind_path );
+		}
 	}
 
-	// Theme JS
-	wp_enqueue_script(
-		'pg-navigation',
-		get_template_directory_uri() . '/js/navigation.js',
-		array(),
-		_S_VERSION,
-		true
-	);
+	// Alpine.js (self-hosted)
+	$alpine_path = get_template_directory() . '/assets/js/alpine.min.js';
+	$alpine_uri  = get_template_directory_uri() . '/assets/js/alpine.min.js';
+
+	if ( file_exists( $alpine_path ) ) {
+		wp_enqueue_script(
+			'pg-alpine',
+			$alpine_uri,
+			array(),
+			filemtime( $alpine_path ),
+			true // footer
+		);
+	} else {
+		if ( WP_DEBUG ) {
+			error_log( 'Missing Alpine JS: ' . $alpine_path );
+		}
+	}
+
+	// Navigation JS
+	$nav_path = get_template_directory() . '/js/navigation.js';
+	$nav_uri  = get_template_directory_uri() . '/js/navigation.js';
+
+	if ( file_exists( $nav_path ) ) {
+		wp_enqueue_script(
+			'pg-navigation',
+			$nav_uri,
+			array( 'pg-alpine' ), // Depend on Alpine
+			filemtime( $nav_path ),
+			true // footer
+		);
+	} else {
+		if ( WP_DEBUG ) {
+			error_log( 'Missing Navigation JS: ' . $nav_path );
+		}
+	}
 
 	// Comments
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
@@ -161,6 +197,7 @@ function pg_scripts() {
 	}
 }
 add_action( 'wp_enqueue_scripts', 'pg_scripts' );
+
 
 
 /**
