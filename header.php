@@ -25,6 +25,4 @@
 <div id="page" class="site">
 	<a class="skip-link screen-reader-text" href="#primary"><?php esc_html_e( 'Skip to content', 'pg' ); ?></a>
 
-	<header class="site-header py-4 bg-slate-200">
-		<p class="text-center">This is the header </p>	
-	</header><!-- #masthead -->
+	

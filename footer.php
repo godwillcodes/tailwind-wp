@@ -13,7 +13,7 @@
 
 	<footer class="py-4 bg-slate-200">
 		<p class="text-center">This is the footer</p>
-	</footer><!-- #colophon -->
+	</footer>
 </div><!-- #page -->
 
 <?php wp_footer(); ?>

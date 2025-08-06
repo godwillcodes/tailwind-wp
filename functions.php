@@ -155,6 +155,23 @@ function pg_scripts() {
 		}
 	}
 
+	// AOS CSS
+	$aos_css_path = get_template_directory() . '/assets/css/aos.css';
+	$aos_css_uri  = get_template_directory_uri() . '/assets/css/aos.css';
+
+	if ( file_exists( $aos_css_path ) ) {
+		wp_enqueue_style(
+			'pg-aos',
+			$aos_css_uri,
+			array(),
+			filemtime( $aos_css_path )
+		);
+	} else {
+		if ( WP_DEBUG ) {
+			error_log( 'Missing AOS CSS: ' . $aos_css_path );
+		}
+	}
+
 	// Alpine.js (self-hosted)
 	$alpine_path = get_template_directory() . '/assets/js/alpine.min.js';
 	$alpine_uri  = get_template_directory_uri() . '/assets/js/alpine.min.js';
@@ -165,11 +182,29 @@ function pg_scripts() {
 			$alpine_uri,
 			array(),
 			filemtime( $alpine_path ),
-			true // footer
+			true
 		);
 	} else {
 		if ( WP_DEBUG ) {
 			error_log( 'Missing Alpine JS: ' . $alpine_path );
+		}
+	}
+
+	// AOS JS
+	$aos_js_path = get_template_directory() . '/assets/js/aos.js';
+	$aos_js_uri  = get_template_directory_uri() . '/assets/js/aos.js';
+
+	if ( file_exists( $aos_js_path ) ) {
+		wp_enqueue_script(
+			'pg-aos',
+			$aos_js_uri,
+			array(),
+			filemtime( $aos_js_path ),
+			true
+		);
+	} else {
+		if ( WP_DEBUG ) {
+			error_log( 'Missing AOS JS: ' . $aos_js_path );
 		}
 	}
 
@@ -181,9 +216,9 @@ function pg_scripts() {
 		wp_enqueue_script(
 			'pg-navigation',
 			$nav_uri,
-			array( 'pg-alpine' ), // Depend on Alpine
+			array( 'pg-alpine' ),
 			filemtime( $nav_path ),
-			true // footer
+			true
 		);
 	} else {
 		if ( WP_DEBUG ) {
@@ -197,6 +232,12 @@ function pg_scripts() {
 	}
 }
 add_action( 'wp_enqueue_scripts', 'pg_scripts' );
+
+// AOS initialization
+add_action( 'wp_footer', function () {
+	echo "<script>AOS.init();</script>";
+}, 100 );
+
 
 
 
