@@ -34,7 +34,7 @@
 
             <!-- Right Column Image -->
             <div class="md:col-span-5 order-2 flex justify-center md:justify-end">
-                <img src="http://piedmontglobal.local/wp-content/uploads/iStock-1454186321-1.webp"
+                <img src=" /wp-content/uploads/iStock-1454186321-1.webp"
                      alt="Feature Image"
                      class="w-full max-w-[440px] h-auto shadow-md md:absolute md:bottom-[-60%] md:right-0 md:z-20">
             </div>

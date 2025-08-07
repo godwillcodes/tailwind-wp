@@ -121,7 +121,7 @@ get_template_part( 'components/banner/primary' );
         background: linear-gradient(0deg, #550061, #550061),
         linear-gradient(0.03deg, #D16555 0.04%, rgba(171, 157, 186, 0) 50.01%);
       ">
-                <img src="http://piedmontglobal.local/wp-content/uploads/Rectangle-21027.png" alt="Team collaboration"
+                <img src=" /wp-content/uploads/Rectangle-21027.png" alt="Team collaboration"
                     class=" h-full w-full object-cover rounded-[6px] p-10 md:p-20 " />
             </div>
         </div>
@@ -157,7 +157,7 @@ get_template_part( 'components/banner/primary' );
             <?php for ($i = 0; $i < 9; $i++) { ?>
             <div class="bg-[#006155] text-black rounded-[4px] shadow-md p-10 flex flex-col justify-between"
                 data-aos="fade-up" data-aos-delay="<?= $i * 100 ?>">
-                <img src="http://piedmontglobal.local/wp-content/uploads/Union.png" class="mb-6 h-16 w-16" alt="">
+                <img src=" /wp-content/uploads/Union.png" class="mb-6 h-16 w-16" alt="">
                 <h3 class="text-xl text-white font-semibold mb-4">Industry <?= $i + 1 ?></h3>
                 <p class="text-white mb-3 mt-8 font-normal text-lg">
                     Tailored solutions that understand your unique challenges and opportunities.
@@ -186,7 +186,7 @@ get_template_part( 'components/banner/primary' );
 
         <!-- 1/3 Column -->
         <div class="bg-white rounded border border-[#DFDAD4] overflow-hidden shadow-sm">
-            <img src="http://piedmontglobal.local/wp-content/uploads/Rectangle-21027.png" alt="Team discussing"
+            <img src=" /wp-content/uploads/Rectangle-21027.png" alt="Team discussing"
                 class="w-full h-48 object-cover">
             <div class="py-6 px-8">
                 <p class="text-6xl font-bold text-gray-900 mb-4">56%</p>
@@ -229,7 +229,7 @@ get_template_part( 'components/banner/primary' );
             <?php for ($i = 0; $i < 6; $i++) { ?>
             <!-- Card 1 -->
             <div class="bg-white rounded border shadow-sm overflow-hidden flex flex-col">
-                <img src="http://piedmontglobal.local/wp-content/uploads/Rectangle-21027.png" alt="Translation"
+                <img src=" /wp-content/uploads/Rectangle-21027.png" alt="Translation"
                     class="w-full h-60 object-cover">
                 <div class="p-6 flex flex-col flex-1">
                     <h3 class="text-2xl font-semibold text-gray-900 mb-2">Translation</h3>
