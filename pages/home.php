@@ -89,21 +89,19 @@ get_template_part( 'components/banner/primary' );
     </div>
 </section>
 
-<section class="bg-[#F7F7F5] py-20 max-w-7xl mx-auto">
-
-    <div class="flex flex-col md:flex-row justify-between items-start md:items-center w-full mb-20 gap-6 px-10 md:px-0">
-        <h2 class="text-3xl md:text-5xl font-bold text-gray-900" data-aos="fade-right">
-            From translation to<br />transformation
-        </h2>
-        <a href="#"
-            class="inline-flex items-center text-lg font-medium border-b-2 border-[#D16555] hover:border-[#D16555] transition-colors duration-300"
-            data-aos="fade-left" data-aos-delay="100">
-            Explore full capabilities <span class="ml-1 text-lg">→</span>
+<section class="bg-[#F7F7F5] py-20 ">
+  <div class="max-w-7xl mx-auto">
+    <div class="flex flex-col md:flex-row justify-between items-start md:items-center w-full mb-20 gap-6">
+      <h2 class="text-3xl md:text-5xl font-bold text-gray-900" data-aos="fade-right">
+        From translation to<br />transformation
+      </h2>
+      <a href="#"
+          class="inline-flex items-center text-lg font-medium border-b-2 border-[#D16555] hover:border-[#D16555] transition-colors duration-300"
+          data-aos="fade-left" data-aos-delay="100">
+          Explore full capabilities <span class="ml-1 text-lg">→</span>
         </a>
     </div>
-
-
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-32">
+     <div class="grid grid-cols-1 md:grid-cols-2 gap-32">
         <div data-aos="fade-up" data-aos-delay="150" class="flex-1 px-10 md:px-0">
             <div class="space-y-10">
                 <?php for ($i = 0; $i < 3; $i++) { ?>
@@ -128,6 +126,9 @@ get_template_part( 'components/banner/primary' );
             </div>
         </div>
     </div>
+
+
+   
 
 
 
@@ -189,6 +190,7 @@ get_template_part( 'components/banner/primary' );
                 class="w-full h-48 object-cover">
             <div class="py-6 px-8">
                 <p class="text-6xl font-bold text-gray-900 mb-4">56%</p>
+                
                 <p class="text-gray-700 mb-4 text-lg max-w-xs">
                     Reduction in turnaround time for high-volume, high-stakes translation projects.
                 </p>
@@ -203,43 +205,49 @@ get_template_part( 'components/banner/primary' );
     </div>
 </section>
 
-<section class="h-[200px] bg-repeat-x bg-top pb-10"
+<section class="h-[200px] bg-repeat-x bg-top pb-10 bg-[#F9F8F6]"
     style="background-image: url('<?php echo esc_url( get_template_directory_uri() . '/assets/icons/pattern-2.svg' ); ?>')">
 </section>
 
-<section class="bg-[#F7F7F5] py-20 max-w-7xl mx-auto px-10 md:px-0">
+<section class="bg-[#F7F7F5] py-20  px-10 md:px-0">
 
-    <div class="flex flex-col md:flex-row justify-between items-start md:items-center w-full mb-20 gap-6">
-        <h2 class="text-3xl md:text-5xl font-bold text-gray-900" data-aos="fade-right">
-            From translation to<br />transformation
-        </h2>
-        <a href="#"
-            class="inline-flex items-center text-lg font-medium border-b-2 border-[#D16555] hover:border-[#D16555] transition-colors duration-300"
-            data-aos="fade-left" data-aos-delay="100">
-            Explore full capabilities <span class="ml-1 text-lg">→</span>
-        </a>
+    <div class="max-w-7xl mx-auto">
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-center w-full mb-20 gap-6">
+            <h2 class="text-3xl md:text-5xl font-bold text-gray-900" data-aos="fade-right">
+                From translation to<br />transformation
+            </h2>
+            <a href="#"
+                class="inline-flex items-center text-lg font-medium border-b-2 border-[#D16555] hover:border-[#D16555] transition-colors duration-300"
+                data-aos="fade-left" data-aos-delay="100">
+                Explore full capabilities <span class="ml-1 text-lg">→</span>
+            </a>
+        </div>
+
+
+        <div class="grid md:grid-cols-3 gap-12 max-w-7xl mx-auto">
+
+            <?php for ($i = 0; $i < 6; $i++) { ?>
+            <!-- Card 1 -->
+            <div class="bg-white rounded border shadow-sm overflow-hidden flex flex-col">
+                <img src="http://piedmontglobal.local/wp-content/uploads/Rectangle-21027.png" alt="Translation"
+                    class="w-full h-60 object-cover">
+                <div class="p-6 flex flex-col flex-1">
+                    <h3 class="text-2xl font-semibold text-gray-900 mb-2">Translation</h3>
+                    <p class="text-gray-700 mb-6 text-lg flex-1">Accurate, fast, and secure, in over 200 languages</p>
+                    <a href="#"
+                        class="inline-flex items-center gap-3 mt-12 text-sm font-semibold text-gray-900 hover:underline">
+                        Learn more
+                        <span class="ml-1 text-lg">→</span>
+                    </a>
+                    <div class="h-0.5 w-24 mt-1 bg-[#D16555]"></div>
+                </div>
+            </div>
+            <?php } ?>
+
+        </div>
     </div>
 
 
-    <div class="grid md:grid-cols-3 gap-12 max-w-7xl mx-auto">
-
-    <?php for ($i = 0; $i < 6; $i++) { ?>
-        <!-- Card 1 -->
-    <div class="bg-white rounded border shadow-sm overflow-hidden flex flex-col">
-      <img src="http://piedmontglobal.local/wp-content/uploads/Rectangle-21027.png" alt="Translation" class="w-full h-60 object-cover">
-      <div class="p-6 flex flex-col flex-1">
-        <h3 class="text-2xl font-semibold text-gray-900 mb-2">Translation</h3>
-        <p class="text-gray-700 mb-6 text-lg flex-1">Accurate, fast, and secure, in over 200 languages</p>
-        <a href="#" class="inline-flex items-center gap-3 mt-12 text-sm font-semibold text-gray-900 hover:underline">
-          Learn more
-          <span class="ml-1 text-lg">→</span>
-        </a>
-        <div class="h-0.5 w-24 mt-1 bg-[#D16555]"></div>
-      </div>
-    </div>
-        <?php } ?>
-
-    </div>
 
 
 

@@ -1391,6 +1391,11 @@ video {
   background-color: rgb(209 101 85 / var(--tw-bg-opacity, 1));
 }
 
+.bg-\[\#F9F8F6\] {
+  --tw-bg-opacity: 1;
+  background-color: rgb(249 248 246 / var(--tw-bg-opacity, 1));
+}
+
 .bg-gradient-to-b {
   background-image: linear-gradient(to bottom, var(--tw-gradient-stops));
 }
@@ -1824,6 +1829,14 @@ video {
 
 .opacity-20 {
   opacity: 0.2;
+}
+
+.opacity-80 {
+  opacity: 0.8;
+}
+
+.opacity-30 {
+  opacity: 0.3;
 }
 
 .shadow-2xl {
