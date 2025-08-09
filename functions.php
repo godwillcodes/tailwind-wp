@@ -149,10 +149,8 @@ function pg_scripts() {
 			array(),
 			filemtime( $tailwind_path )
 		);
-	} else {
-		if ( WP_DEBUG ) {
-			error_log( 'Missing Tailwind CSS: ' . $tailwind_path );
-		}
+	} elseif ( WP_DEBUG ) {
+		error_log( 'Missing Tailwind CSS: ' . $tailwind_path );
 	}
 
 	// AOS CSS
@@ -166,10 +164,37 @@ function pg_scripts() {
 			array(),
 			filemtime( $aos_css_path )
 		);
-	} else {
-		if ( WP_DEBUG ) {
-			error_log( 'Missing AOS CSS: ' . $aos_css_path );
-		}
+	} elseif ( WP_DEBUG ) {
+		error_log( 'Missing AOS CSS: ' . $aos_css_path );
+	}
+
+	// Owl Carousel CSS
+	$owl_css_path = get_template_directory() . '/assets/css/owl.carousel.min.css';
+	$owl_css_uri  = get_template_directory_uri() . '/assets/css/owl.carousel.min.css';
+
+	if ( file_exists( $owl_css_path ) ) {
+		wp_enqueue_style(
+			'pg-owl-carousel',
+			$owl_css_uri,
+			array(),
+			filemtime( $owl_css_path )
+		);
+	} elseif ( WP_DEBUG ) {
+		error_log( 'Missing Owl Carousel CSS: ' . $owl_css_path );
+	}
+
+	$owl_theme_path = get_template_directory() . '/assets/css/owl.theme.default.min.css';
+	$owl_theme_uri  = get_template_directory_uri() . '/assets/css/owl.theme.default.min.css';
+
+	if ( file_exists( $owl_theme_path ) ) {
+		wp_enqueue_style(
+			'pg-owl-theme',
+			$owl_theme_uri,
+			array( 'pg-owl-carousel' ),
+			filemtime( $owl_theme_path )
+		);
+	} elseif ( WP_DEBUG ) {
+		error_log( 'Missing Owl Carousel Theme CSS: ' . $owl_theme_path );
 	}
 
 	// Alpine.js (self-hosted)
@@ -184,10 +209,8 @@ function pg_scripts() {
 			filemtime( $alpine_path ),
 			true
 		);
-	} else {
-		if ( WP_DEBUG ) {
-			error_log( 'Missing Alpine JS: ' . $alpine_path );
-		}
+	} elseif ( WP_DEBUG ) {
+		error_log( 'Missing Alpine JS: ' . $alpine_path );
 	}
 
 	// AOS JS
@@ -202,10 +225,40 @@ function pg_scripts() {
 			filemtime( $aos_js_path ),
 			true
 		);
-	} else {
-		if ( WP_DEBUG ) {
-			error_log( 'Missing AOS JS: ' . $aos_js_path );
-		}
+	} elseif ( WP_DEBUG ) {
+		error_log( 'Missing AOS JS: ' . $aos_js_path );
+	}
+
+	// jQuery (self-hosted)
+	$jquery_path = get_template_directory() . '/assets/js/jquery.min.js';
+	$jquery_uri  = get_template_directory_uri() . '/assets/js/jquery.min.js';
+
+	if ( file_exists( $jquery_path ) ) {
+		wp_enqueue_script(
+			'pg-jquery',
+			$jquery_uri,
+			array(),
+			filemtime( $jquery_path ),
+			true
+		);
+	} elseif ( WP_DEBUG ) {
+		error_log( 'Missing jQuery: ' . $jquery_path );
+	}
+
+	// Owl Carousel JS
+	$owl_js_path = get_template_directory() . '/assets/js/owl.carousel.min.js';
+	$owl_js_uri  = get_template_directory_uri() . '/assets/js/owl.carousel.min.js';
+
+	if ( file_exists( $owl_js_path ) ) {
+		wp_enqueue_script(
+			'pg-owl-carousel',
+			$owl_js_uri,
+			array( 'pg-jquery' ),
+			filemtime( $owl_js_path ),
+			true
+		);
+	} elseif ( WP_DEBUG ) {
+		error_log( 'Missing Owl Carousel JS: ' . $owl_js_path );
 	}
 
 	// Navigation JS
@@ -220,10 +273,8 @@ function pg_scripts() {
 			filemtime( $nav_path ),
 			true
 		);
-	} else {
-		if ( WP_DEBUG ) {
-			error_log( 'Missing Navigation JS: ' . $nav_path );
-		}
+	} elseif ( WP_DEBUG ) {
+		error_log( 'Missing Navigation JS: ' . $nav_path );
 	}
 
 	// Comments
@@ -233,12 +284,45 @@ function pg_scripts() {
 }
 add_action( 'wp_enqueue_scripts', 'pg_scripts' );
 
+
 // AOS initialization
 add_action( 'wp_footer', function () {
 	echo "<script>AOS.init();</script>";
 }, 100 );
 
+// Allow SVG
+add_filter( 'wp_check_filetype_and_ext', function($data, $file, $filename, $mimes) {
 
+  global $wp_version;
+  if ( $wp_version !== '4.7.1' ) {
+     return $data;
+  }
+
+  $filetype = wp_check_filetype( $filename, $mimes );
+
+  return [
+      'ext'             => $filetype['ext'],
+      'type'            => $filetype['type'],
+      'proper_filename' => $data['proper_filename']
+  ];
+
+}, 10, 4 );
+
+function cc_mime_types( $mimes ){
+  $mimes['svg'] = 'image/svg+xml';
+  return $mimes;
+}
+add_filter( 'upload_mimes', 'cc_mime_types' );
+
+function fix_svg() {
+  echo '<style type="text/css">
+        .attachment-266x266, .thumbnail img {
+             width: 100% !important;
+             height: auto !important;
+        }
+        </style>';
+}
+add_action( 'admin_head', 'fix_svg' );
 
 
 /**

@@ -17,50 +17,96 @@
 
             <!-- Column 1 -->
             <div>
-                <h4 class="text-lg font-semibold mb-4">Company</h4>
+                <h4 class="text-lg font-semibold mb-4">Solutions</h4>
                 <ul class="space-y-4 text-base font-normal text-[#F9F8F6]/70">
-                    <li><a href="#" class="hover:text-white">About Us</a></li>
-                    <li><a href="#" class="hover:text-white">Careers</a></li>
-                    <li><a href="#" class="hover:text-white">Blog</a></li>
-                    <li><a href="#" class="hover:text-white">Contact</a></li>
+                    <?php
+                    $args = array(
+                        'post_type'      => 'solutions',
+                        'posts_per_page' => -1,
+                        'post_status'    => 'publish',
+                        'order'          => 'ASC',
+                        'orderby'        => 'title'
+                    );
+                    $solutions_query = new WP_Query($args);
+
+                    if ($solutions_query->have_posts()) :
+                        while ($solutions_query->have_posts()) : $solutions_query->the_post();
+                    ?>
+                    <li>
+                        <a href="<?php the_permalink(); ?>" class="hover:text-white">
+                            <?php the_title(); ?>
+                        </a>
+                    </li>
+                    <?php
+                        endwhile;
+                        wp_reset_postdata();
+                    endif;
+                    ?>
                 </ul>
             </div>
 
+
             <!-- Column 2 -->
             <div>
-                <h4 class="text-lg font-semibold mb-4">Services</h4>
+                <h4 class="text-lg font-semibold mb-4">Industries</h4>
                 <ul class="space-y-4 text-base font-normal text-[#F9F8F6]/70">
-                    <li><a href="#" class="hover:text-white">Consulting</a></li>
-                    <li><a href="#" class="hover:text-white">Development</a></li>
-                    <li><a href="#" class="hover:text-white">Design</a></li>
-                    <li><a href="#" class="hover:text-white">Support</a></li>
+                    <?php
+        $industries = new WP_Query([
+            'post_type' => 'industry',
+            'posts_per_page' => -1, // Get all posts
+            'post_status' => 'publish', // Get only published posts
+            'orderby' => 'title', // Order by title
+            'order' => 'ASC' // In ascending order
+        ]);
+
+        if ($industries->have_posts()) :
+            while ($industries->have_posts()) : $industries->the_post();
+        ?>
+                    <li><a href="<?php the_permalink(); ?>" class="hover:text-white"><?php the_title(); ?></a></li>
+                    <?php
+            endwhile;
+            wp_reset_postdata(); // Reset the post data to the main query
+        endif;
+        ?>
                 </ul>
             </div>
 
             <!-- Column 3 -->
             <div>
-                <h4 class="text-lg font-semibold mb-4">Resources</h4>
-                <ul class="space-y-4 text-base font-normal text-[#F9F8F6]/70">
-                    <li><a href="#" class="hover:text-white">Help Center</a></li>
-                    <li><a href="#" class="hover:text-white">Guides</a></li>
-                    <li><a href="#" class="hover:text-white">Security</a></li>
-                    <li><a href="#" class="hover:text-white">API Docs</a></li>
-                </ul>
-            </div>
+    <h4 class="text-lg font-semibold mb-4">Products</h4>
+    <ul class="space-y-4 text-base font-normal text-[#F9F8F6]/70">
+        <?php
+        $menu_items = wp_get_nav_menu_items(6);
+
+        if ($menu_items) {
+            foreach ($menu_items as $menu_item) {
+                echo '<li><a href="' . esc_url($menu_item->url) . '" class="hover:text-white">' . esc_html($menu_item->title) . '</a></li>';
+            }
+        }
+        ?>
+    </ul>
+</div>
+
 
             <!-- Column 4 -->
             <div>
-                <h4 class="text-lg font-semibold mb-4">Social</h4>
+                <h4 class="text-lg font-semibold mb-4">Company</h4>
                 <ul class="space-y-4 text-base font-normal text-[#F9F8F6]/70">
-                    <li><a href="#" class="hover:text-white">Facebook</a></li>
-                    <li><a href="#" class="hover:text-white">Twitter</a></li>
-                    <li><a href="#" class="hover:text-white">LinkedIn</a></li>
-                    <li><a href="#" class="hover:text-white">YouTube</a></li>
-                </ul>
+    <?php
+    $menu_items = wp_get_nav_menu_items(7);
+
+    if ($menu_items) {
+        foreach ($menu_items as $menu_item) {
+            echo '<li><a href="' . esc_url($menu_item->url) . '" class="hover:text-white">' . esc_html($menu_item->title) . '</a></li>';
+        }
+    }
+    ?>
+</ul>
+
 
                 <!-- Newsletter -->
                 <!-- Newsletter -->
-                <div class="col-span-full mt-8">
+                <div class="col-span-full mt-12">
                     <h5 class="text-lg font-semibold mb-2">Newsletter</h5>
                     <form class="relative w-full max-w-md">
                         <input type="email" placeholder="Your email"
@@ -108,10 +154,9 @@
 
         <!-- Footer Image -->
         <div class="w-full md:w-auto md:flex-1 md:pl-12 ">
-  <img src="<?php echo esc_url(get_template_directory_uri() . '/assets/icons/footer.png'); ?>"
-       alt="Footer Image"
-       class="w-full relative left-0 md:left-[40%]" />
-</div>
+            <img src="<?php echo esc_url(get_template_directory_uri() . '/assets/icons/footer.png'); ?>"
+                alt="Footer Image" class="w-full relative left-0 md:left-[40%]" />
+        </div>
 
     </div>
 </footer>
@@ -121,6 +166,53 @@
 </div><!-- #page -->
 
 <?php wp_footer(); ?>
+
+<script>
+jQuery(document).ready(function($) {
+    $('.partners-carousel').owlCarousel({
+        loop: true,
+        margin: 30,
+        autoplay: true,
+        autoplayTimeout: 3000,
+        autoplayHoverPause: true,
+        responsiveClass: true,
+        responsive: {
+            0: { items: 2 },
+            640: { items: 3 },
+            1024: { items: 5 }
+        }
+    });
+});
+
+</script>
+
+
+
+<script>
+jQuery(document).ready(function($) {
+    $('.recognized-carousel').owlCarousel({
+        loop: true,
+        margin: 20,
+        nav: false,
+        dots: false,
+        autoplay: true,
+        autoplayTimeout: 2500,
+        autoplayHoverPause: true,
+        responsive: {
+            0: {
+                items: 3
+            },
+            768: {
+                items: 5
+            },
+            1024: {
+                items: 7.5
+            }
+        }
+    });
+});
+</script>
+
 
 </body>
 
