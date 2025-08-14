@@ -73,9 +73,9 @@
 
             <!-- Column 3 -->
             <div>
-    <h4 class="text-lg font-semibold mb-4">Products</h4>
-    <ul class="space-y-4 text-base font-normal text-[#F9F8F6]/70">
-        <?php
+                <h4 class="text-lg font-semibold mb-4">Products</h4>
+                <ul class="space-y-4 text-base font-normal text-[#F9F8F6]/70">
+                    <?php
         $menu_items = wp_get_nav_menu_items(6);
 
         if ($menu_items) {
@@ -84,15 +84,15 @@
             }
         }
         ?>
-    </ul>
-</div>
+                </ul>
+            </div>
 
 
             <!-- Column 4 -->
             <div>
                 <h4 class="text-lg font-semibold mb-4">Company</h4>
                 <ul class="space-y-4 text-base font-normal text-[#F9F8F6]/70">
-    <?php
+                    <?php
     $menu_items = wp_get_nav_menu_items(7);
 
     if ($menu_items) {
@@ -101,7 +101,7 @@
         }
     }
     ?>
-</ul>
+                </ul>
 
 
                 <!-- Newsletter -->
@@ -128,25 +128,35 @@
     <!-- Logo, Address, Footer Image -->
     <div class="flex flex-col md:flex-row items-start justify-between max-w-7xl mx-auto px-10 md:px-5 pt-8 gap-8">
         <!-- Logo and Address -->
-        <div class="flex flex-col space-y-8">
+        <div class="flex flex-col space-y-8 items-start">
             <?php
-      $custom_logo_id = get_theme_mod('custom_logo');
-      if ($custom_logo_id) {
-        $logo = wp_get_attachment_image_src($custom_logo_id, 'full');
-        echo '<img src="' . esc_url($logo[0]) . '" alt="' . get_bloginfo('name') . '" class="h-10 md:h-16 w-auto mb-4" />';
-      } else {
-        echo '<span class="text-xl font-bold">' . get_bloginfo('name') . '</span>';
-      }
-      ?>
+            $custom_logo_id = get_theme_mod('custom_logo');
+            $home_url = esc_url(home_url('/'));
+            if ($custom_logo_id) {
+            $logo = wp_get_attachment_image_src($custom_logo_id, 'full');
+            echo '<a href="' . $home_url . '" aria-label="Homepage"><img src="' . esc_url($logo[0]) . '" alt="' . get_bloginfo('name') . '" class="h-10 object-contain md:h-16 w-auto mb-4" /></a>';
+            } else {
+            echo '<a href="' . $home_url . '" class="text-xl font-bold" aria-label="Homepage">' . get_bloginfo('name') . '</a>';
+            }
+            ?>
             <p class="not-italic text-base text-[#F9F8F6] leading-relaxed">
-                1234 Example Street<br>
-                Nairobi, Kenya
+                <?php the_field('company_address', 'option'); ?>
             </p>
 
-            <p class="not-italic text-base text-[#F9F8F6] leading-relaxed"><a href="tel:+254700000000">+254 700 000
-                    000</a>
+            <p class="not-italic text-base text-[#F9F8F6] leading-relaxed">
+                <a href="tel:<?php echo preg_replace('/\s+/', '', get_field('company_phone_number', 'option')); ?>">
+                    <?php the_field('company_phone_number', 'option'); ?>
+                </a>
                 <br>
-                <a href="mailto:info@example.com">info@example.com</a>
+                <a href="mailto:<?php the_field('company_mail', 'option'); ?>">
+                    <?php the_field('company_mail', 'option'); ?>
+                </a>
+            </p>
+            <p class="not-italic text-base text-[#F9F8F6] leading-relaxed">
+                <?php
+                $year = date('Y');
+                echo '&copy; ' . $year . ' ' . get_bloginfo('name') . '. All rights reserved.';
+                ?>
             </p>
 
 
@@ -177,13 +187,18 @@ jQuery(document).ready(function($) {
         autoplayHoverPause: true,
         responsiveClass: true,
         responsive: {
-            0: { items: 2 },
-            640: { items: 3 },
-            1024: { items: 5 }
+            0: {
+                items: 2
+            },
+            640: {
+                items: 3
+            },
+            1024: {
+                items: 5
+            }
         }
     });
 });
-
 </script>
 
 
@@ -200,7 +215,7 @@ jQuery(document).ready(function($) {
         autoplayHoverPause: true,
         responsive: {
             0: {
-                items: 3
+                items: 1.6
             },
             768: {
                 items: 5

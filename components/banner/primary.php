@@ -1,4 +1,4 @@
-<section  class="relative bg-[linear-gradient(to_bottom,_#1F3131_85%,_#006155_100%)] h-auto md:h-[80vh] w-full text-white overflow-hidden">
+<section  class="relative bg-[linear-gradient(to_bottom,_#1F3131_85%,_#006155_100%)] h-auto lg:h-[80vh] w-full text-white overflow-hidden">
     <!-- Navigation -->
     <?php get_template_part('components/navigation/desktop'); ?>
     <?php get_template_part('components/navigation/mobile'); ?>
@@ -44,5 +44,5 @@
     <!-- Bottom Pattern -->
     <img src="<?php echo esc_url(get_template_directory_uri() . '/assets/icons/pattern-1.svg'); ?>"
          alt="<?php echo esc_attr(get_bloginfo('name')); ?>"
-         class="absolute bottom-[-120px] left-0 w-full h-[300px] z-10">
+         class="absolute bottom-[-80px] left-0 w-full h-[300px] z-10">
 </section>

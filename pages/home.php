@@ -1,7 +1,7 @@
 <?php
 /**
  * Template Name: Home
- * Description: Immersive countdown teaser — ultra-minimal, scrollable, evolution-themed.
+ * Description: 
  */
 get_header();
 get_template_part( 'components/banner/primary' );
@@ -11,76 +11,128 @@ get_template_part( 'components/banner/primary' );
         <h2 class="text-3xl md:text-4xl font-semibold mb-12 text-center">What brings you here today?</h2>
 
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-            <?php for ($i = 0; $i < 3; $i++) { ?>
-            <div class="relative group overflow-hidden rounded shadow-md h-full bg-white text-black p-10"
+            <?php if (have_rows('what_brings_you_here_today')): ?>
+            <?php while (have_rows('what_brings_you_here_today')): the_row(); 
+            $title       = get_sub_field('title');
+            $description = get_sub_field('description');
+            $link        = get_sub_field('link');
+            $size        = get_sub_field('size_of_card'); // only "small"
+            if (strtolower($size) !== 'small') {
+                continue;
+            }
+        ?>
+            <div class="relative group overflow-hidden rounded shadow-md h-full bg-[#F9F8F6] text-black p-10"
                 data-aos="fade-up" data-aos-duration="800" data-aos-easing="ease-out-cubic">
+
                 <!-- Default Content -->
                 <div class="relative z-10 text-start group-hover:opacity-0 transition-opacity duration-500 ease-in-out">
-                    <h3 class="text-2xl font-semibold transition-transform duration-500 group-hover:-translate-y-2">
-                        Ready to streamline and scale?
+                    <?php if ($title): ?>
+                    <h3
+                        class="text-2xl font-semibold transition-transform duration-500 group-hover:-translate-y-2 max-w-[250px]">
+                        <?php echo esc_html($title); ?>
                     </h3>
-                    <p class="text-gray-700 mt-2 transition-opacity duration-500">
-                        Simplify vendors, strengthen compliance, and enhance quality
+                    <?php endif; ?>
+
+                    <?php if ($description): ?>
+                    <p class="text-gray-700 mt-4 transition-opacity duration-500">
+                        <?php echo esc_html($description); ?>
                     </p>
+                    <?php endif; ?>
+
                     <div class="h-20 md:h-40"></div>
-                    <a href="#"
+
+
+                    <a href="<?php echo esc_url($link); ?>"
                         class="inline-flex items-center gap-1 text-sm font-medium mt-6 border-b-2 border-[#D16555] hover:border-[#D16555] transition-colors duration-300">
                         Learn more <span class="text-lg">→</span>
                     </a>
+
                 </div>
 
-                <!-- Hover Content with Gradient Background -->
+                <!-- Hover Content -->
                 <div
                     class="absolute inset-0 z-20 flex flex-col items-center justify-center text-center px-6 opacity-0 group-hover:opacity-100 transition-all duration-100 ease-out bg-[linear-gradient(180deg,_rgba(152,196,65,0)_46.15%,_rgba(152,196,65,0.5)_80%,_rgba(0,97,85,0.5)_100%)] scale-95 group-hover:scale-100">
 
-                    <a href="#"
-                        class="text-xl md:text-2xl  px-6 md:px-20 font-semibold inline-flex items-center gap-2 text-black mb-6 transition-transform duration-500 ease-in-out group-hover:translate-y-1">
+
+                    <a href="<?php echo esc_url($link); ?>"
+                        class="text-xl md:text-2xl px-6 md:px-20 font-semibold inline-flex items-center gap-2 text-black mb-6 transition-transform duration-500 ease-in-out group-hover:translate-y-1">
                         Explore our Approach
                     </a>
+
+
                     <img src="<?php echo esc_url(get_template_directory_uri() . '/assets/icons/arrow-side.svg'); ?>"
-                        alt=" Arrow Icon"
+                        alt="Arrow Icon"
                         class="h-10 w-10 text-white bg-black p-3 rounded-full transition-transform duration-500 ease-in-out group-hover:scale-110">
                 </div>
             </div>
-            <?php } ?>
+            <?php endwhile; ?>
+            <?php endif; ?>
         </div>
 
+
         <!-- Government CTA -->
-        <div class="bg-white text-black mt-12 rounded-lg p-8 text-center group relative overflow-hidden"
+        <?php if (have_rows('what_brings_you_here_today')): ?>
+        <?php while (have_rows('what_brings_you_here_today')): the_row(); 
+        $title       = get_sub_field('title');
+        $description = get_sub_field('description');
+        $link        = get_sub_field('link');
+        $size        = get_sub_field('size_of_card'); // only "big"
+        if (strtolower($size) !== 'big') {
+            continue;
+        }
+    ?>
+        <div class="bg-[#F9F8F6] text-black mt-12 rounded-lg p-8 text-center group relative overflow-hidden"
             data-aos="fade-up" data-aos-duration="800" data-aos-easing="ease-out-cubic">
+
             <div class="relative z-10 transition-opacity duration-500 ease-in-out group-hover:opacity-0">
+                <?php if ($title): ?>
                 <h3 class="text-2xl font-semibold mb-2 transition-transform duration-500 group-hover:-translate-y-2">
-                    Are you a government agency?
+                    <?php echo esc_html($title); ?>
                 </h3>
+                <?php endif; ?>
+
+                <?php if ($description): ?>
                 <p class="text-gray-700 mb-4 transition-opacity duration-500">
-                    Visit Piedmont Global Federal for our government solutions.
+                    <?php echo esc_html($description); ?>
                 </p>
+                <?php endif; ?>
+
                 <div class="h-20"></div>
-                <a href="#"
+
+
+                <a href="<?php echo esc_url($link); ?>"
                     class="inline-flex items-center gap-1 text-sm font-medium mt-6 border-b-2 border-[#D16555] hover:border-[#D16555] transition-colors duration-300">
-                    Visit Piedmont Global Federal <span class="text-lg">→</span>
+                    Learn More <span class="text-lg">→</span>
                 </a>
+
             </div>
 
             <div
                 class="absolute inset-0 z-20 flex flex-col items-center justify-center px-6 text-center
-        opacity-0 group-hover:opacity-100 transition-all duration-200 ease-out
-        bg-[linear-gradient(180deg,_rgba(152,196,65,0)_46.15%,_rgba(152,196,65,0.5)_80%,_rgba(0,97,85,0.5)_100%)] scale-95 group-hover:scale-100">
-                <a href="#"
+                        opacity-0 group-hover:opacity-100 transition-all duration-200 ease-out
+                        bg-[linear-gradient(180deg,_rgba(152,196,65,0)_46.15%,_rgba(152,196,65,0.5)_80%,_rgba(0,97,85,0.5)_100%)] scale-95 group-hover:scale-100">
+
+
+                <a href="<?php echo esc_url($link); ?>"
                     class="text-xl md:text-2xl max-w-xs mx-auto font-semibold inline-flex items-center gap-2 text-black mb-6 transition-transform duration-500 ease-in-out group-hover:translate-y-1">
-                    Explore Government Solutions
+                    Explore Our Approach
                 </a>
+
+
                 <img src="<?php echo esc_url(get_template_directory_uri() . '/assets/icons/arrow-side.svg'); ?>"
-                    alt=" Arrow Icon"
+                    alt="Arrow Icon"
                     class="h-10 w-10 text-white bg-black p-3 rounded-full transition-transform duration-500 ease-in-out group-hover:scale-110">
             </div>
         </div>
+        <?php endwhile; ?>
+        <?php endif; ?>
+
 
     </div>
 </section>
 
 
-<section class="bg-[#F7F7F5] py-20 px-10 md:px-0">
+<section class="bg-[#F7F7F5] py-16 px-10 md:px-0">
     <div class="max-w-7xl mx-auto">
         <!-- Section Header -->
         <div class="flex flex-col md:flex-row justify-between items-start md:items-center w-full mb-20 gap-6">
@@ -90,53 +142,76 @@ get_template_part( 'components/banner/primary' );
 
         </div>
 
+        <?php if (have_rows('partners_repeater', 'option')): ?>
         <div class="owl-carousel owl-theme mb-16 partners-carousel">
-            <?php for ($i = 0; $i < 2; $i++) { ?>
+            <?php while (have_rows('partners_repeater', 'option')): the_row(); ?>
             <div class="item">
-                <img src="http://piedmontglobal.local/wp-content/uploads/Group-10322.png" alt="READ"
-                    class="h-12 w-auto mx-auto object-contain" />
+                <a href="<?php the_sub_field('url'); ?>" target="_blank" rel="noopener">
+                    <img src="<?php the_sub_field('partner_logo'); ?>" alt="Piedmont Global Partner"
+                        class="h-12 w-auto mx-auto object-contain" />
+                </a>
             </div>
-            <?php } ?>
-
+            <?php endwhile; ?>
         </div>
+        <?php endif; ?>
+
+
 
 
 
         <div class="grid gap-6 md:grid-cols-2 mb-16">
-            <?php for ($i = 0; $i < 2; $i++) { ?>
-            <div class=" items-start gap-4 border border-[#DFDAD4] rounded-lg p-12 shadow-md">
-                <div class="flex-shrink-0">
-                    <img src="http://piedmontglobal.local/wp-content/uploads/Vector.png" alt="" aria-hidden="true"
-                        class="h-12 w-12" />
-                </div>
+    <?php if (have_rows('the_trusted_partner_for_local_and_global_growth_cards')): ?>
+        <?php while (have_rows('the_trusted_partner_for_local_and_global_growth_cards')): the_row(); 
+            $image       = get_sub_field('image'); // URL string
+            $title       = get_sub_field('title');
+            $description = get_sub_field('description');
+        ?>
+            <div class="items-start gap-4 border border-[#DFDAD4] rounded-lg p-12 shadow-md">
+                <?php if (!empty($image)): ?>
+                    <div class="flex-shrink-0">
+                        <img src="<?php echo esc_url($image); ?>" 
+                             alt="Piedmont Global Image" 
+                             class="h-12 w-12" />
+                    </div>
+                <?php endif; ?>
                 <div class="pt-4">
-                    <h3 class="text-2xl text-[#1F3131] font-semibold">200+ Languages</h3>
-                    <p class="text-gray-600 tex-lg pt-2">Supporting copy can go here and further drive home this point
-                        by balancing
-                        this space</p>
+                    <?php if (!empty($title)): ?>
+                        <h3 class="text-2xl text-[#1F3131] font-semibold">
+                            <?php echo esc_html($title); ?>
+                        </h3>
+                    <?php endif; ?>
+                    <?php if (!empty($description)): ?>
+                        <p class="text-gray-600 text-lg pt-2">
+                            <?php echo esc_html($description); ?>
+                        </p>
+                    <?php endif; ?>
                 </div>
             </div>
-            <?php } ?>
+        <?php endwhile; ?>
+    <?php endif; ?>
+</div>
 
-        </div>
 
 
 
-        <div class="bg-white rounded-lg border border-[#DFDAD4] p-8 md:p-12 shadow-md">
+        <div class=" rounded-lg border border-[#DFDAD4] p-8 md:p-12 shadow-md">
             <h3 class="text-2xl md:text-3xl text-[#1F3131] font-semibold mb-8">
                 We’ve been recognized
             </h3>
-
+            <?php if (have_rows('recognized_by', 'option')): ?>
             <div class="owl-carousel owl-theme recognized-carousel">
-                <?php for ($i = 0; $i < 12; $i++) { ?>
-                <span
+                 <?php while (have_rows('recognized_by', 'option')): the_row(); ?>
+                <a href="<?php the_sub_field('url'); ?>" target="_blank" rel="noopener">
+                    <span
                     class="flex items-center justify-center h-32 w-32 rounded-full bg-gradient-to-b from-gray-100 to-green-100 shadow-sm"
-                    aria-label="Environmental Sustainability Award">
-                    <img src="http://piedmontglobal.local/wp-content/uploads/fc6c468ca3bf0a126824235c072b86a661d06935.png"
-                        alt="Environmental Sustainability Award" class="max-h-20 max-w-20 object-contain" />
+                    aria-label="Piedmont Global Recognition">
+                    <img src="<?php the_sub_field('logo'); ?>"
+                        alt="Piedmont Global Recognition" class="max-h-20 max-w-20 object-contain" />
                 </span>
-                <?php } ?>
+                </a>
+                <?php endwhile; ?>
             </div>
+            <?php endif; ?>
         </div>
 
 
@@ -145,7 +220,7 @@ get_template_part( 'components/banner/primary' );
     </div>
 </section>
 
-<section class="bg-[#F7F7F5] py-20 ">
+<section class="bg-[#F7F7F5] py-16 px-10 md:px-0 ">
     <div class="max-w-7xl mx-auto">
         <div class="flex flex-col md:flex-row justify-between items-start md:items-center w-full mb-20 gap-6">
             <h2 class="text-3xl md:text-5xl font-bold text-gray-900" data-aos="fade-right">
@@ -158,19 +233,34 @@ get_template_part( 'components/banner/primary' );
             </a>
         </div>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-32">
-            <div data-aos="fade-up" data-aos-delay="150" class="flex-1 px-10 md:px-0">
+            <div data-aos="fade-up" data-aos-delay="150" class="flex-1 ">
                 <div class="space-y-10">
-                    <?php for ($i = 0; $i < 3; $i++) { ?>
-                    <div class="<?= $i < 2 ? 'pb-6 border-b border-gray-300' : '' ?>">
-                        <h3 class="text-2xl font-semibold text-gray-900 mb-4">Reach people, fluently</h3>
-                        <p class="text-gray-700 text-lg">
-                            Multilingual communication that feels like home wherever you appear. We help you build trust
-                            and
-                            understanding through culturally attuned CX, comms, and digital content.
-                        </p>
-                    </div>
-                    <?php } ?>
-                </div>
+    <?php if (have_rows('capabilities')): ?>
+        <?php 
+        $row_count = count(get_field('capabilities')); 
+        $index = 0;
+        ?>
+        <?php while (have_rows('capabilities')): the_row(); 
+            $title       = get_sub_field('title');
+            $description = get_sub_field('description');
+        ?>
+            <div class="<?php echo $index < ($row_count - 1) ? 'pb-6 border-b border-gray-300' : ''; ?>">
+                <?php if (!empty($title)): ?>
+                    <h3 class="text-2xl font-semibold text-gray-900 mb-4">
+                        <?php echo esc_html($title); ?>
+                    </h3>
+                <?php endif; ?>
+                <?php if (!empty($description)): ?>
+                    <p class="text-gray-700 text-lg">
+                        <?php echo esc_html($description); ?>
+                    </p>
+                <?php endif; ?>
+            </div>
+            <?php $index++; ?>
+        <?php endwhile; ?>
+    <?php endif; ?>
+</div>
+
             </div>
 
             <div class="" data-aos="fade-down" data-aos-delay="100">
@@ -253,33 +343,84 @@ get_template_part( 'components/banner/primary' );
     <div class="max-w-7xl mx-auto grid md:grid-cols-3 gap-8 items-stretch">
 
         <!-- 2/3 Column -->
+        <?php if (have_rows('testimonials', 'option')): ?>
+    <?php 
+        $testimonials = [];
+        while (have_rows('testimonials', 'option')): the_row();
+            $testimonials[] = [
+                'description' => get_sub_field('description'),
+                'title'       => get_sub_field('title'),
+                'location'    => get_sub_field('location'),
+            ];
+        endwhile;
+
+        if (!empty($testimonials)) {
+            $random = $testimonials[array_rand($testimonials)];
+        }
+    ?>
+    <?php if (!empty($random)): ?>
         <div class="md:col-span-2 bg-white rounded border border-[#DFDAD4] p-8 shadow-sm flex flex-col">
-            <div class="text-green-600 text-7xl mb-4">“</div>
+            <img src="<?php echo esc_url(get_template_directory_uri() . '/assets/icons/quote.svg'); ?>" alt="<?php echo esc_html($random['title']); ?>"
+                class="h-10 w-10 mb-4" />
             <p class="text-3xl text-gray-800 font-medium flex-grow max-w-xl">
-                We needed more than a vendor. Piedmont Global showed up with strategy, execution, and results.
+                <?php echo esc_html($random['description']); ?>
             </p>
             <div class="mt-6">
-                <p class="font-semibold text-gray-900">Healthcare Network Director</p>
-                <p class="text-gray-600">Midwest U.S.</p>
+                <p class="font-semibold text-gray-900"><?php echo esc_html($random['title']); ?></p>
+                <p class="text-gray-600"><?php echo esc_html($random['location']); ?></p>
             </div>
         </div>
+    <?php endif; ?>
+<?php endif; ?>
+
+
 
         <!-- 1/3 Column -->
-        <div class="bg-white rounded border border-[#DFDAD4] overflow-hidden shadow-sm">
-            <img src=" /wp-content/uploads/Rectangle-21027.png" alt="Team discussing" class="w-full h-48 object-cover">
-            <div class="py-6 px-8">
-                <p class="text-6xl font-bold text-gray-900 mb-4">56%</p>
+        <?php
+$args = [
+    'post_type'      => 'case_study',
+    'posts_per_page' => -1,
+];
 
-                <p class="text-gray-700 mb-4 text-lg max-w-xs">
-                    Reduction in turnaround time for high-volume, high-stakes translation projects.
+$query = new WP_Query($args);
+
+if ($query->have_posts()):
+    while ($query->have_posts()): $query->the_post();
+        $percentage  = get_field('value');   // ACF field
+        $description = get_field('description'); // ACF field
+        $image       = get_field('image');       // ACF image field
+        $link        = get_permalink();
+?>
+    <div class="bg-white rounded border border-[#DFDAD4] overflow-hidden shadow-sm">
+        <?php if (has_post_thumbnail()): ?>
+            <?php the_post_thumbnail('large', ['class' => 'w-full h-48 object-cover', 'alt' => get_the_title()]); ?>
+        <?php endif; ?>
+        <div class="py-6 px-8">
+            <?php if ($percentage): ?>
+                <p class="text-6xl font-bold text-gray-900 mb-4">
+                    <?php echo esc_html($percentage); ?>
                 </p>
-                <a href="#"
-                    class="inline-flex items-center mt-10 text-base font-medium border-b-2 border-[#D16555] hover:border-[#D16555] transition-colors duration-300"
-                    data-aos="fade-left" data-aos-delay="100">
-                    View Case Study <span class="ml-1 text-lg">→</span>
-                </a>
-            </div>
+            <?php endif; ?>
+
+            <?php if (get_the_title()): ?>
+                <p class="text-gray-700 mb-4 text-lg max-w-xs">
+                    <?php echo esc_html(get_the_title()); ?>
+                </p>
+            <?php endif; ?>
+
+            <a href="<?php echo esc_url($link); ?>"
+                class="inline-flex items-center mt-10 text-base font-medium border-b-2 border-[#D16555] hover:border-[#D16555] transition-colors duration-300"
+                data-aos="fade-left" data-aos-delay="100">
+                View Case Study <span class="ml-1 text-lg">→</span>
+            </a>
         </div>
+    </div>
+<?php
+    endwhile;
+    wp_reset_postdata();
+endif;
+?>
+
 
     </div>
 </section>

@@ -1,4 +1,5 @@
-<div class="max-w-7xl mx-auto px-6 py-6 flex md:hidden justify-between items-center">
+<div
+    class="max-w-7xl mx-auto px-6 py-6 fixed top-0 w-full z-50 bg-[#1F3131] flex lg:hidden justify-between items-center">
     <div class="flex items-center">
         <?php
     $custom_logo_id = get_theme_mod('custom_logo');
@@ -57,14 +58,15 @@
                         </svg>
                     </button>
                     <?php
-$menu_items = wp_get_nav_menu_items(5);
+                    $menu_items = wp_get_nav_menu_items(5);
 
-if ($menu_items) {
-    foreach ($menu_items as $menu_item) {
-        echo '<a href="' . esc_url($menu_item->url) . '" class="block text-base font-semibold text-white hover:text-[#98C441] transition">' . esc_html($menu_item->title) . '</a>';
-    }
-}
-?>
+                    if ($menu_items) {
+                        foreach ($menu_items as $menu_item) {
+                            echo '<a href="' . esc_url($menu_item->url) . '" class="block text-base font-semibold text-white hover:text-[#98C441] transition">' . esc_html($menu_item->title) . '</a>';
+                        }
+                    }
+                    ?>
+
 
                 </nav>
 
@@ -107,25 +109,28 @@ if ($solutions->have_posts()) {
     wp_reset_postdata();
 }
 ?>
+                    <a href="#" class="block text-base font-semibold text-white hover:text-[#98C441] transition">Explore All Solutions</a>
+
 
                 </div>
 
                 <div x-show="submenu === 'industries'" x-transition class="space-y-3">
                     <?php
-$industries = new WP_Query([
-    'post_type'      => 'industry',
-    'posts_per_page' => -1,
-    'post_status'    => 'publish',
-]);
+                    $industries = new WP_Query([
+                        'post_type'      => 'industry',
+                        'posts_per_page' => -1,
+                        'post_status'    => 'publish',
+                    ]);
 
-if ($industries->have_posts()) {
-    while ($industries->have_posts()) {
-        $industries->the_post();
-        echo '<a href="' . esc_url(get_permalink()) . '" class="block text-white hover:text-[#98C441]">' . esc_html(get_the_title()) . '</a>';
-    }
-    wp_reset_postdata();
-}
-?>
+                    if ($industries->have_posts()) {
+                        while ($industries->have_posts()) {
+                            $industries->the_post();
+                            echo '<a href="' . esc_url(get_permalink()) . '" class="block text-white hover:text-[#98C441]">' . esc_html(get_the_title()) . '</a>';
+                        }
+                        wp_reset_postdata();
+                    }
+                    ?>
+                    <a href="#" class="block text-base font-semibold text-white hover:text-[#98C441] transition">Explore All Industries</a>
 
                 </div>
 
