@@ -73,7 +73,7 @@ get_template_part('components/banner/tertiary');
             aria-label="What We Offer Content">
             <!-- Section 1 -->
             <section id="section-1" class="w-full lg:w-[80%] mx-auto flex flex-col items-start scroll-mt-20">
-                <img src="http://pg.local/wp-content/uploads/f8278d0f0f3c9dc8bdd12184679c36dfb77b57e3.png"
+                <img src="/wp-content/uploads/f8278d0f0f3c9dc8bdd12184679c36dfb77b57e3.png"
                     class="w-full h-[320px] object-cover object-top rounded-md shadow-md"
                     alt="Document & Technical Translation" loading="lazy" />
                 <h2 class="text-2xl font-extrabold mt-8 text-[#1F3131] tracking-wide">
@@ -106,7 +106,7 @@ get_template_part('components/banner/tertiary');
 
             <!-- Section 2 -->
             <section id="section-2" class="w-full lg:w-[80%] mx-auto flex flex-col items-start scroll-mt-20">
-                <img src="http://pg.local/wp-content/uploads/f8278d0f0f3c9dc8bdd12184679c36dfb77b57e3.png"
+                <img src=/wp-content/uploads/f8278d0f0f3c9dc8bdd12184679c36dfb77b57e3.png"
                     class="w-full h-[320px] object-cover object-top rounded-md shadow-md"
                     alt="Website & App Localization" loading="lazy" />
                 <h2 class="text-3xl font-extrabold mt-8 text-[#1F3131] tracking-wide">
@@ -139,7 +139,7 @@ get_template_part('components/banner/tertiary');
 
             <!-- Section 3 -->
             <section id="section-3" class="w-full lg:w-[80%] mx-auto flex flex-col items-start scroll-mt-20">
-                <img src="http://pg.local/wp-content/uploads/f8278d0f0f3c9dc8bdd12184679c36dfb77b57e3.png"
+                <img src="/wp-content/uploads/f8278d0f0f3c9dc8bdd12184679c36dfb77b57e3.png"
                     class="w-full h-[320px] object-cover object-top rounded-md shadow-md"
                     alt="Marketing & Brand Adaptation" loading="lazy" />
                 <h2 class="text-3xl font-extrabold mt-8 text-[#1F3131] tracking-wide">
@@ -172,7 +172,7 @@ get_template_part('components/banner/tertiary');
 
             <!-- Section 4 -->
             <section id="section-4" class="w-full lg:w-[80%] mx-auto flex flex-col items-start scroll-mt-20">
-                <img src="http://pg.local/wp-content/uploads/f8278d0f0f3c9dc8bdd12184679c36dfb77b57e3.png"
+                <img src="/wp-content/uploads/f8278d0f0f3c9dc8bdd12184679c36dfb77b57e3.png"
                     class="w-full h-[320px] object-cover object-top rounded-md shadow-md" alt="Multilingual Desktop"
                     loading="lazy" />
                 <h2 class="text-3xl font-extrabold mt-8 text-[#1F3131] tracking-wide">
