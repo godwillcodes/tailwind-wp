@@ -159,36 +159,36 @@ get_template_part( 'components/banner/primary' );
 
 
 
-        <div class="grid gap-6 md:grid-cols-2 mb-16">
-    <?php if (have_rows('the_trusted_partner_for_local_and_global_growth_cards')): ?>
-        <?php while (have_rows('the_trusted_partner_for_local_and_global_growth_cards')): the_row(); 
-            $image       = get_sub_field('image'); // URL string
-            $title       = get_sub_field('title');
-            $description = get_sub_field('description');
-        ?>
-            <div class="items-start gap-4 border border-[#DFDAD4] rounded-lg p-12 shadow-md">
-                <?php if (!empty($image)): ?>
-                    <div class="flex-shrink-0">
-                        <img src="<?php echo esc_url($image); ?>" 
-                             alt="Piedmont Global Image" 
-                             class="h-12 w-12" />
+        <div class="grid gap-6 md:grid-cols-2 mb-8">
+        <?php if (have_rows('the_trusted_partner_for_local_and_global_growth_cards')): ?>
+            <?php while (have_rows('the_trusted_partner_for_local_and_global_growth_cards')): the_row(); 
+                $image       = get_sub_field('image'); // URL string
+                $title       = get_sub_field('title');
+                $description = get_sub_field('description');
+            ?>
+                <div class="items-justify gap-4 border border-[#DFDAD4] rounded-lg p-12 shadow-md">
+                    <?php if (!empty($image)): ?>
+                        <div class="flex-shrink-0">
+                            <img src="<?php echo esc_url($image); ?>" 
+                                alt="Piedmont Global Image" 
+                                class="h-12 w-12" />
+                        </div>
+                    <?php endif; ?>
+                    <div class="pt-4">
+                        <?php if (!empty($title)): ?>
+                            <h3 class="text-2xl text-[#1F3131] font-semibold">
+                                <?php echo esc_html($title); ?>
+                            </h3>
+                        <?php endif; ?>
+                        <?php if (!empty($description)): ?>
+                            <p class="text-gray-600 text-lg pt-2">
+                                <?php echo esc_html($description); ?>
+                            </p>
+                        <?php endif; ?>
                     </div>
-                <?php endif; ?>
-                <div class="pt-4">
-                    <?php if (!empty($title)): ?>
-                        <h3 class="text-2xl text-[#1F3131] font-semibold">
-                            <?php echo esc_html($title); ?>
-                        </h3>
-                    <?php endif; ?>
-                    <?php if (!empty($description)): ?>
-                        <p class="text-gray-600 text-lg pt-2">
-                            <?php echo esc_html($description); ?>
-                        </p>
-                    <?php endif; ?>
                 </div>
-            </div>
-        <?php endwhile; ?>
-    <?php endif; ?>
+            <?php endwhile; ?>
+        <?php endif; ?>
 </div>
 
 

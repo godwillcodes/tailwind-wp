@@ -36,7 +36,7 @@
             <div class="md:col-span-5 order-2 flex justify-center md:justify-end">
                 <img src="<?php echo esc_url(get_field('banner_image')); ?>"
                      alt="<?php echo esc_attr(get_bloginfo('name')); ?>"
-                     class="w-full max-w-[440px] h-auto shadow-md md:absolute md:bottom-[-60%] md:right-0 md:z-20">
+                     class="w-full max-w-[440px] h-auto shadow-md md:absolute md:bottom-[-50%] md:right-0 md:z-20">
             </div>
         </div>
     </div>
@@ -44,5 +44,5 @@
     <!-- Bottom Pattern -->
     <img src="<?php echo esc_url(get_template_directory_uri() . '/assets/icons/pattern-1.svg'); ?>"
          alt="<?php echo esc_attr(get_bloginfo('name')); ?>"
-         class="absolute bottom-[-80px] left-0 w-full h-[300px] z-10">
+         class="absolute bottom-[-19%] left-0 w-full h-[300px] z-10">
 </section>
