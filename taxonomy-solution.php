@@ -207,7 +207,8 @@ $industries_section = get_field('industries_section', $term_key); // ACF Relatio
             foreach ($why_piedmont_global_cards as $card): 
                 $delay += 100;  // increment delay for staggered animation
             ?>
-            <div class="bg-[#006155] p-6 flex flex-col h-full transition-transform duration-300 ease-in-out hover:scale-[1.03] hover:shadow-lg hover:bg-[#007766]" data-aos="fade-up" data-aos-delay="<?php echo esc_attr($delay); ?>" data-aos-duration="600">
+            <div class="bg-[#006155] p-6 flex flex-col h-full transition-transform duration-300 ease-in-out hover:scale-[1.03] hover:shadow-lg hover:bg-[#007766]"
+                data-aos="fade-up" data-aos-delay="<?php echo esc_attr($delay); ?>" data-aos-duration="600">
                 <?php if (!empty($card['card_title'])): ?>
                 <h3 class="font-semibold text-lg capitalize lg:text-xl mb-4 text-start w-full lg:max-w-[80px]">
                     <?php echo esc_html($card['card_title']); ?>
@@ -232,9 +233,11 @@ $industries_section = get_field('industries_section', $term_key); // ACF Relatio
 <?php if (!empty($industries_section)): ?>
 <section class="py-20 bg-[#F9F9F6] text-[#1F3131]">
     <div class="max-w-7xl mx-auto px-6 lg:px-0">
-        <p data-aos="fade-up" data-aos-delay="100" data-aos-duration="900" class="text-lg font-medium mb-2">Industries we support</p>
+        <p data-aos="fade-up" data-aos-delay="100" data-aos-duration="900" class="text-lg font-medium mb-2">Industries
+            we support</p>
 
-        <h2 data-aos="fade-up" data-aos-delay="200" data-aos-duration="1000" class="text-3xl sm:text-4xl md:text-5xl max-w-4xl font-extrabold mb-6 leading-[98%]">
+        <h2 data-aos="fade-up" data-aos-delay="200" data-aos-duration="1000"
+            class="text-3xl sm:text-4xl md:text-5xl max-w-4xl font-extrabold mb-6 leading-[98%]">
             Tailored solutions for regulated, high-impact sectors.
         </h2>
 
@@ -273,13 +276,77 @@ $industries_section = get_field('industries_section', $term_key); // ACF Relatio
 </section>
 <?php endif; ?>
 
+<section class="bg-white py-24">
+    <div class="max-w-7xl mx-auto px-6 lg:px-0">
+        <div class="text-center">
+            <p data-aos="fade-up" data-aos-delay="100" data-aos-duration="900" class="text-lg font-medium mb-2">Outcomes
+            </p>
+
+            <h2 data-aos="fade-up" data-aos-delay="200" data-aos-duration="1000"
+                class="text-3xl sm:text-4xl md:text-5xl max-w-4xl mx-auto font-extrabold mb-6 leading-[98%]">
+                Results You Can Expect
+            </h2>
+
+        </div>
+
+        <div class="w-full mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+  <!-- Top row -->
+  <div data-aos="fade-up" data-aos-delay="100"
+    class="bg-[#006155] text-white p-6 min-h-[250px] flex flex-col justify-between font-semibold text-2xl rounded shadow-sm">
+    <div>Faster time to market</div>
+    <p class="text-lg font-normal">
+      Accelerate your product launch by reducing development cycles.
+    </p>
+  </div>
+
+  <div class="bg-[#DFDAD4] text-[#1F3131] border border-[#DFDAD4] p-6 min-h-[250px] flex flex-col justify-between shadow-sm font-semibold text-2xl sm:col-span-2">
+    <div>Improved accessibility</div>
+    <p class="text-lg font-normal">
+      Ensure your digital platforms meet accessibility standards.
+    </p>
+  </div>
+
+  <!-- Bottom row -->
+  <div class="bg-[#550061] text-white p-6 min-h-[250px] lg:h-[620px] flex flex-col justify-between shadow-sm font-semibold text-2xl">
+    <div>Faster time to market</div>
+    <p class="text-lg font-normal">
+      Drive efficiency and deliver products faster.
+    </p>
+  </div>
+
+  <div class="relative min-h-[250px] lg:h-[620px] overflow-hidden group shadow-sm flex flex-col justify-between text-white">
+    <img src="http://pg.local/wp-content/uploads/iStock-1454186321-1.webp" alt="Improved accessibility"
+      class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
+    
+  </div>
+
+  <div class="flex flex-col gap-4">
+    <div class="bg-[#ab9dba] text-[#1F3131] p-6 min-h-[300px] flex flex-col justify-between font-semibold text-2xl">
+      <div>Consistent brand voice</div>
+      <p class="text-lg font-normal">
+        Maintain brand integrity across all content.
+      </p>
+    </div>
+    <div class="bg-[#98C441] text-black p-6 shadow-sm min-h-[300px] flex flex-col justify-between font-semibold text-2xl">
+      <div>Consistent brand voice</div>
+      <p class="text-lg font-normal">
+        Reduce inconsistencies with unified messaging.
+      </p>
+    </div>
+  </div>
+</div>
+
+    </div>
+</section>
 
 <section class="py-16 bg-white">
     <div class="max-w-7xl mx-auto px-6 lg:px-0">
         <!-- Section Header -->
         <div class="mb-12">
-            <p data-aos="fade-up" data-aos-delay="100" data-aos-duration="900" class="text-lg font-medium  mb-2">Key Features</p>
-            <h2 data-aos="fade-up" data-aos-delay="200" data-aos-duration="1000" class="text-3xl sm:text-4xl md:text-5xl max-w-3xl font-extrabold mb-6 leading-[98%]">
+            <p data-aos="fade-up" data-aos-delay="100" data-aos-duration="900" class="text-lg font-medium  mb-2">Key
+                Features</p>
+            <h2 data-aos="fade-up" data-aos-delay="200" data-aos-duration="1000"
+                class="text-3xl sm:text-4xl md:text-5xl max-w-3xl font-extrabold mb-6 leading-[98%]">
                 What Sets Our Translation Models Apart
             </h2>
         </div>
@@ -300,7 +367,7 @@ $industries_section = get_field('industries_section', $term_key); // ACF Relatio
                         <span
                             class="flex items-center justify-center h-24 w-24 sm:h-28 sm:w-28 md:h-32 md:w-32 rounded-full bg-gradient-to-b from-gray-100 to-green-100 shadow-sm"
                             aria-label="Piedmont Global Recognition">
-                            <img src="http://pg.local/wp-content/uploads/fc6c468ca3bf0a126824235c072b86a661d06935.png"
+                            <img src="/wp-content/uploads/fc6c468ca3bf0a126824235c072b86a661d06935.png"
                                 alt="Piedmont Global Recognition"
                                 class="max-h-20 max-w-20 sm:max-h-24 sm:max-w-24 md:max-h-20 md:max-w-20 object-contain">
                         </span>
@@ -317,7 +384,7 @@ $industries_section = get_field('industries_section', $term_key); // ACF Relatio
                     <span
                         class="flex items-center justify-center h-16 w-16 lg:h-24 lg:w-24 rounded-full bg-gradient-to-b from-gray-100 to-green-100 shadow-sm"
                         aria-label="Piedmont Global Recognition">
-                        <img src="http://pg.local/wp-content/uploads/fc6c468ca3bf0a126824235c072b86a661d06935.png"
+                        <img src="/wp-content/uploads/fc6c468ca3bf0a126824235c072b86a661d06935.png"
                             alt="Piedmont Global Recognition"
                             class="max-h-10 lg:max-h-16 max-w-10 lg:max-w-16 object-contain">
                     </span>

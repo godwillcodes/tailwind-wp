@@ -121,7 +121,7 @@
                         if ($solutions->have_posts()) :
                             while ($solutions->have_posts()) : $solutions->the_post(); ?>
                         <a href="<?php the_permalink(); ?>"
-                            class="flex flex-col space-y-1 p-4 transition-all duration-300 transform group outline-none">
+                            class="flex flex-col space-y-1 pt-4 transition-all duration-300 transform group outline-none">
                             <div>
                                 <?php
                                         // Get the custom fields
@@ -146,7 +146,20 @@
                             wp_reset_postdata();
                         endif;
                         ?>
-
+                        <a href="<?php echo esc_url(site_url('/industries')); ?>"
+                            class="flex flex-col space-y-1 pt-4 border-t border-gray-200 transition-all duration-300 transform group outline-none">
+                            <div class="flex items-center justify-center">
+                                <p
+                                    class="text-sm font-semibold text-[#1F3131] text-center group-hover:text-[#98C441] transition-colors duration-300">
+                                    Explore Industries
+                                </p>
+                                <!-- Right Arrow SVG -->
+                                <svg class="w-4 h-4 ml-2 text-[#1F3131] group-hover:text-[#98C441] transition-colors duration-300"
+                                    fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+                                </svg>
+                            </div>
+                        </a>
                     </div>
                 </div>
             </div>

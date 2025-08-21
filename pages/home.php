@@ -50,10 +50,7 @@ get_template_part( 'components/banner/primary' );
                 </div>
 
                 <!-- Hover Content -->
-                <div
-                    class="absolute inset-0 z-20 flex flex-col items-center justify-center text-center px-6 opacity-0 group-hover:opacity-100 transition-all duration-100 ease-out bg-[linear-gradient(180deg,_rgba(152,196,65,0)_46.15%,_rgba(152,196,65,0.5)_80%,_rgba(0,97,85,0.5)_100%)] scale-95 group-hover:scale-100">
-
-
+                <div class="absolute inset-0 z-20 flex flex-col items-center justify-center text-center px-6 opacity-0 group-hover:opacity-100 transition-all duration-100 ease-out bg-[linear-gradient(180deg,_rgba(152,196,65,0)_46.15%,_rgba(152,196,65,0.5)_80%,_rgba(0,97,85,0.5)_100%)] scale-95 group-hover:scale-100">
                     <a href="<?php echo esc_url($link); ?>"
                         class="text-xl md:text-2xl px-6 md:px-20 font-semibold inline-flex items-center gap-2 text-black mb-6 transition-transform duration-500 ease-in-out group-hover:translate-y-1">
                         Explore our Approach
