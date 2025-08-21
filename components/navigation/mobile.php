@@ -94,22 +94,23 @@
                 </div>
 
                 <div x-show="submenu === 'solutions'" x-transition class="space-y-3">
-                    <?php
-$solutions = new WP_Query([
-    'post_type'      => 'solutions',
-    'posts_per_page' => -1,
-    'post_status'    => 'publish',
-]);
+                   <?php 
+                    // Get all terms in the 'solution' taxonomy
+                    $terms = get_terms([
+                        'taxonomy'   => 'solution',
+                        'hide_empty' => false, // true hides unused terms
+                    ]);
 
-if ($solutions->have_posts()) {
-    while ($solutions->have_posts()) {
-        $solutions->the_post();
-        echo '<a href="' . esc_url(get_permalink()) . '" class="block text-white hover:text-[#98C441]">' . esc_html(get_the_title()) . '</a>';
-    }
-    wp_reset_postdata();
-}
-?>
-                    <a href="#" class="block text-base font-semibold text-white hover:text-[#98C441] transition">Explore All Solutions</a>
+                    if (!empty($terms) && !is_wp_error($terms)) : 
+                        foreach ($terms as $term) : ?>
+                            <a href="<?php echo esc_url(get_term_link($term)); ?>" 
+                            class="block text-white hover:text-[#98C441]">
+                            <?php echo esc_html($term->name); ?>
+                            </a>
+                        <?php endforeach; 
+                    endif;
+                    ?>
+                    <a href="#" class="block text-base my-8 font-semibold text-white hover:text-[#98C441] transition">Explore All Solutions</a>
 
 
                 </div>

@@ -4,15 +4,15 @@
         scrolled: false, 
         logoDefault: '<?php echo esc_url( wp_get_attachment_image_src( get_theme_mod("custom_logo"), "full" )[0] ); ?>',
         logoScrolled: '<?php echo esc_url( get_template_directory_uri() . "/assets/icons/pglogo-light.svg" ); ?>'
-    }" x-init="window.addEventListener('scroll', () => { scrolled = window.scrollY > 100 })"
-    :class="{ 'bg-gradient-to-b from-[#F9F8F6]/95 to-[#F9F8F6]/70 mt-0 backdrop-blur-xl shadow-[0_4px_30px_rgba(0,0,0,0.1)] text-black': scrolled }">
-    <div class="max-w-7xl mx-auto py-4 px-6 lg:px-0 flex items-center justify-between">
+        }" x-init="window.addEventListener('scroll', () => { scrolled = window.scrollY > 100 })"
+        :class="{ 'bg-gradient-to-b from-[#F9F8F6]/95 to-[#F9F8F6]/70 mt-0 backdrop-blur-xl shadow-[0_4px_30px_rgba(0,0,0,0.1)] text-black': scrolled }">
+        <div class="max-w-7xl mx-auto py-4 px-6 lg:px-0 flex items-center justify-between">
 
         <!-- Logo -->
         <div class="flex items-center">
             <a href="<?php echo esc_url(home_url('/')); ?>" aria-label="Home">
-            <img :src="scrolled ? logoScrolled : logoDefault" alt="<?php echo esc_attr( get_bloginfo('name') ); ?>"
-                class="h-8 w-auto transition-all duration-300" />
+                <img :src="scrolled ? logoScrolled : logoDefault" alt="<?php echo esc_attr( get_bloginfo('name') ); ?>"
+                    class="h-8 w-auto transition-all duration-300" />
             </a>
         </div>
 
@@ -44,47 +44,49 @@
                     @click.away="open = false" role="menu" aria-label="Solutions menu">
 
                     <div class="space-y-1">
-                        <?php
-                        $solutions = new WP_Query([
-                            'post_type' => 'solutions',
-                            'posts_per_page' => 5,
-                            'post_status' => 'publish'
+                        <?php 
+                        // Get all terms in the 'solution' taxonomy
+                        $terms = get_terms([
+                            'taxonomy' => 'solution',
+                            'hide_empty' => false, // set true to hide terms not assigned to any post
                         ]);
-                        if ($solutions->have_posts()) :
-                            while ($solutions->have_posts()) : $solutions->the_post(); ?>
-                        <a href="<?php the_permalink(); ?>"
-                            class="flex flex-col space-y-1 p-4  transition-all duration-300 transform   group outline-none">
-                            <div>
-                                <p
-                                    class="text-base font-semibold text-[#1F3131] group-hover:text-[#98C441] transition-colors duration-300">
-                                    <?php the_title(); ?>
+
+                        if (!empty($terms) && !is_wp_error($terms)) :
+                            foreach ($terms as $term) : ?>
+                        <a href="<?php echo esc_url(get_term_link($term)); ?>"
+                            class="flex flex-col space-y-1 py-4 transition-all duration-300 transform group outline-none w-full">
+                            <div class="w-full">
+                                <p class="text-base font-semibold text-[#1F3131] group-hover:text-[#98C441] transition-colors duration-300">
+                                    <?php echo esc_html($term->name); ?>
                                 </p>
-                                <?php
-                                $tagline = get_field('solution_tagline');
-                                if ($tagline) : ?>
-                                <div class="text-sm font-normal text-gray-600 mt-1">
-                                    <?php echo wp_kses_post($tagline); ?>
+                                <?php if (!empty($term->description)) : ?>
+                                <div class="text-sm font-normal text-gray-600 mt-1 w-full">
+                                    <?php echo wp_kses_post($term->description); ?>
                                 </div>
                                 <?php endif; ?>
                             </div>
                         </a>
-                        <?php endwhile;
-                            wp_reset_postdata();
-                        endif;
-                        ?>
+
+                        <?php endforeach;
+                        else: ?>
+                        <p>No taxonomy terms found in the 'solution' taxonomy.</p>
+                        <?php endif; ?>
                         <a href="<?php echo esc_url(site_url('/solutions')); ?>"
                             class="flex flex-col space-y-1 pt-4 border-t border-gray-200 transition-all duration-300 transform group outline-none">
-                             <div class="flex items-center justify-center">
-                                  <p class="text-sm font-semibold text-[#1F3131] text-center group-hover:text-[#98C441] transition-colors duration-300">
-                                        Explore Solutions
-                                  </p>
-                                  <!-- Right Arrow SVG -->
-                                  <svg class="w-4 h-4 ml-2 text-[#1F3131] group-hover:text-[#98C441] transition-colors duration-300" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
-                                  </svg>
-                             </div>
+                            <div class="flex items-center justify-center">
+                                <p
+                                    class="text-sm font-semibold text-[#1F3131] text-center group-hover:text-[#98C441] transition-colors duration-300">
+                                    Explore Solutions
+                                </p>
+                                <!-- Right Arrow SVG -->
+                                <svg class="w-4 h-4 ml-2 text-[#1F3131] group-hover:text-[#98C441] transition-colors duration-300"
+                                    fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+                                </svg>
+                            </div>
                         </a>
                     </div>
+
                 </div>
             </div>
             <!-- Industries Dropdown -->
@@ -118,44 +120,33 @@
                         ]);
                         if ($solutions->have_posts()) :
                             while ($solutions->have_posts()) : $solutions->the_post(); ?>
-                                            <a href="<?php the_permalink(); ?>"
-                                                class="flex flex-col space-y-1 p-4 transition-all duration-300 transform group outline-none">
-                                                <div>
-                                                    <?php
+                        <a href="<?php the_permalink(); ?>"
+                            class="flex flex-col space-y-1 p-4 transition-all duration-300 transform group outline-none">
+                            <div>
+                                <?php
                                         // Get the custom fields
                                         $tagline = get_field('industry_tagline');
                                         ?>
 
-                                                    <p
-                                                        class="text-base font-semibold text-[#1F3131] group-hover:text-[#98C441] transition-colors duration-300">
-                                                        <?php the_title(); ?>
-                                                    </p>
+                                <p
+                                    class="text-base font-semibold text-[#1F3131] group-hover:text-[#98C441] transition-colors duration-300">
+                                    <?php the_title(); ?>
+                                </p>
 
-                                                    <?php
+                                <?php
                                         // Display the tagline if it exists
                                         if ($tagline) : ?>
-                                                    <div class="text-sm font-normal text-gray-600 mt-1">
-                                                        <?php echo wp_kses_post($tagline); ?>
-                                                    </div>
-                                                    <?php endif; ?>
-                                                </div>
-                                            </a>
-                                            <?php endwhile;
+                                <div class="text-sm font-normal text-gray-600 mt-1">
+                                    <?php echo wp_kses_post($tagline); ?>
+                                </div>
+                                <?php endif; ?>
+                            </div>
+                        </a>
+                        <?php endwhile;
                             wp_reset_postdata();
                         endif;
                         ?>
-                        <a href="<?php echo esc_url(site_url('/industries')); ?>"
-                            class="flex flex-col space-y-1 pt-4 border-t border-gray-200 transition-all duration-300 transform group outline-none">
-                             <div class="flex items-center justify-center">
-                                  <p class="text-sm font-semibold text-[#1F3131] text-center group-hover:text-[#98C441] transition-colors duration-300">
-                                        Explore Industries
-                                  </p>
-                                  <!-- Right Arrow SVG -->
-                                  <svg class="w-4 h-4 ml-2 text-[#1F3131] group-hover:text-[#98C441] transition-colors duration-300" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
-                                  </svg>
-                             </div>
-                        </a>
+
                     </div>
                 </div>
             </div>

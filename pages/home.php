@@ -160,36 +160,34 @@ get_template_part( 'components/banner/primary' );
 
 
         <div class="grid gap-6 md:grid-cols-2 mb-8">
-        <?php if (have_rows('the_trusted_partner_for_local_and_global_growth_cards')): ?>
+            <?php if (have_rows('the_trusted_partner_for_local_and_global_growth_cards')): ?>
             <?php while (have_rows('the_trusted_partner_for_local_and_global_growth_cards')): the_row(); 
                 $image       = get_sub_field('image'); // URL string
                 $title       = get_sub_field('title');
                 $description = get_sub_field('description');
             ?>
-                <div class="items-justify gap-4 border border-[#DFDAD4] rounded-lg p-12 shadow-md">
-                    <?php if (!empty($image)): ?>
-                        <div class="flex-shrink-0">
-                            <img src="<?php echo esc_url($image); ?>" 
-                                alt="Piedmont Global Image" 
-                                class="h-12 w-12" />
-                        </div>
-                    <?php endif; ?>
-                    <div class="pt-4">
-                        <?php if (!empty($title)): ?>
-                            <h3 class="text-2xl text-[#1F3131] font-semibold">
-                                <?php echo esc_html($title); ?>
-                            </h3>
-                        <?php endif; ?>
-                        <?php if (!empty($description)): ?>
-                            <p class="text-gray-600 text-lg pt-2">
-                                <?php echo esc_html($description); ?>
-                            </p>
-                        <?php endif; ?>
-                    </div>
+            <div class="items-justify gap-4 border border-[#DFDAD4] rounded-lg p-12 shadow-md">
+                <?php if (!empty($image)): ?>
+                <div class="flex-shrink-0">
+                    <img src="<?php echo esc_url($image); ?>" alt="Piedmont Global Image" class="h-12 w-12" />
                 </div>
+                <?php endif; ?>
+                <div class="pt-4">
+                    <?php if (!empty($title)): ?>
+                    <h3 class="text-2xl text-[#1F3131] font-semibold">
+                        <?php echo esc_html($title); ?>
+                    </h3>
+                    <?php endif; ?>
+                    <?php if (!empty($description)): ?>
+                    <p class="text-gray-600 text-lg pt-2">
+                        <?php echo esc_html($description); ?>
+                    </p>
+                    <?php endif; ?>
+                </div>
+            </div>
             <?php endwhile; ?>
-        <?php endif; ?>
-</div>
+            <?php endif; ?>
+        </div>
 
 
 
@@ -200,14 +198,14 @@ get_template_part( 'components/banner/primary' );
             </h3>
             <?php if (have_rows('recognized_by', 'option')): ?>
             <div class="owl-carousel owl-theme recognized-carousel">
-                 <?php while (have_rows('recognized_by', 'option')): the_row(); ?>
+                <?php while (have_rows('recognized_by', 'option')): the_row(); ?>
                 <a href="<?php the_sub_field('url'); ?>" target="_blank" rel="noopener">
                     <span
-                    class="flex items-center justify-center h-32 w-32 rounded-full bg-gradient-to-b from-gray-100 to-green-100 shadow-sm"
-                    aria-label="Piedmont Global Recognition">
-                    <img src="<?php the_sub_field('logo'); ?>"
-                        alt="Piedmont Global Recognition" class="max-h-20 max-w-20 object-contain" />
-                </span>
+                        class="flex items-center justify-center h-32 w-32 rounded-full bg-gradient-to-b from-gray-100 to-green-100 shadow-sm"
+                        aria-label="Piedmont Global Recognition">
+                        <img src="<?php the_sub_field('logo'); ?>" alt="Piedmont Global Recognition"
+                            class="max-h-20 max-w-20 object-contain" />
+                    </span>
                 </a>
                 <?php endwhile; ?>
             </div>
@@ -235,31 +233,31 @@ get_template_part( 'components/banner/primary' );
         <div class="grid grid-cols-1 md:grid-cols-2 gap-32">
             <div data-aos="fade-up" data-aos-delay="150" class="flex-1 ">
                 <div class="space-y-10">
-    <?php if (have_rows('capabilities')): ?>
-        <?php 
+                    <?php if (have_rows('capabilities')): ?>
+                    <?php 
         $row_count = count(get_field('capabilities')); 
         $index = 0;
         ?>
-        <?php while (have_rows('capabilities')): the_row(); 
+                    <?php while (have_rows('capabilities')): the_row(); 
             $title       = get_sub_field('title');
             $description = get_sub_field('description');
         ?>
-            <div class="<?php echo $index < ($row_count - 1) ? 'pb-6 border-b border-gray-300' : ''; ?>">
-                <?php if (!empty($title)): ?>
-                    <h3 class="text-2xl font-semibold text-gray-900 mb-4">
-                        <?php echo esc_html($title); ?>
-                    </h3>
-                <?php endif; ?>
-                <?php if (!empty($description)): ?>
-                    <p class="text-gray-700 text-lg">
-                        <?php echo esc_html($description); ?>
-                    </p>
-                <?php endif; ?>
-            </div>
-            <?php $index++; ?>
-        <?php endwhile; ?>
-    <?php endif; ?>
-</div>
+                    <div class="<?php echo $index < ($row_count - 1) ? 'pb-6 border-b border-gray-300' : ''; ?>">
+                        <?php if (!empty($title)): ?>
+                        <h3 class="text-2xl font-semibold text-gray-900 mb-4">
+                            <?php echo esc_html($title); ?>
+                        </h3>
+                        <?php endif; ?>
+                        <?php if (!empty($description)): ?>
+                        <p class="text-gray-700 text-lg">
+                            <?php echo esc_html($description); ?>
+                        </p>
+                        <?php endif; ?>
+                    </div>
+                    <?php $index++; ?>
+                    <?php endwhile; ?>
+                    <?php endif; ?>
+                </div>
 
             </div>
 
@@ -344,7 +342,7 @@ get_template_part( 'components/banner/primary' );
 
         <!-- 2/3 Column -->
         <?php if (have_rows('testimonials', 'option')): ?>
-    <?php 
+        <?php 
         $testimonials = [];
         while (have_rows('testimonials', 'option')): the_row();
             $testimonials[] = [
@@ -358,10 +356,10 @@ get_template_part( 'components/banner/primary' );
             $random = $testimonials[array_rand($testimonials)];
         }
     ?>
-    <?php if (!empty($random)): ?>
+        <?php if (!empty($random)): ?>
         <div class="md:col-span-2 bg-white rounded border border-[#DFDAD4] p-8 shadow-sm flex flex-col">
-            <img src="<?php echo esc_url(get_template_directory_uri() . '/assets/icons/quote.svg'); ?>" alt="<?php echo esc_html($random['title']); ?>"
-                class="h-10 w-10 mb-4" />
+            <img src="<?php echo esc_url(get_template_directory_uri() . '/assets/icons/quote.svg'); ?>"
+                alt="<?php echo esc_html($random['title']); ?>" class="h-10 w-10 mb-4" />
             <p class="text-3xl text-gray-800 font-medium flex-grow max-w-xl">
                 <?php echo esc_html($random['description']); ?>
             </p>
@@ -370,8 +368,8 @@ get_template_part( 'components/banner/primary' );
                 <p class="text-gray-600"><?php echo esc_html($random['location']); ?></p>
             </div>
         </div>
-    <?php endif; ?>
-<?php endif; ?>
+        <?php endif; ?>
+        <?php endif; ?>
 
 
 
@@ -391,31 +389,31 @@ if ($query->have_posts()):
         $image       = get_field('image');       // ACF image field
         $link        = get_permalink();
 ?>
-    <div class="bg-white rounded border border-[#DFDAD4] overflow-hidden shadow-sm">
-        <?php if (has_post_thumbnail()): ?>
+        <div class="bg-white rounded border border-[#DFDAD4] overflow-hidden shadow-sm">
+            <?php if (has_post_thumbnail()): ?>
             <?php the_post_thumbnail('large', ['class' => 'w-full h-48 object-cover', 'alt' => get_the_title()]); ?>
-        <?php endif; ?>
-        <div class="py-6 px-8">
-            <?php if ($percentage): ?>
+            <?php endif; ?>
+            <div class="py-6 px-8">
+                <?php if ($percentage): ?>
                 <p class="text-6xl font-bold text-gray-900 mb-4">
                     <?php echo esc_html($percentage); ?>
                 </p>
-            <?php endif; ?>
+                <?php endif; ?>
 
-            <?php if (get_the_title()): ?>
+                <?php if (get_the_title()): ?>
                 <p class="text-gray-700 mb-4 text-lg max-w-xs">
                     <?php echo esc_html(get_the_title()); ?>
                 </p>
-            <?php endif; ?>
+                <?php endif; ?>
 
-            <a href="<?php echo esc_url($link); ?>"
-                class="inline-flex items-center mt-10 text-base font-medium border-b-2 border-[#D16555] hover:border-[#D16555] transition-colors duration-300"
-                data-aos="fade-left" data-aos-delay="100">
-                View Case Study <span class="ml-1 text-lg">→</span>
-            </a>
+                <a href="<?php echo esc_url($link); ?>"
+                    class="inline-flex items-center mt-10 text-base font-medium border-b-2 border-[#D16555] hover:border-[#D16555] transition-colors duration-300"
+                    data-aos="fade-left" data-aos-delay="100">
+                    View Case Study <span class="ml-1 text-lg">→</span>
+                </a>
+            </div>
         </div>
-    </div>
-<?php
+        <?php
     endwhile;
     wp_reset_postdata();
 endif;
@@ -443,62 +441,75 @@ endif;
             </a>
         </div>
 
-        <!-- Solutions Grid -->
+        <!-- Solutions Taxonomy Grid -->
         <div class="grid md:grid-cols-3 gap-12 max-w-7xl mx-auto">
             <?php
-            $args = array(
-                'post_type'      => 'solutions',
-                'posts_per_page' => 6,
-            );
-            $solutions_query = new WP_Query($args);
+            // Get terms in 'solution' taxonomy
+            $terms = get_terms([
+                'taxonomy'   => 'solution', // adjust taxonomy slug accordingly
+                'hide_empty' => false,
+                'number'     => 6,
+            ]);
 
-            if ($solutions_query->have_posts()) :
+            if (!is_wp_error($terms) && !empty($terms)) :
                 $delay = 0;
-                while ($solutions_query->have_posts()) : $solutions_query->the_post();
-                    $tagline = get_field('solution_tagline');
-                    $image = get_field('solution_featured_image');
-                    $image_url = is_array($image) && isset($image['url']) ? $image['url'] : '/wp-content/uploads/Rectangle-21027.png';
-            ?>
+                foreach ($terms as $term) :
+                    // Get ACF fields for the term
+                    $tagline = get_field('solution_tagline', $term->taxonomy . '_' . $term->term_id);
+                    $image = get_field('solution_featured_image', $term->taxonomy . '_' . $term->term_id);
 
-            <!-- Individual Solution Card -->
-            <a href="<?php the_permalink(); ?>"
-                class="group relative bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden flex flex-col transform transition-all duration-500 hover:-translate-y-1 hover:shadow-sm  focus:outline-none focus:ring-4 focus:ring-[#D16555] focus:ring-offset-2"
-                data-aos="fade-up" data-aos-delay="<?php echo $delay; ?>" data-aos-duration="600"
-                aria-label="Learn more about <?php the_title_attribute(); ?>">
+                    // Fallback image URL if no image set
+                    $image_url = $image && is_array($image) && isset($image['url'])
+                        ? $image['url']
+                        : '/wp-content/uploads/Rectangle-21027.png';
 
-                <!-- Card Image -->
-                <div class="overflow-hidden">
-                    <img src="<?php echo esc_url($image_url); ?>" alt="<?php the_title_attribute(); ?>"
-                        class="w-full h-60 object-cover transition-transform duration-700 ease-out group-hover:scale-105">
-                </div>
+                    // Term archive link
+                    $term_link = get_term_link($term);
+                    if (is_wp_error($term_link)) {
+                        continue; // skip if error getting link
+                    }
+                    ?>
+                    <!-- Individual Solution Taxonomy Card -->
+                    <a href="<?php echo esc_url($term_link); ?>"
+                        class="group relative bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden flex flex-col transform transition-all duration-500 hover:-translate-y-1 hover:shadow-sm"
+                        data-aos="fade-up" data-aos-delay="<?php echo esc_attr($delay); ?>" data-aos-duration="600"
+                        aria-label="Learn more about <?php echo esc_attr($term->name); ?>">
 
-                <!-- Card Content -->
-                <div class="p-6 flex flex-col flex-1">
-                    <h3 class="text-2xl font-semibold text-gray-900 mb-2"><?php the_title(); ?></h3>
-                    <div class="text-gray-700 mb-6 text-lg flex-1">
-                        <?php echo wp_kses_post($tagline); ?>
-                    </div>
-                    <div class="h-6 md:h-20"></div>
+                        <!-- Card Image -->
+                        <div class="overflow-hidden">
+                            <img src="<?php echo esc_url($image_url); ?>" alt="<?php echo esc_attr($term->name); ?>"
+                                class="w-full h-60 object-cover transition-transform duration-700 ease-out group-hover:scale-105" />
+                        </div>
 
-                    <!-- Learn More Indicator -->
-                    <div
-                        class="flex items-center mt-auto text-sm font-semibold text-gray-900 transition-colors duration-300 group-hover:text-[#D16555]">
-                        Learn more
-                        <span class="ml-2 text-lg transition-transform duration-300 group-hover:translate-x-1">→</span>
-                    </div>
-                    <div class="h-0.5 w-8 mt-1 bg-[#D16555] transition-all duration-300 group-hover:w-24"></div>
-                </div>
-            </a>
+                        <!-- Card Content -->
+                        <div class="p-6 flex flex-col flex-1">
+                            <h3 class="text-2xl font-semibold text-gray-900 mb-2"><?php echo esc_html($term->name); ?></h3>
+                            <div class="text-gray-700 mb-6 text-lg flex-1">
+                                <?php echo wp_kses_post($tagline); ?>
+                            </div>
+                            <div class="h-6 md:h-20"></div>
 
-            <?php
-                $delay += 100;
-                endwhile;
-                wp_reset_postdata();
-            endif;
-            ?>
+                            <!-- Learn More Indicator -->
+                            <div
+                                class="flex items-center mt-auto text-sm font-semibold text-gray-900 transition-colors duration-300 group-hover:text-[#D16555]">
+                                Learn more
+                                <span class="ml-2 text-lg transition-transform duration-300 group-hover:translate-x-1">→</span>
+                            </div>
+                            <div class="h-0.5 w-8 mt-1 bg-[#D16555] transition-all duration-300 group-hover:w-24"></div>
+                        </div>
+                    </a>
+
+                    <?php
+                    $delay += 100;
+                endforeach;
+            else :
+                ?>
+                <p class="text-center text-lg text-gray-900">No solutions found.</p>
+            <?php endif; ?>
         </div>
     </div>
 </section>
+
 
 
 

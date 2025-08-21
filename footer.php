@@ -18,31 +18,26 @@
             <!-- Column 1 -->
             <div>
                 <h4 class="text-lg font-semibold mb-4">Solutions</h4>
-                <ul class="space-y-4 text-base font-normal text-[#F9F8F6]/70">
-                    <?php
-                    $args = array(
-                        'post_type'      => 'solutions',
-                        'posts_per_page' => -1,
-                        'post_status'    => 'publish',
-                        'order'          => 'ASC',
-                        'orderby'        => 'title'
-                    );
-                    $solutions_query = new WP_Query($args);
+                <?php
+$terms = get_terms(array(
+    'taxonomy'   => 'solution',  // your taxonomy slug
+    'hide_empty' => true,        // only show terms with posts
+    'orderby'    => 'name',
+    'order'      => 'ASC',
+));
 
-                    if ($solutions_query->have_posts()) :
-                        while ($solutions_query->have_posts()) : $solutions_query->the_post();
-                    ?>
-                    <li>
-                        <a href="<?php the_permalink(); ?>" class="hover:text-white">
-                            <?php the_title(); ?>
-                        </a>
-                    </li>
-                    <?php
-                        endwhile;
-                        wp_reset_postdata();
-                    endif;
-                    ?>
-                </ul>
+if (!is_wp_error($terms) && !empty($terms)): ?>
+    <ul class="space-y-4 text-base font-normal text-[#F9F8F6]/70">
+        <?php foreach ($terms as $term): ?>
+            <li>
+                <a href="<?php echo esc_url(get_term_link($term)); ?>" class="hover:text-white">
+                    <?php echo esc_html($term->name); ?>
+                </a>
+            </li>
+        <?php endforeach; ?>
+    </ul>
+<?php endif; ?>
+
             </div>
 
 
@@ -176,6 +171,57 @@
 </div><!-- #page -->
 
 <?php wp_footer(); ?>
+
+<script>
+const buttons = document.querySelectorAll('.menu-btn');
+const sections = document.querySelectorAll('div[id^="section-"]');
+const rightContent = document.querySelector('.lg\\:w-2\\/3');
+
+function clearActive() {
+    buttons.forEach(btn => {
+        btn.classList.remove('opacity-100', 'border-l-4', 'border-l-[#98C441]', 'font-semibold',
+            'text-[#0F1E1E]');
+        btn.classList.add('opacity-50', 'border-l-0', 'font-medium', 'text-[#555F58]');
+        btn.setAttribute('aria-current', 'false');
+    });
+}
+
+function setActive(index) {
+    clearActive();
+    buttons[index].classList.add('opacity-100', 'border-l-4', 'border-l-[#98C441]', 'font-semibold', 'text-[#0F1E1E]');
+    buttons[index].classList.remove('opacity-50', 'border-l-0', 'font-medium', 'text-[#555F58]');
+    buttons[index].setAttribute('aria-current', 'true');
+}
+
+buttons.forEach((btn, i) => {
+    btn.addEventListener('click', () => {
+        sections[i].scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+        });
+        setActive(i);
+    });
+});
+
+let ticking = false;
+rightContent.addEventListener('scroll', () => {
+    if (!ticking) {
+        window.requestAnimationFrame(() => {
+            const scrollPos = rightContent.scrollTop + rightContent.offsetHeight / 3;
+            for (let i = sections.length - 1; i >= 0; i--) {
+                if (scrollPos >= sections[i].offsetTop) {
+                    setActive(i);
+                    break;
+                }
+            }
+            ticking = false;
+        });
+        ticking = true;
+    }
+});
+
+window.addEventListener('load', () => setActive(0));
+</script>
 
 <script>
 jQuery(document).ready(function($) {
