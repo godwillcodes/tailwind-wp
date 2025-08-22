@@ -434,9 +434,10 @@ endif;
         <header class="text-center max-w-2xl mx-auto sticky top-10 bg-[#F7F7F5] z-20 p-4">
             <h2 class="text-4xl md:text-5xl font-semibold mb-8">
                 <?php echo esc_html( get_field('visual_moment_title') ); ?> </h2>
-            <p class="text-[#1F3131] text-lg">
-                <?php echo esc_html( get_field('visual_moment_description') ); ?>
-            </p>
+            <div class="text-[#1F3131] text-lg space-y-6">
+    <?php echo wp_kses_post( get_field('visual_moment_subtitle') ); ?>
+<div>
+
         </header>
 
         <!-- Loop items stacked absolutely -->
