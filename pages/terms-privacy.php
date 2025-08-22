@@ -24,8 +24,7 @@ get_header();
                 We help you with the ​people, capabilities, and strategies you need to lead with clarity, confidence, and cultural fluency. Let’s build real connection across markets, channels, and communities.
             </p>
 
-             <a href="#"
-                class="inline-block mt-8 bg-[#98C441] text-[#1F3131] px-5 py-2 font-medium text-base shadow-md hover:bg-[#8AB738] focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#98C441] transition">
+             <a href="/contact" class="inline-block mt-8 bg-[#98C441] text-[#1F3131] px-5 py-2 font-bold text-base shadow-md hover:bg-[#8AB738] focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#98C441] transition">
                 Get in Touch
             </a>
         </div>
