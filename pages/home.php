@@ -50,7 +50,8 @@ get_template_part( 'components/banner/primary' );
                 </div>
 
                 <!-- Hover Content -->
-                <div class="absolute inset-0 z-20 flex flex-col items-center justify-center text-center px-6 opacity-0 group-hover:opacity-100 transition-all duration-100 ease-out bg-[linear-gradient(180deg,_rgba(152,196,65,0)_46.15%,_rgba(152,196,65,0.5)_80%,_rgba(0,97,85,0.5)_100%)] scale-95 group-hover:scale-100">
+                <div
+                    class="absolute inset-0 z-20 flex flex-col items-center justify-center text-center px-6 opacity-0 group-hover:opacity-100 transition-all duration-100 ease-out bg-[linear-gradient(180deg,_rgba(152,196,65,0)_46.15%,_rgba(152,196,65,0.5)_80%,_rgba(0,97,85,0.5)_100%)] scale-95 group-hover:scale-100">
                     <a href="<?php echo esc_url($link); ?>"
                         class="text-xl md:text-2xl px-6 md:px-20 font-semibold inline-flex items-center gap-2 text-black mb-6 transition-transform duration-500 ease-in-out group-hover:translate-y-1">
                         Explore our Approach
@@ -424,6 +425,72 @@ endif;
     style="background-image: url('<?php echo esc_url( get_template_directory_uri() . '/assets/icons/pattern-2.svg' ); ?>')">
 </section>
 
+<section class="h-[100vh] py-24 relative overflow-hidden"
+    style="background: linear-gradient(to bottom, #F7F7F5 0%, #F7F7F5 70%, #98C44180 85%, #00615580 100%);">
+
+    <div class="max-w-7xl mx-auto relative z-10 h-full flex flex-col">
+
+        <!-- Sticky static header -->
+        <header class="text-center max-w-2xl mx-auto sticky top-10 bg-[#F7F7F5] z-20 p-4">
+            <h2 class="text-4xl md:text-5xl font-semibold mb-8">
+                <?php echo esc_html( get_field('visual_moment_title') ); ?> </h2>
+            <p class="text-[#1F3131] text-lg">
+                <?php echo esc_html( get_field('visual_moment_description') ); ?>
+            </p>
+        </header>
+
+        <!-- Loop items stacked absolutely -->
+        <div class="relative flex-1">
+            <?php if (have_rows('visual_moment_stories')): ?>
+            <?php $i = 0; ?>
+            <?php while (have_rows('visual_moment_stories')): the_row(); ?>
+            <?php
+        $title = get_sub_field('title');
+        $description = get_sub_field('description');
+        $active_class = $i === 0 ? 'opacity-100 pointer-events-auto active' : 'opacity-0 pointer-events-none';
+      ?>
+            <div
+                class="scroll-item absolute inset-0 max-w-2xl mx-auto text-center flex items-center justify-center flex-col transition-opacity duration-700 <?php echo $active_class; ?>">
+                <h2 class="text-xl md:text-3xl font-semibold mb-8"><?php echo esc_html($title); ?></h2>
+                <p class="text-[#1F3131] text-lg">
+                    <?php echo esc_html($description); ?>
+                </p>
+            </div>
+            <?php $i++; ?>
+            <?php endwhile; ?>
+            <?php endif; ?>
+        </div>
+
+
+    </div>
+
+    <!-- Side images -->
+    <img src="http://pg.local/wp-content/uploads/f0489d9cc6826b4ffd2e5e2bfc4fb95c2fd944c2.png" alt="Left visual"
+        id="imageLeft"
+        class="absolute top-1/2 left-12 w-[177px] h-[177px] object-contain  z-5 transition-transform duration-700" />
+    <img src="http://pg.local/wp-content/uploads/f0489d9cc6826b4ffd2e5e2bfc4fb95c2fd944c2.png" alt="Right visual"
+        id="imageRight"
+        class="absolute top-1/2 right-12 w-[177px] h-[177px] object-contain z-5 transition-transform duration-700" />
+</section>
+
+
+<style>
+/* For accessibility and smooth transitions */
+.scroll-item {
+    transition: opacity 0.7s ease, pointer-events 0.7s ease;
+}
+
+.scroll-item:not(.active) {
+    pointer-events: none;
+}
+</style>
+
+
+
+
+
+
+
 <section class="bg-[#F7F7F5] py-20 px-10 md:px-0">
     <div class="max-w-7xl mx-auto">
         <!-- Section Header -->
@@ -466,42 +533,42 @@ endif;
                         continue; // skip if error getting link
                     }
                     ?>
-                    <!-- Individual Solution Taxonomy Card -->
-                    <a href="<?php echo esc_url($term_link); ?>"
-                        class="group relative bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden flex flex-col transform transition-all duration-500 hover:-translate-y-1 hover:shadow-sm"
-                        data-aos="fade-up" data-aos-delay="<?php echo esc_attr($delay); ?>" data-aos-duration="600"
-                        aria-label="Learn more about <?php echo esc_attr($term->name); ?>">
+            <!-- Individual Solution Taxonomy Card -->
+            <a href="<?php echo esc_url($term_link); ?>"
+                class="group relative bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden flex flex-col transform transition-all duration-500 hover:-translate-y-1 hover:shadow-sm"
+                data-aos="fade-up" data-aos-delay="<?php echo esc_attr($delay); ?>" data-aos-duration="600"
+                aria-label="Learn more about <?php echo esc_attr($term->name); ?>">
 
-                        <!-- Card Image -->
-                        <div class="overflow-hidden">
-                            <img src="<?php echo esc_url($image_url); ?>" alt="<?php echo esc_attr($term->name); ?>"
-                                class="w-full h-60 object-cover transition-transform duration-700 ease-out group-hover:scale-105" />
-                        </div>
+                <!-- Card Image -->
+                <div class="overflow-hidden">
+                    <img src="<?php echo esc_url($image_url); ?>" alt="<?php echo esc_attr($term->name); ?>"
+                        class="w-full h-60 object-cover transition-transform duration-700 ease-out group-hover:scale-105" />
+                </div>
 
-                        <!-- Card Content -->
-                        <div class="p-6 flex flex-col flex-1">
-                            <h3 class="text-2xl font-semibold text-gray-900 mb-2"><?php echo esc_html($term->name); ?></h3>
-                            <div class="text-gray-700 mb-6 text-lg flex-1">
-                                <?php echo wp_kses_post($tagline); ?>
-                            </div>
-                            <div class="h-6 md:h-20"></div>
+                <!-- Card Content -->
+                <div class="p-6 flex flex-col flex-1">
+                    <h3 class="text-2xl font-semibold text-gray-900 mb-2"><?php echo esc_html($term->name); ?></h3>
+                    <div class="text-gray-700 mb-6 text-lg flex-1">
+                        <?php echo wp_kses_post($tagline); ?>
+                    </div>
+                    <div class="h-6 md:h-20"></div>
 
-                            <!-- Learn More Indicator -->
-                            <div
-                                class="flex items-center mt-auto text-sm font-semibold text-gray-900 transition-colors duration-300 group-hover:text-[#D16555]">
-                                Learn more
-                                <span class="ml-2 text-lg transition-transform duration-300 group-hover:translate-x-1">→</span>
-                            </div>
-                            <div class="h-0.5 w-8 mt-1 bg-[#D16555] transition-all duration-300 group-hover:w-24"></div>
-                        </div>
-                    </a>
+                    <!-- Learn More Indicator -->
+                    <div
+                        class="flex items-center mt-auto text-sm font-semibold text-gray-900 transition-colors duration-300 group-hover:text-[#D16555]">
+                        Learn more
+                        <span class="ml-2 text-lg transition-transform duration-300 group-hover:translate-x-1">→</span>
+                    </div>
+                    <div class="h-0.5 w-8 mt-1 bg-[#D16555] transition-all duration-300 group-hover:w-24"></div>
+                </div>
+            </a>
 
-                    <?php
+            <?php
                     $delay += 100;
                 endforeach;
             else :
                 ?>
-                <p class="text-center text-lg text-gray-900">No solutions found.</p>
+            <p class="text-center text-lg text-gray-900">No solutions found.</p>
             <?php endif; ?>
         </div>
     </div>

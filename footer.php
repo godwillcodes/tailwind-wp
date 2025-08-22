@@ -274,6 +274,88 @@ jQuery(document).ready(function($) {
 });
 </script>
 
+<script>
+const items = document.querySelectorAll('.scroll-item');
+let currentIndex = 0;
+const leftImage = document.getElementById('imageLeft');
+const rightImage = document.getElementById('imageRight');
+let isThrottled = false;
+
+function showItem(index) {
+    items.forEach((item, i) => {
+        const active = i === index;
+        item.classList.toggle('active', active);
+        item.style.opacity = active ? '1' : '0';
+        item.style.pointerEvents = active ? 'auto' : 'none';
+    });
+
+    // Side images transform based on index
+    const movement = index * 30; // Adjust multiplier for desired effect
+    leftImage.style.transform = `translate(-${movement}px, -50%)`;
+    rightImage.style.transform = `translate(${movement}px, -50%)`;
+}
+
+function onScroll(e) {
+    if (isThrottled) return;
+    isThrottled = true;
+    setTimeout(() => (isThrottled = false), 200); // Throttle scroll event
+
+    if (e.deltaY > 0 && currentIndex < items.length - 1) {
+        currentIndex++;
+        showItem(currentIndex);
+    } else if (e.deltaY < 0 && currentIndex > 0) {
+        currentIndex--;
+        showItem(currentIndex);
+    }
+}
+
+// Keyboard Accessibility: up/down arrows
+function onKeyDown(e) {
+    if (e.key === 'ArrowDown' && currentIndex < items.length - 1) {
+        currentIndex++;
+        showItem(currentIndex);
+    } else if (e.key === 'ArrowUp' && currentIndex > 0) {
+        currentIndex--;
+        showItem(currentIndex);
+    }
+}
+
+// Touch support: swipe up/down
+let touchStartY = 0;
+let touchEndY = 0;
+
+function onTouchStart(e) {
+    touchStartY = e.changedTouches[0].screenY;
+}
+
+function onTouchEnd(e) {
+    touchEndY = e.changedTouches.screenY;
+    let diff = touchStartY - touchEndY;
+    if (Math.abs(diff) > 40) { // swipe threshold
+        if (diff > 0 && currentIndex < items.length - 1) {
+            currentIndex++;
+            showItem(currentIndex);
+        } else if (diff < 0 && currentIndex > 0) {
+            currentIndex--;
+            showItem(currentIndex);
+        }
+    }
+}
+
+// Initialize
+showItem(currentIndex);
+window.addEventListener('wheel', onScroll, {
+    passive: true
+});
+window.addEventListener('keydown', onKeyDown);
+window.addEventListener('touchstart', onTouchStart, {
+    passive: true
+});
+window.addEventListener('touchend', onTouchEnd, {
+    passive: true
+});
+</script>
+
 
 </body>
 
