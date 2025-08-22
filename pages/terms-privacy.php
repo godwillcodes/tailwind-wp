@@ -37,7 +37,7 @@ get_header();
 
 
 
-<section class="max-w-7xl mx-auto my-12">
+<section class="max-w-7xl mx-auto my-12 px-8 lg:px-0">
   <div class="prose lg:prose-xl">
     <?php the_content(); ?>
   </div>

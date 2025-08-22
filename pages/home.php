@@ -466,10 +466,10 @@ endif;
     </div>
 
     <!-- Side images -->
-    <img src="http://pg.local/wp-content/uploads/f0489d9cc6826b4ffd2e5e2bfc4fb95c2fd944c2.png" alt="Left visual"
+    <img src="/wp-content/uploads/f0489d9cc6826b4ffd2e5e2bfc4fb95c2fd944c2.png" alt="Left visual"
         id="imageLeft"
         class="absolute top-1/2 left-12 w-[177px] h-[177px] object-contain  z-5 transition-transform duration-700" />
-    <img src="http://pg.local/wp-content/uploads/f0489d9cc6826b4ffd2e5e2bfc4fb95c2fd944c2.png" alt="Right visual"
+    <img src=/wp-content/uploads/f0489d9cc6826b4ffd2e5e2bfc4fb95c2fd944c2.png" alt="Right visual"
         id="imageRight"
         class="absolute top-1/2 right-12 w-[177px] h-[177px] object-contain z-5 transition-transform duration-700" />
 </section>
