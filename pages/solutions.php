@@ -12,7 +12,7 @@ get_template_part( 'components/banner/secondary' );
     <h4 class="font-black text-2xl sm:text-3xl lg:text-4xl my-4 sm:my-6 leading-snug">
         We don’t just fill gaps. <br class="hidden sm:block"> We build what others overlook.
     </h4>
-    <p class="max-w-2xl mx-auto text-base sm:text-lg leading-relaxed">
+    <p class="max-w-3xl mx-auto text-base sm:text-lg leading-relaxed">
         Partnering with us means gaining an embedded team of experts who help you navigate complexity, reduce risk, and deliver measurable impact. Whether you're scaling globally or serving diverse communities locally, we give you the strategy, systems, and support to connect confidently and securely.
     </p>
 </div>
