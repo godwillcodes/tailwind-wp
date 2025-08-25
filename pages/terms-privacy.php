@@ -20,11 +20,7 @@ get_header();
                 <?php the_title(); ?>
             </h2>
 
-            <p class="text-sm sm:text-base md:text-lg leading-relaxed">
-                We help you with the ​people, capabilities, and strategies you need to lead with clarity, confidence, and cultural fluency. Let’s build real connection across markets, channels, and communities.
-            </p>
-
-             <a href="/contact" class="inline-block mt-8 bg-[#98C441] text-[#1F3131] px-5 py-2 font-bold text-base shadow-md hover:bg-[#8AB738] focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#98C441] transition">
+             <a href="/contact" class="inline-block mt-4 bg-[#98C441] text-[#1F3131] px-5 py-2 font-bold text-base shadow-md hover:bg-[#8AB738] focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#98C441] transition">
                 Get in Touch
             </a>
         </div>
@@ -32,7 +28,7 @@ get_header();
 
     <img src="<?php echo esc_url(get_template_directory_uri() . '/assets/icons/pattern-3.svg'); ?>"
          alt="<?php echo esc_attr(get_bloginfo('name')); ?>"
-         class="absolute bottom-[-20px] lg:bottom-[-105%] left-0 w-full z-10">
+         class="absolute bottom-[-20px] lg:bottom-[-125%] left-0 w-full z-10">
 </section>
 
 
@@ -49,7 +45,7 @@ get_header();
 .prose {
   color: #1a1a1a;
   line-height: 1.7;
-  font-size: 1.125rem;
+  font-size: 1.115rem;
 }
 
 .prose h1, 
