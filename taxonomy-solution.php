@@ -276,72 +276,56 @@ $industries_section = get_field('industries_section', $term_key); // ACF Relatio
 </section>
 <?php endif; ?>
 
+<?php if( have_rows('outcomes', 'taxonomy_' . $term->term_id) ): ?>
 <section class="bg-white py-24">
   <div class="max-w-7xl mx-auto px-6 lg:px-0">
     <div class="text-center">
-      <p data-aos="fade-up" data-aos-delay="100" data-aos-duration="900"
-        class="text-lg font-medium mb-2">
-        Outcomes
-      </p>
-
-      <h2 data-aos="fade-up" data-aos-delay="200" data-aos-duration="1000"
-        class="text-3xl sm:text-4xl md:text-5xl max-w-4xl mx-auto font-extrabold mb-6 leading-[98%]">
+      <p class="text-lg font-medium mb-2">Outcomes</p>
+      <h2 class="text-3xl sm:text-4xl md:text-5xl max-w-4xl mx-auto font-extrabold mb-6 leading-[98%]">
         Results You Can Expect
       </h2>
     </div>
 
-    <div class="w-full mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-      <!-- Top row -->
-      <div data-aos="fade-up" data-aos-delay="100" data-aos-duration="1000"
-        class="bg-[#006155] text-white p-6 min-h-[250px] flex flex-col justify-between font-semibold text-2xl rounded shadow-sm">
-        <div>Faster time to market</div>
-        <p class="text-lg font-normal">
-          Accelerate your product launch by reducing development cycles.
-        </p>
-      </div>
+    <div class="w-full mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 auto-rows-[250px]">
+      <?php 
+        // Define bento slots
+        $bento_slots = [
+          [ 'class' => 'bg-[#006155] text-white', 'span' => '' ],
+          [ 'class' => 'bg-[#DFDAD4] text-[#1F3131] border border-[#DFDAD4]', 'span' => 'sm:col-span-2' ],
+          [ 'class' => 'bg-[#550061] text-white', 'span' => 'lg:row-span-2' ],
+          [ 'class' => 'image', 'span' => 'lg:row-span-2' ],
+          [ 'class' => 'bg-[#ab9dba] text-[#1F3131]', 'span' => '' ],
+          [ 'class' => 'bg-[#98C441] text-black', 'span' => '' ],
+        ];
 
-      <div data-aos="fade-up" data-aos-delay="200" data-aos-duration="1000"
-        class="bg-[#DFDAD4] text-[#1F3131] border border-[#DFDAD4] p-6 min-h-[250px] flex flex-col justify-between shadow-sm font-semibold text-2xl sm:col-span-2">
-        <div>Improved accessibility</div>
-        <p class="text-lg font-normal">
-          Ensure your digital platforms meet accessibility standards.
-        </p>
-      </div>
+        $i = 0;
+        while( have_rows('outcomes', 'taxonomy_' . $term->term_id) ): the_row();
+          $title = get_sub_field('title');
+          $description = get_sub_field('description');
 
-      <!-- Bottom row -->
-      <div data-aos="fade-up" data-aos-delay="300" data-aos-duration="1000"
-        class="bg-[#550061] text-white p-6 min-h-[250px] lg:h-[620px] flex flex-col justify-between shadow-sm font-semibold text-2xl">
-        <div>Faster time to market</div>
-        <p class="text-lg font-normal">
-          Drive efficiency and deliver products faster.
-        </p>
-      </div>
+          // Pick slot (repeats pattern if more than 6 items)
+          $slot = $bento_slots[$i % count($bento_slots)];
+      ?>
 
-      <div data-aos="fade-up" data-aos-delay="400" data-aos-duration="1000"
-        class="relative min-h-[250px] lg:h-[620px] overflow-hidden group shadow-sm flex flex-col justify-between text-white">
-        <img src="http://pg.local/wp-content/uploads/iStock-1454186321-1.webp" alt="Improved accessibility"
-          class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
-      </div>
+        <?php if( $slot['class'] === 'image' ): ?>
+          <div class="relative overflow-hidden group shadow-sm flex flex-col justify-between text-white <?php echo esc_attr($slot['span']); ?>">
+            <img src="<?php echo esc_url( get_the_post_thumbnail_url( get_the_ID(), 'full' ) ); ?>"
+                 alt="<?php echo esc_attr( get_the_title() ); ?>"
+                 class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
+          </div>
+        <?php else: ?>
+          <div class="<?php echo esc_attr($slot['class']); ?> p-6 flex flex-col justify-between font-semibold text-2xl rounded shadow-sm <?php echo esc_attr($slot['span']); ?>">
+            <div><?php echo esc_html($title); ?></div>
+            <p class="text-lg font-normal"><?php echo esc_html($description); ?></p>
+          </div>
+        <?php endif; ?>
 
-      <div class="flex flex-col gap-4">
-        <div data-aos="fade-up" data-aos-delay="500" data-aos-duration="1000"
-          class="bg-[#ab9dba] text-[#1F3131] p-6 min-h-[300px] flex flex-col justify-between font-semibold text-2xl">
-          <div>Consistent brand voice</div>
-          <p class="text-lg font-normal">
-            Maintain brand integrity across all content.
-          </p>
-        </div>
-        <div data-aos="fade-up" data-aos-delay="600" data-aos-duration="1000"
-          class="bg-[#98C441] text-black p-6 shadow-sm min-h-[300px] flex flex-col justify-between font-semibold text-2xl">
-          <div>Consistent brand voice</div>
-          <p class="text-lg font-normal">
-            Reduce inconsistencies with unified messaging.
-          </p>
-        </div>
-      </div>
+      <?php $i++; endwhile; ?>
     </div>
   </div>
 </section>
+<?php endif; ?>
+
 
 
 <section class="py-16 bg-white">
