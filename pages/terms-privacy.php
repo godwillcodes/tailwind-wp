@@ -10,7 +10,7 @@ get_header();
     <?php get_template_part('components/navigation/desktop'); ?>
     <?php get_template_part('components/navigation/mobile'); ?>
 
-    <div class="w-full pt-[30%] lg:pt-[8%] px-4 sm:px-6 md:px-12 relative z-20 pb-60">
+    <div class="w-full pt-[30%] lg:pt-[8%] px-4 sm:px-6 md:px-12 relative z-20 pb-40">
         <div class="text-center gap-y-8 max-w-4xl mx-auto">
             <h1 class="text-base sm:text-lg md:text-xl font-bold hidden">
                 <?php the_title(); ?>
@@ -28,7 +28,7 @@ get_header();
 
     <img src="<?php echo esc_url(get_template_directory_uri() . '/assets/icons/pattern-3.svg'); ?>"
          alt="<?php echo esc_attr(get_bloginfo('name')); ?>"
-         class="absolute bottom-[-20px] lg:bottom-[-125%] left-0 w-full z-10">
+         class="absolute bottom-[-20px] lg:bottom-[-135%] left-0 w-full z-10">
 </section>
 
 
