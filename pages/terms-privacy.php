@@ -19,16 +19,12 @@ get_header();
             <h2 class="text-3xl py-5 sm:text-4xl md:text-5xl max-w-4xl font-extrabold mb-6 leading-[98%]">
                 <?php the_title(); ?>
             </h2>
-
-             <a href="/contact" class="inline-block mt-4 bg-[#98C441] text-[#1F3131] px-5 py-2 font-bold text-base shadow-md hover:bg-[#8AB738] focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#98C441] transition">
-                Get in Touch
-            </a>
         </div>
     </div>
 
     <img src="<?php echo esc_url(get_template_directory_uri() . '/assets/icons/pattern-3.svg'); ?>"
          alt="<?php echo esc_attr(get_bloginfo('name')); ?>"
-         class="absolute bottom-[-20px] lg:bottom-[-135%] left-0 w-full z-10">
+         class="absolute bottom-[-20px] lg:bottom-[-150%] left-0 w-full z-10">
 </section>
 
 
