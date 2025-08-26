@@ -521,7 +521,7 @@ endif;
                 foreach ($terms as $term) :
                     // Get ACF fields for the term
                     $tagline = get_field('solution_tagline', $term->taxonomy . '_' . $term->term_id);
-                    $image = get_field('solution_featured_image', $term->taxonomy . '_' . $term->term_id);
+                    $image = get_field('featured_image', $term->taxonomy . '_' . $term->term_id);
 
                     // Fallback image URL if no image set
                     $image_url = $image && is_array($image) && isset($image['url'])
@@ -542,7 +542,7 @@ endif;
 
                 <!-- Card Image -->
                 <div class="overflow-hidden">
-                    <img src="<?php echo esc_url($image_url); ?>" alt="<?php echo esc_attr($term->name); ?>"
+                    <img src="<?php echo esc_url($image); ?>" alt="<?php echo esc_attr($term->name); ?>"
                         class="w-full h-60 object-cover transition-transform duration-700 ease-out group-hover:scale-105" />
                 </div>
 
