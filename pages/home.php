@@ -146,7 +146,7 @@ get_template_part( 'components/banner/primary' );
             <div class="item">
                 <a href="<?php the_sub_field('url'); ?>" target="_blank" rel="noopener">
                     <img src="<?php the_sub_field('partner_logo'); ?>" alt="Piedmont Global Partner"
-                        class="h-12 w-auto mx-auto object-contain" />
+                        class="h-24 w-auto mx-auto object-contain" />
                 </a>
             </div>
             <?php endwhile; ?>
@@ -466,10 +466,10 @@ endif;
     </div>
 
     <!-- Side images -->
-    <img src="/wp-content/uploads/f0489d9cc6826b4ffd2e5e2bfc4fb95c2fd944c2.png" alt="Left visual"
+    <img src=/wp-content/uploads/Rectangle-21027.png" alt="Left visual"
         id="imageLeft"
         class="absolute top-1/2 left-12 w-[177px] h-[177px] object-contain  z-5 transition-transform duration-700" />
-    <img src=/wp-content/uploads/f0489d9cc6826b4ffd2e5e2bfc4fb95c2fd944c2.png" alt="Right visual"
+    <img src=/wp-content/uploads/Rectangle-21027.png" alt="Right visual"
         id="imageRight"
         class="absolute top-1/2 right-12 w-[177px] h-[177px] object-contain z-5 transition-transform duration-700" />
 </section>

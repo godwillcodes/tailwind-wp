@@ -17,6 +17,7 @@ $why_piedmont_global_section_title = get_field('why_piedmont_global_section_titl
 $why_piedmont_global_description = get_field('why_piedmont_global_description', $term_key);
 $why_piedmont_global_cards = get_field('why_piedmont_global_cards', $term_key);
 $industries_section = get_field('industries_section', $term_key); // ACF Relationship field
+$outcomes_section = get_field('outcomes', $term_key); // Repeater field
 ?>
 
 <section class="shadow-sm">
@@ -31,17 +32,17 @@ $industries_section = get_field('industries_section', $term_key); // ACF Relatio
         style="background-image: linear-gradient(180deg, rgba(31,49,49,0.5) 0%, #1F3131 80%), url('<?php echo esc_url($featured_image); ?>');">
         <div class="absolute inset-0 flex items-end">
             <div class="max-w-7xl mx-auto w-full px-10 lg:px-0 pb-4 md:pb-12 lg:pb-12 text-white">
-                <h1 class="text-2xl md:text-4xl lg:text-4xl font-bold" data-aos="fade-up" data-aos-delay="200">
+                <h1 class="text-2xl md:text-4xl lg:text-4xl font-bold" data-aos="fade-up" data-aos-delay="200" data-aos-duration="800">
                     <?php echo esc_html($term->name); ?>
                 </h1>
 
                 <?php if ($tagline): ?>
-                <p class="text-base lg:text-lg my-4 max-w-4xl" data-aos="fade-up" data-aos-delay="400">
+                <p class="text-base lg:text-lg my-4 max-w-4xl" data-aos="fade-up" data-aos-delay="400" data-aos-duration="600">
                     <?php echo esc_html($tagline); ?>
                 </p>
                 <?php endif; ?>
 
-                <a href="#"
+                <a href="#" data-aos="fade-up" data-aos-delay="600" data-aos-duration="500"
                     class="inline-block bg-[#98C441] text-[#1F3131] px-5 py-2 mt-4 font-bold text-base shadow-md hover:bg-[#8AB738] focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#98C441] transition">
                     Explore our model
                 </a>
@@ -65,7 +66,7 @@ $industries_section = get_field('industries_section', $term_key); // ACF Relatio
             <?php endif; ?>
         </div>
 
-        <div class="md:w-1/3 flex items-center" data-aos="fade-down" data-aos-delay="250" data-aos-duration="1000"
+        <div class="md:w-1/3 flex items-center" data-aos="fade-up" data-aos-delay="400" data-aos-duration="800"
             data-aos-easing="ease-out-cubic">
             <?php if ($supporting_description): ?>
             <div class="text-white text-base leading-relaxed">
@@ -242,12 +243,16 @@ $industries_section = get_field('industries_section', $term_key); // ACF Relatio
         </h2>
 
         <div class="grid gap-x-24 gap-y-6 sm:grid-cols-2 mt-16">
-            <?php foreach ($industries_section as $industry):
+            <?php 
+            $industry_delay = 0;
+            foreach ($industries_section as $industry):
                     $title = get_the_title($industry);
                     $desc = get_field('industry_tagline', $industry->ID);
+                    $industry_delay += 150;
                     ?>
             <a href="<?php echo esc_url(get_permalink($industry->ID)); ?>"
                 class="group block border-b border-gray-300 px-4 py-6 transition-colors duration-200 ease-in-out hover:border-[#98C441]"
+                data-aos="fade-up" data-aos-delay="<?php echo $industry_delay; ?>" data-aos-duration="600"
                 aria-label="<?php echo esc_attr($title . ': ' . $desc); ?>">
                 <div class="flex flex-col sm:flex-row items-center sm:items-center justify-between gap-4">
                     <div class="flex-1">
@@ -276,15 +281,15 @@ $industries_section = get_field('industries_section', $term_key); // ACF Relatio
 </section>
 <?php endif; ?>
 
-<?php if( have_rows('outcomes', 'taxonomy_' . $term->term_id) ): ?>
+<?php if ($outcomes_section): ?>
 <section class="bg-white py-24">
   <div class="max-w-7xl mx-auto px-6 lg:px-0">
-    <div class="text-center">
-      <p class="text-lg font-medium mb-2">Outcomes</p>
-      <h2 class="text-3xl sm:text-4xl md:text-5xl max-w-4xl mx-auto font-extrabold mb-6 leading-[98%]">
-        Results You Can Expect
-      </h2>
-    </div>
+         <div class="text-center">
+       <p class="text-lg font-medium mb-2" data-aos="fade-up" data-aos-delay="100" data-aos-duration="600">Outcomes</p>
+       <h2 class="text-3xl sm:text-4xl md:text-5xl max-w-4xl mx-auto font-extrabold mb-6 leading-[98%]" data-aos="fade-up" data-aos-delay="200" data-aos-duration="800">
+         Results You Can Expect
+       </h2>
+     </div>
 
     <div class="w-full mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 auto-rows-[250px]">
       <?php 
@@ -299,7 +304,7 @@ $industries_section = get_field('industries_section', $term_key); // ACF Relatio
         ];
 
         $i = 0;
-        while( have_rows('outcomes', 'taxonomy_' . $term->term_id) ): the_row();
+        while( have_rows('outcomes', $term_key) ): the_row();
           $title = get_sub_field('title');
           $description = get_sub_field('description');
 
@@ -307,18 +312,18 @@ $industries_section = get_field('industries_section', $term_key); // ACF Relatio
           $slot = $bento_slots[$i % count($bento_slots)];
       ?>
 
-        <?php if( $slot['class'] === 'image' ): ?>
-          <div class="relative overflow-hidden group shadow-sm flex flex-col justify-between text-white <?php echo esc_attr($slot['span']); ?>">
-            <img src="<?php echo esc_url( get_the_post_thumbnail_url( get_the_ID(), 'full' ) ); ?>"
-                 alt="<?php echo esc_attr( get_the_title() ); ?>"
-                 class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
-          </div>
-        <?php else: ?>
-          <div class="<?php echo esc_attr($slot['class']); ?> p-6 flex flex-col justify-between font-semibold text-2xl rounded shadow-sm <?php echo esc_attr($slot['span']); ?>">
-            <div><?php echo esc_html($title); ?></div>
-            <p class="text-lg font-normal"><?php echo esc_html($description); ?></p>
-          </div>
-        <?php endif; ?>
+                          <?php if( $slot['class'] === 'image' ): ?>
+            <div class="relative overflow-hidden group shadow-sm flex flex-col justify-between text-white <?php echo esc_attr($slot['span']); ?>" data-aos="fade-up" data-aos-delay="<?php echo $i * 100; ?>" data-aos-duration="700">
+              <img src="<?php echo esc_url( get_field('featured_image', $term_key) ); ?>"
+                   alt="<?php echo esc_attr( $term->name ); ?>"
+                   class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
+            </div>
+          <?php else: ?>
+            <div class="<?php echo esc_attr($slot['class']); ?> p-6 flex flex-col justify-between font-semibold text-2xl rounded shadow-sm <?php echo esc_attr($slot['span']); ?>" data-aos="fade-up" data-aos-delay="<?php echo $i * 100; ?>" data-aos-duration="700">
+              <div><?php echo esc_html($title); ?></div>
+              <p class="text-lg font-normal"><?php echo esc_html($description); ?></p>
+            </div>
+          <?php endif; ?>
 
       <?php $i++; endwhile; ?>
     </div>
@@ -330,61 +335,61 @@ $industries_section = get_field('industries_section', $term_key); // ACF Relatio
 
 <section class="py-16 bg-white">
     <div class="max-w-7xl mx-auto px-6 lg:px-0">
-        <!-- Section Header -->
-        <div class="mb-12">
-            <p data-aos="fade-up" data-aos-delay="100" data-aos-duration="900" class="text-lg font-medium  mb-2">Key
-                Features</p>
-            <h2 data-aos="fade-up" data-aos-delay="200" data-aos-duration="1000"
-                class="text-3xl sm:text-4xl md:text-5xl max-w-3xl font-extrabold mb-6 leading-[98%]">
-                What Sets Our Translation Models Apart
-            </h2>
-        </div>
+                 <!-- Section Header -->
+         <div class="mb-12">
+             <p data-aos="fade-up" data-aos-delay="100" data-aos-duration="600" class="text-lg font-medium  mb-2">Key
+                 Features</p>
+             <h2 data-aos="fade-up" data-aos-delay="200" data-aos-duration="800"
+                 class="text-3xl sm:text-4xl md:text-5xl max-w-3xl font-extrabold mb-6 leading-[98%]">
+                 What Sets Our Translation Models Apart
+             </h2>
+         </div>
 
         <!-- Features Grid -->
         <div class="grid gap-6 grid-cols-1 lg:grid-cols-2">
-            <!-- ISO-Certified Quality (Full width on large screens) -->
-            <div
-                class="block md:flex flex-col md:flex-row items-center md:justify-between p-6 sm:p-8 md:p-12 border border-[#DFDAD4] rounded-lg lg:col-span-2">
-                <div class="mb-6 md:mb-0 text-center md:text-left">
-                    <h3 class="text-2xl sm:text-3xl md:text-3xl font-semibold text-gray-900">
-                        ISO-Certified Quality
-                    </h3>
-                </div>
-                <div class="flex flex-wrap justify-center md:justify-end gap-4 md:gap-4">
-                    <?php for ($i = 0; $i <2  ; $i++) { ?>
-                    <a href="" target="_blank" rel="noopener">
-                        <span
-                            class="flex items-center justify-center h-24 w-24 sm:h-28 sm:w-28 md:h-32 md:w-32 rounded-full bg-gradient-to-b from-gray-100 to-green-100 shadow-sm"
-                            aria-label="Piedmont Global Recognition">
-                            <img src="/wp-content/uploads/fc6c468ca3bf0a126824235c072b86a661d06935.png"
-                                alt="Piedmont Global Recognition"
-                                class="max-h-20 max-w-20 sm:max-h-24 sm:max-w-24 md:max-h-20 md:max-w-20 object-contain">
-                        </span>
-                    </a>
-                    <?php } ?>
-                </div>
-            </div>
+                         <!-- ISO-Certified Quality (Full width on large screens) -->
+             <div
+                 class="block md:flex flex-col md:flex-row items-center md:justify-between p-6 sm:p-8 md:p-12 border border-[#DFDAD4] rounded-lg lg:col-span-2" data-aos="fade-up" data-aos-delay="300" data-aos-duration="800">
+                 <div class="mb-6 md:mb-0 text-center md:text-left">
+                     <h3 class="text-2xl sm:text-3xl md:text-3xl font-semibold text-gray-900">
+                         ISO-Certified Quality
+                     </h3>
+                 </div>
+                 <div class="flex flex-wrap justify-center md:justify-end gap-4 md:gap-4">
+                     <?php for ($i = 0; $i <2  ; $i++) { ?>
+                     <a href="" target="_blank" rel="noopener">
+                         <span
+                             class="flex items-center justify-center h-24 w-24 sm:h-28 sm:w-28 md:h-32 md:w-32 rounded-full bg-gradient-to-b from-gray-100 to-green-100 shadow-sm"
+                             aria-label="Piedmont Global Recognition">
+                             <img src="/wp-content/uploads/fc6c468ca3bf0a126824235c072b86a661d06935.png"
+                                 alt="Piedmont Global Recognition"
+                                 class="max-h-20 max-w-20 sm:max-h-24 sm:max-w-24 md:max-h-20 md:max-w-20 object-contain">
+                         </span>
+                     </a>
+                     <?php } ?>
+                 </div>
+             </div>
 
             <?php for ($i = 0; $i < 2; $i++) { ?>
 
-            <!-- Integrated Workflow -->
-            <div class="items-justify gap-4 border border-[#DFDAD4] rounded-lg p-12 shadow-md">
-                <div class="flex-shrink-0">
-                    <span
-                        class="flex items-center justify-center h-16 w-16 lg:h-24 lg:w-24 rounded-full bg-gradient-to-b from-gray-100 to-green-100 shadow-sm"
-                        aria-label="Piedmont Global Recognition">
-                        <img src="/wp-content/uploads/fc6c468ca3bf0a126824235c072b86a661d06935.png"
-                            alt="Piedmont Global Recognition"
-                            class="max-h-10 lg:max-h-16 max-w-10 lg:max-w-16 object-contain">
-                    </span>
-                </div>
-                <div class="pt-4">
-                    <h3 class="text-xl lg:text-2xl text-[#1F3131] font-semibold">
-                        200+ Languages </h3>
-                    <p class="text-gray-600 text-base lg:text-lg pt-2">
-                        Supporting copy can go here and further drive home this point by balancing this space </p>
-                </div>
-            </div>
+                         <!-- Integrated Workflow -->
+             <div class="items-justify gap-4 border border-[#DFDAD4] rounded-lg p-12 shadow-md" data-aos="fade-up" data-aos-delay="<?php echo 400 + ($i * 100); ?>" data-aos-duration="700">
+                 <div class="flex-shrink-0">
+                     <span
+                         class="flex items-center justify-center h-16 w-16 lg:h-24 lg:w-24 rounded-full bg-gradient-to-b from-gray-100 to-green-100 shadow-sm"
+                         aria-label="Piedmont Global Recognition">
+                         <img src="/wp-content/uploads/fc6c468ca3bf0a126824235c072b86a661d06935.png"
+                             alt="Piedmont Global Recognition"
+                             class="max-h-10 lg:max-h-16 max-w-10 lg:max-w-16 object-contain">
+                     </span>
+                 </div>
+                 <div class="pt-4">
+                     <h3 class="text-xl lg:text-2xl text-[#1F3131] font-semibold">
+                         200+ Languages </h3>
+                     <p class="text-gray-600 text-base lg:text-lg pt-2">
+                         Supporting copy can go here and further drive home this point by balancing this space </p>
+                 </div>
+             </div>
             <?php } ?>
 
             <!-- Global Reach, Local Sensitivity -->
@@ -397,21 +402,21 @@ $industries_section = get_field('industries_section', $term_key); // ACF Relatio
 <section class="bg-[#1F3131] py-28 text-center">
     <div class="max-w-3xl mx-auto px-4">
         <!-- Heading -->
-        <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold text-[#F9F8F6] tracking-tight">
-            Let’s Translate What Matters
+        <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold text-[#F9F8F6] tracking-tight" data-aos="fade-up" data-aos-delay="100" data-aos-duration="800">
+            Let's Translate What Matters
         </h1>
 
         <!-- Subheading -->
-        <p class="mt-6 text-base lg:text-lg text-[#F9F8F6] leading-relaxed">
+        <p class="mt-6 text-base lg:text-lg text-[#F9F8F6] leading-relaxed" data-aos="fade-up" data-aos-delay="200" data-aos-duration="600">
             Looking for a partner who understands that translation<br class="hidden sm:block">
             is mission-critical, not just transactional?
         </p>
-        <p class="mt-4 text-base lg:text-lg text-[#F9F8F6]">
-            Let’s build something lasting—together.
+        <p class="mt-4 text-base lg:text-lg text-[#F9F8F6]" data-aos="fade-up" data-aos-delay="300" data-aos-duration="600">
+            Let's build something lasting—together.
         </p>
 
         <!-- CTA Buttons -->
-        <div class="mt-10 flex flex-col sm:flex-row items-center justify-center gap-6">
+        <div class="mt-10 flex flex-col sm:flex-row items-center justify-center gap-6" data-aos="fade-up" data-aos-delay="400" data-aos-duration="700">
             <a href="#"
                 class="bg-[#8DC63F] hover:bg-[#7AB22E] text-black font-medium px-6 py-3 text-base lg:text-lg transition">
                 Schedule a Consultation
