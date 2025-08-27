@@ -145,8 +145,10 @@ get_template_part( 'components/banner/primary' );
             <?php while (have_rows('partners_repeater', 'option')): the_row(); ?>
             <div class="item">
                 <a href="<?php the_sub_field('url'); ?>" target="_blank" rel="noopener">
-                    <img src="<?php the_sub_field('partner_logo'); ?>" alt="Piedmont Global Partner"
-                        class="h-24 w-auto mx-auto object-contain" />
+                   <img src="<?php the_sub_field('partner_logo'); ?>" 
+     alt="Piedmont Global Partner"
+     class="h-24 w-auto mx-auto object-contain transition duration-300 ease-in-out grayscale hover:grayscale-0" />
+
                 </a>
             </div>
             <?php endwhile; ?>
@@ -201,8 +203,10 @@ get_template_part( 'components/banner/primary' );
                     <span
                         class="flex items-center justify-center h-32 w-32 rounded-full bg-gradient-to-b from-gray-100 to-green-100 shadow-sm"
                         aria-label="Piedmont Global Recognition">
-                        <img src="<?php the_sub_field('logo'); ?>" alt="Piedmont Global Recognition"
-                            class="max-h-20 max-w-20 object-contain" />
+                       <img src="<?php the_sub_field('logo'); ?>" 
+                        alt="Piedmont Global Recognition"
+                        class="max-h-24 max-w-24 object-contain transition duration-300 ease-in-out grayscale hover:grayscale-0" />
+
                     </span>
                 </a>
                 <?php endwhile; ?>
