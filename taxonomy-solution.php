@@ -133,7 +133,7 @@ $outcomes_section = get_field('outcomes', $term_key); // Repeater field
                 ?>
         </nav>
 
-        <div class="lg:w-2/3 w-full flex flex-col gap-16 overflow-y-scroll h-[85vh] mt-8 scroll-smooth" tabindex="0"
+        <div class="lg:w-2/3 w-full space-y-6  gap-16 overflow-y-scroll h-[85vh] mt-8 scroll-smooth" tabindex="0"
             aria-label="What We Offer Content">
             <?php
                 $count = 1;
