@@ -28,10 +28,7 @@ get_header();
     </p>
 <?php endif; ?>
 
-                <a href="/contact" data-aos="fade-up" data-aos-delay="600" data-aos-duration="500"
-                    class="inline-block bg-[#98C441] text-[#1F3131] px-5 py-2 mt-4 font-bold text-base shadow-md hover:bg-[#8AB738] focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#98C441] transition">
-                    Request Demo
-                </a>
+               
             </div>
         </div>
     </div>
