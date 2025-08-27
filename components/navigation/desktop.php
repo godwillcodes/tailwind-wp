@@ -40,7 +40,7 @@
                     x-transition:leave="transition ease-in duration-200"
                     x-transition:leave-start="opacity-100 translate-y-0"
                     x-transition:leave-end="opacity-0 translate-y-2"
-                    class="absolute left-1/2 top-full  z-40 mt-4 w-96 -translate-x-1/2 rounded-lg bg-gradient-to-b from-white/95 to-white/90 backdrop-blur-xl shadow-[0_4px_30px_rgba(0,0,0,0.1)]  p-6 overflow-hidden  "
+                    class="absolute left-1/2 top-full  z-40 mt-4 w-96 -translate-x-1/2 rounded bg-gradient-to-b from-white/95 to-white/90 backdrop-blur-xl shadow-[0_4px_30px_rgba(0,0,0,0.1)]  p-6 overflow-hidden  "
                     @click.away="open = false" role="menu" aria-label="Solutions menu">
 
                     <div class="space-y-1">
@@ -54,13 +54,13 @@
                         if (!empty($terms) && !is_wp_error($terms)) :
                             foreach ($terms as $term) : ?>
                         <a href="<?php echo esc_url(get_term_link($term)); ?>"
-                            class="flex flex-col space-y-1 py-4 transition-all duration-300 transform group outline-none w-full">
+                            class="flex flex-col space-y-1 py-2 transition-all duration-300 transform group outline-none w-full">
                             <div class="w-full">
                                 <p class="text-base font-semibold text-[#1F3131] group-hover:text-[#98C441] transition-colors duration-300">
                                     <?php echo esc_html($term->name); ?>
                                 </p>
                                 <?php if (!empty($term->description)) : ?>
-                                <div class="text-sm font-normal text-gray-600 mt-1 w-full">
+                                <div class="text-sm font-normal text-gray-600  w-full">
                                     <?php echo wp_kses_post($term->description); ?>
                                 </div>
                                 <?php endif; ?>
@@ -75,8 +75,8 @@
                             class="flex flex-col space-y-1 pt-4 border-t border-gray-200 transition-all duration-300 transform group outline-none">
                             <div class="flex items-center justify-center">
                                 <p
-                                    class="text-sm font-semibold text-[#1F3131] text-center group-hover:text-[#98C441] transition-colors duration-300">
-                                    Explore Solutions
+                                    class="text-sm font-bold text-[#1F3131] text-center group-hover:text-[#98C441] transition-colors duration-300">
+                                    Explore All Solutions
                                 </p>
                                 <!-- Right Arrow SVG -->
                                 <svg class="w-4 h-4 ml-2 text-[#1F3131] group-hover:text-[#98C441] transition-colors duration-300"
@@ -108,7 +108,7 @@
                     x-transition:leave="transition ease-in duration-200"
                     x-transition:leave-start="opacity-100 translate-y-0"
                     x-transition:leave-end="opacity-0 translate-y-2"
-                    class="absolute left-1/2 top-full  z-40 mt-4 w-96 -translate-x-1/2 rounded-lg bg-gradient-to-b from-white/95 to-white/90 backdrop-blur-3xl shadow-[0_4px_30px_rgba(0,0,0,0.1)]  p-6 overflow-hidden  "
+                    class="absolute left-1/2 top-full  z-40 mt-4 w-96 -translate-x-1/2 rounded bg-gradient-to-b from-white/95 to-white/90 backdrop-blur-3xl shadow-[0_4px_30px_rgba(0,0,0,0.1)]  p-6 overflow-hidden  "
                     @click.away="open = false" role="menu" aria-label="Solutions menu">
 
                     <div class="space-y-1">
@@ -121,7 +121,7 @@
                         if ($solutions->have_posts()) :
                             while ($solutions->have_posts()) : $solutions->the_post(); ?>
                         <a href="<?php the_permalink(); ?>"
-                            class="flex flex-col space-y-1 pt-4 transition-all duration-300 transform group outline-none">
+                            class="flex flex-col space-y-1 pt-2 transition-all duration-300 transform group outline-none">
                             <div>
                                 <?php
                                         // Get the custom fields
@@ -150,8 +150,8 @@
                             class="flex flex-col space-y-1 pt-4 border-t border-gray-200 transition-all duration-300 transform group outline-none">
                             <div class="flex items-center justify-center">
                                 <p
-                                    class="text-sm font-semibold text-[#1F3131] text-center group-hover:text-[#98C441] transition-colors duration-300">
-                                    Explore Industries
+                                    class="text-sm font-bold text-[#1F3131] text-center group-hover:text-[#98C441] transition-colors duration-300">
+                                    Explore All Industries
                                 </p>
                                 <!-- Right Arrow SVG -->
                                 <svg class="w-4 h-4 ml-2 text-[#1F3131] group-hover:text-[#98C441] transition-colors duration-300"
