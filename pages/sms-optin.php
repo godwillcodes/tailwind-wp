@@ -47,11 +47,23 @@ get_header();
     <!-- Form Section -->
     <div class="bg-[#006155] rounded-xl shadow-lg p-6 sm:p-8 text-white w-full">
       <h2 class="text-2xl font-bold mb-6">SMS Opt-In Form</h2>
-      <?php echo do_shortcode('[contact-form-7 id="123" title="SMS Opt-In Form"]'); ?>
+            <div class="text-lg">
+                <?php echo do_shortcode('[forminator_form id="211"]'); ?>
+            </div>
     </div>
   </div>
 </section>
 
+<style>
+    #forminator-module-211 label, #forminator-module-211 span, #forminator-module-211 .forminator-label, #forminator-module-211 .forminator-button-submit, #forminator-module-211 .forminator-radio-label {
+        font-size: 16px !important;
+    }
+    .forminator-button-submit{
+        font-size: 16px !important;
+        padding: 12px 24px;
+        background-color: #98c441 !important;
+    }
+</style>
 
 
 <?php
