@@ -142,8 +142,7 @@ $outcomes_section = get_field('outcomes', $term_key); // Repeater field
                     $featured_image = get_the_post_thumbnail_url($post->ID, 'full');
                     $solution_tagline = get_field('solution_tagline', $post->ID);
                     ?>
-            <div id="section-<?php echo $count; ?>" data-aos="fade-up" data-aos-delay="<?php echo $count * 100; ?>"
-                data-aos-duration="700"
+            <div id="section-<?php echo $count; ?>"
                 class="relative w-full lg:w-[80%] mx-auto rounded-xl overflow-hidden shadow-lg group cursor-pointer"
                 onclick="window.location.href='<?php echo get_the_permalink($post->ID); ?>'">
                 <?php if ($featured_image): ?>

@@ -13,7 +13,7 @@ get_header();
         ?>
     </div>
 
-    <div class="h-[500px] md:h-[400px] lg:h-[554px] bg-cover bg-top relative"
+    <div class="h-[300px] md:h-[300px] lg:h-[344px] bg-cover bg-top relative"
         style="background-image: linear-gradient(180deg, rgba(31,49,49,0.5) 0%, #1F3131 80%), url('<?php echo esc_url($featured_image); ?>');">
         <div class="absolute inset-0 flex items-end">
             <div class="max-w-7xl mx-auto w-full px-10 lg:px-0 pb-4 md:pb-12 lg:pb-12 text-white">

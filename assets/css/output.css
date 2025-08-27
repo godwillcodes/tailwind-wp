@@ -2067,6 +2067,11 @@
       height: calc(var(--spacing) * 80);
     }
   }
+  .md\:h-\[300px\] {
+    @media (width >= 48rem) {
+      height: 300px;
+    }
+  }
   .md\:h-\[400px\] {
     @media (width >= 48rem) {
       height: 400px;
@@ -2307,6 +2312,16 @@
   .lg\:h-\[80vh\] {
     @media (width >= 64rem) {
       height: 80vh;
+    }
+  }
+  .lg\:h-\[304px\] {
+    @media (width >= 64rem) {
+      height: 304px;
+    }
+  }
+  .lg\:h-\[344px\] {
+    @media (width >= 64rem) {
+      height: 344px;
     }
   }
   .lg\:h-\[554px\] {
