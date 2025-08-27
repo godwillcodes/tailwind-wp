@@ -30,7 +30,7 @@ get_header();
 
                 <a href="/contact" data-aos="fade-up" data-aos-delay="600" data-aos-duration="500"
                     class="inline-block bg-[#98C441] text-[#1F3131] px-5 py-2 mt-4 font-bold text-base shadow-md hover:bg-[#8AB738] focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#98C441] transition">
-                    Explore our model
+                    Request Demo
                 </a>
             </div>
         </div>
@@ -50,10 +50,10 @@ if (have_rows('testimonials', 'option')):
 endif;
 ?>
 
-<section class="relative bg-white py-20 px-6">
+<section class="relative bg-white py-24 px-6 lg:px-0">
     <div class="max-w-7xl mx-auto">
 
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-10">
             <?php foreach ($testimonials as $testimonial): ?>
                 <div class="relative bg-stone-50 shadow-sm rounded p-8 flex flex-col transform transition duration-300 hover:-translate-y-2 hover:shadow-2xl">
                     <!-- Decorative Quote -->
@@ -64,16 +64,16 @@ endif;
                     </div>
 
                     <!-- Testimonial Content -->
-                    <p class="text-gray-700 text-base leading-relaxed mb-6 italic">
+                    <p class="text-gray-700 text-lg leading-relaxed mb-6 italic">
                         “<?php echo esc_html($testimonial['description']); ?>”
                     </p>
 
                     <!-- Author -->
                     <div class="mt-auto pt-4 border-t border-gray-100">
-                        <p class="text-lg font-semibold text-gray-900">
+                        <p class="text-xl font-semibold text-gray-900">
                             <?php echo esc_html($testimonial['title']); ?>
                         </p>
-                        <p class="text-sm text-gray-500">
+                        <p class="text-lg text-gray-500">
                             <?php echo esc_html($testimonial['location']); ?>
                         </p>
                     </div>
