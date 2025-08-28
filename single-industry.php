@@ -67,7 +67,6 @@ get_header();
             <figure class="flex justify-center lg:justify-end" data-aos="fade-up" data-aos-delay="400">
                 <img src="/wp-content/uploads/iStock-1454186321-1.png" alt="Illustration showing industry-related graphics"
                     class="max-w-full h-auto" />
-                <figcaption class="sr-only">Illustration related to Piedmont Global industry</figcaption>
             </figure>
 
         </div>
