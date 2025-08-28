@@ -195,7 +195,7 @@ get_header();
                 <!-- Section 1557 logos -->
                 <?php for ($i = 0; $i < 5; $i++) { ?>
                     <img src="<?php echo esc_url(get_template_directory_uri() . '/assets/icons/section-logo.svg'); ?>" alt="Section 1557 compliance logo <?php echo $i + 1; ?>"
-                        class="h-20 object-contain" role="listitem" />
+                        class="h-12 lg:h-20 object-contain" role="listitem" />
                 <?php } ?>
             </div>
 
