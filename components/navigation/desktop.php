@@ -246,7 +246,7 @@
 
         <!-- CTA Button -->
         <div>
-            <a href="#"
+            <a href="/contact"
                 class="inline-block bg-[#98C441] text-[#1F3131] px-5 py-2 font-medium text-base shadow-md hover:bg-[#8AB738] focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#98C441] transition">
                 Request Demo
             </a>

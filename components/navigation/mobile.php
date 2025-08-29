@@ -84,7 +84,7 @@
                 </nav>
 
                 <div class="mt-6">
-                    <a href="#"
+                    <a href=/contact"
                         class="block w-full text-center bg-[#98C441] text-[#1F3131] font-medium py-2 rounded-lg hover:bg-[#8ABF3B] transition">Request
                         Demo</a>
                 </div>
