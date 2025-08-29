@@ -130,7 +130,7 @@ get_template_part( 'components/banner/primary' );
 </section>
 
 
-<section class="bg-[#F7F7F5] py-16 px-10 md:px-0">
+<section class="bg-[#F7F7F5] py-16 px-6 md:px-0">
     <div class="max-w-7xl mx-auto">
         <!-- Section Header -->
         <div class="flex flex-col md:flex-row justify-between items-start md:items-center w-full mb-20 gap-6">
@@ -220,7 +220,7 @@ get_template_part( 'components/banner/primary' );
     </div>
 </section>
 
-<section class="bg-[#F7F7F5] py-16 px-10 md:px-0 ">
+<section class="bg-[#F7F7F5] py-16 px-6 md:px-0 ">
     <div class="max-w-7xl mx-auto">
         <div class="flex flex-col md:flex-row justify-between items-start md:items-center w-full mb-20 gap-6">
             <h2 class="text-3xl md:text-5xl font-bold text-gray-900" data-aos="fade-right">
@@ -232,7 +232,7 @@ get_template_part( 'components/banner/primary' );
                 Explore full capabilities <span class="ml-1 text-lg">→</span>
             </a>
         </div>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-32">
+        <div class="grid grid-cols-1 md:grid-cols-2  gap-10 lg:gap-32">
             <div data-aos="fade-up" data-aos-delay="150" class="flex-1 ">
                 <div class="space-y-10">
                     <?php if (have_rows('capabilities')): ?>
@@ -264,12 +264,12 @@ get_template_part( 'components/banner/primary' );
             </div>
 
             <div class="" data-aos="fade-down" data-aos-delay="100">
-                <div class="rounded-[8px] overflow-hidden mx-10 md:mx-0" style="
+                <div class="rounded-[8px] overflow-hidden mx-6 md:mx-0" style="
         background: linear-gradient(0deg, #550061, #550061),
         linear-gradient(0.03deg, #D16555 0.04%, rgba(171, 157, 186, 0) 50.01%);
       ">
                     <img src="/wp-content/uploads/Rectangle-21027.png" alt="Team collaboration"
-                        class=" h-full w-full object-cover rounded-[6px] p-10 md:p-20 " />
+                        class=" h-full w-full object-cover rounded-[6px] p-6 md:p-20 " />
                 </div>
             </div>
         </div>
@@ -287,7 +287,7 @@ get_template_part( 'components/banner/primary' );
 </section>
 
 
-<section class="bg-[#1F3131] text-white py-20 px-10 md:px-0">
+<section class="bg-[#1F3131] text-white py-20 px-6 md:px-0">
     <div class="max-w-7xl mx-auto">
         <div class="flex flex-col md:flex-row justify-between items-start md:items-center w-full mb-20 gap-6">
             <h2 class="text-3xl md:text-5xl font-bold text-white max-w-lg" data-aos="fade-right">
@@ -496,7 +496,7 @@ endif;
 
 
 
-<section class="bg-[#F7F7F5] py-20 px-10 md:px-0">
+<section class="bg-[#F7F7F5] py-20 px-6 md:px-0">
     <div class="max-w-7xl mx-auto">
         <!-- Section Header -->
         <div class="flex flex-col md:flex-row justify-between items-start md:items-center w-full mb-20 gap-6">

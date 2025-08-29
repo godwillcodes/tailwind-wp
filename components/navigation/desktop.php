@@ -172,7 +172,7 @@
                 <button @click="openAbout = !openAbout"
                     class="inline-flex items-center gap-1 hover:text-[#98C441] transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#98C441]"
                     :aria-expanded="openAbout.toString()" aria-haspopup="true">
-                    <span class="font-normal">About</span>
+                    <span class="font-normal">About PGLS</span>
                     <svg class="w-5 h-5 transition-transform duration-200" :class="{ 'rotate-180': openAbout }"
                         fill="currentColor" viewBox="0 0 20 20">
                         <path
