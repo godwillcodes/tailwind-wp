@@ -8,7 +8,7 @@
 
 
     <div class="w-full px-6 md:px-12 relative z-20">
-        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-8 items-center my-20">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-20 items-center mt-28">
             <!-- Left Column -->
             <div class="md:col-span-7 space-y-6 order-1">
                 <div class="text-3xl md:text-5xl leading-[40px] md:leading-[50px] font-semibold"
@@ -39,7 +39,7 @@
             <div class="md:col-span-5 order-2">
                 <img src="<?php echo esc_url(get_field('banner_image')); ?>"
                      alt="<?php echo esc_attr(get_bloginfo('name')); ?>"
-                     class=" max-w-full lg:max-w-[440px] h-auto object-contain object-bottom object-right">
+                     class=" max-w-full  h-auto object-contain object-bottom object-right">
             </div>
         </div>
     </div>

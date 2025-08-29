@@ -60,7 +60,7 @@ $outcomes_section = get_field('outcomes', $term_key); // Repeater field
             <?php endif; ?>
 
             <?php if ($primary_description): ?>
-            <div class="text-white prose text-base md:text-xl leading-relaxed max-w-3xl">
+            <div class="text-white  text-base md:text-xl leading-relaxed max-w-3xl">
                 <?php echo wp_kses_post($primary_description); ?>
             </div>
             <?php endif; ?>
@@ -84,7 +84,7 @@ $outcomes_section = get_field('outcomes', $term_key); // Repeater field
             <?php echo wp_kses_post($eyebrow_text); ?>
         </h2>
 
-        <h3 class="text-3xl lg:text-5xl font-extrabold leading-tight max-w-4xl mx-auto text-[#0F1E1E]"
+        <h3 class="text-3xl lg:text-4xl font-extrabold leading-tight max-w-4xl mx-auto text-[#0F1E1E]"
             data-aos="fade-up" data-aos-delay="100" data-aos-duration="700">
             <?php echo esc_html($sub_solutions_section_title); ?>
         </h3>
