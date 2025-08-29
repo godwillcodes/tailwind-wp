@@ -190,7 +190,7 @@
 
                     <div class="space-y-3">
                         <?php
-            $menu_items = wp_get_nav_menu_items(11); // About menu
+            $menu_items = wp_get_nav_menu_items(13); // About menu
             if ($menu_items) {
                 foreach ($menu_items as $menu_item) {
                     echo '<a href="' . esc_url($menu_item->url) . '" class="block text-base font-semibold text-[#1F3131] hover:text-[#98C441] transition-colors duration-300">'
