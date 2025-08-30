@@ -279,7 +279,7 @@ jQuery(document).ready(function($) {
   $(".testimonial-carousel").owlCarousel({
     loop: true,
     margin: 30,
-    nav: true,
+    nav: false,
     dots: true,
     autoplay: true,
     autoplayTimeout: 5000,
