@@ -193,7 +193,7 @@
             $menu_items = wp_get_nav_menu_items(13); // About menu
             if ($menu_items) {
                 foreach ($menu_items as $menu_item) {
-                    echo '<a href="' . esc_url($menu_item->url) . '" class="block text-base font-semibold text-[#1F3131] hover:text-[#98C441] transition-colors duration-300">'
+                    echo '<a href="' . esc_url($menu_item->url) . '" class="block text-base font-normal text-[#1F3131] hover:text-[#98C441] transition-colors duration-300">'
                         . esc_html($menu_item->title) .
                         '</a>';
                 }
@@ -230,7 +230,7 @@
             $menu_items = wp_get_nav_menu_items(14); // Resources menu
             if ($menu_items) {
                 foreach ($menu_items as $menu_item) {
-                    echo '<a href="' . esc_url($menu_item->url) . '" class="block text-base font-semibold text-[#1F3131] hover:text-[#98C441] transition-colors duration-300">'
+                    echo '<a href="' . esc_url($menu_item->url) . '" class="block text-base font-normal text-[#1F3131] hover:text-[#98C441] transition-colors duration-300">'
                         . esc_html($menu_item->title) .
                         '</a>';
                 }

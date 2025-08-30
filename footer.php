@@ -228,6 +228,8 @@ jQuery(document).ready(function($) {
     $('.partners-carousel').owlCarousel({
         loop: true,
         margin: 30,
+        nav: false,
+        dots: false,
         autoplay: true,
         autoplayTimeout: 3000,
         autoplayHoverPause: true,
