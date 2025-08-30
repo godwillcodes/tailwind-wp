@@ -255,7 +255,7 @@ jQuery(document).ready(function($) {
         loop: true,
         margin: 20,
         nav: false,
-        dots: false,
+        dots: true,
         autoplay: true,
         autoplayTimeout: 2500,
         autoplayHoverPause: true,
@@ -272,6 +272,26 @@ jQuery(document).ready(function($) {
         }
     });
 });
+</script>
+
+<script>
+    jQuery(document).ready(function($){
+  $(".testimonial-carousel").owlCarousel({
+    loop: true,
+    margin: 30,
+    nav: true,
+    dots: true,
+    autoplay: true,
+    autoplayTimeout: 5000,
+    smartSpeed: 600,
+    responsive:{
+      0:{ items:1 },
+      768:{ items:2 },
+      1024:{ items:3 }
+    }
+  });
+});
+
 </script>
 
 <script>

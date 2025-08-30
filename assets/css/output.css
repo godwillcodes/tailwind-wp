@@ -408,17 +408,35 @@
   .my-4 {
     margin-block: calc(var(--spacing) * 4);
   }
+  .my-7 {
+    margin-block: calc(var(--spacing) * 7);
+  }
   .my-8 {
     margin-block: calc(var(--spacing) * 8);
   }
   .my-12 {
     margin-block: calc(var(--spacing) * 12);
   }
+  .my-14 {
+    margin-block: calc(var(--spacing) * 14);
+  }
+  .my-16 {
+    margin-block: calc(var(--spacing) * 16);
+  }
   .my-20 {
     margin-block: calc(var(--spacing) * 20);
   }
+  .-mt-10 {
+    margin-top: calc(var(--spacing) * -10);
+  }
   .-mt-12 {
     margin-top: calc(var(--spacing) * -12);
+  }
+  .-mt-14 {
+    margin-top: calc(var(--spacing) * -14);
+  }
+  .-mt-20 {
+    margin-top: calc(var(--spacing) * -20);
   }
   .mt-0 {
     margin-top: calc(var(--spacing) * 0);
@@ -435,8 +453,14 @@
   .mt-4 {
     margin-top: calc(var(--spacing) * 4);
   }
+  .mt-5 {
+    margin-top: calc(var(--spacing) * 5);
+  }
   .mt-6 {
     margin-top: calc(var(--spacing) * 6);
+  }
+  .mt-7 {
+    margin-top: calc(var(--spacing) * 7);
   }
   .mt-8 {
     margin-top: calc(var(--spacing) * 8);
@@ -621,8 +645,17 @@
   .max-h-24 {
     max-height: calc(var(--spacing) * 24);
   }
+  .min-h-\[360px\] {
+    min-height: 360px;
+  }
+  .min-h-\[400px\] {
+    min-height: 400px;
+  }
   .min-h-\[600px\] {
     min-height: 600px;
+  }
+  .min-h-\[4000px\] {
+    min-height: 4000px;
   }
   .w-1 {
     width: calc(var(--spacing) * 1);
@@ -1035,6 +1068,9 @@
   .border-\[\#F9F8F6\] {
     border-color: #F9F8F6;
   }
+  .border-\[\#F9F8F6\]\/30 {
+    border-color: color-mix(in oklab, #F9F8F6 30%, transparent);
+  }
   .border-\[\#F9F8F6\]\/50 {
     border-color: color-mix(in oklab, #F9F8F6 50%, transparent);
   }
@@ -1049,6 +1085,9 @@
   }
   .border-l-\[\#98C441\] {
     border-left-color: #98C441;
+  }
+  .bg-\[\#\#98C441\] {
+    background-color: ##98C441;
   }
   .bg-\[\#00A86B\] {
     background-color: #00A86B;
@@ -1354,6 +1393,9 @@
   .pt-4 {
     padding-top: calc(var(--spacing) * 4);
   }
+  .pt-5 {
+    padding-top: calc(var(--spacing) * 5);
+  }
   .pt-6 {
     padding-top: calc(var(--spacing) * 6);
   }
@@ -1544,6 +1586,9 @@
   }
   .text-\[\#F9F8F6\]\/70 {
     color: color-mix(in oklab, #F9F8F6 70%, transparent);
+  }
+  .text-\[\#F9F8F6\]\/80 {
+    color: color-mix(in oklab, #F9F8F6 80%, transparent);
   }
   .text-black {
     color: var(--color-black);
