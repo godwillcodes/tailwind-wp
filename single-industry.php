@@ -16,24 +16,27 @@ get_header();
         style="background-image: url('<?php echo esc_url(get_template_directory_uri() . '/assets/icons/single-industries.svg'); ?>');">
 
         <!-- gradient overlay -->
-        <div class="absolute inset-0 bg-gradient-to-r from-[#1F3131]/90 via-[#1F3131]/70 to-transparent" aria-hidden="true"></div>
+        <div class="absolute inset-0 bg-gradient-to-r from-[#1F3131]/90 via-[#1F3131]/70 to-transparent"
+            aria-hidden="true"></div>
 
         <!-- Content container -->
         <div class="relative z-10 h-full flex items-center">
             <div class="max-w-7xl mx-auto w-full px-10 lg:px-0 pb-4 md:pb-12 lg:pb-12 text-white">
-                <h1 class="text-lg font-medium text-[#F9F8F6]" data-aos="fade-up" data-aos-delay="100" tabindex="0">
+                <p class="text-lg font-medium text-[#F9F8F6]" data-aos="fade-up" data-aos-duration="400">
                     <?php the_title(); ?>
+                </p>
+                <h1 class="text-2xl mt-4 md:text-4xl lg:text-5xl font-bold" data-aos="fade-up" data-aos-duration="400" data-aos-delay="50">
+                    <?php the_field('industry_callout'); ?>
                 </h1>
-                <h2 class="text-2xl mt-4 md:text-4xl lg:text-5xl font-bold" data-aos="fade-up" data-aos-delay="200">Industry Callout Goes Here</h2>
-                <p class="text-base lg:text-lg my-4 max-w-4xl" data-aos="fade-up" data-aos-delay="300">
-                    Industry description goes here.
+                <p class="text-base lg:text-lg my-4 max-w-4xl" data-aos="fade-up" data-aos-duration="400" data-aos-delay="100">
+                    <?php the_field('industry_description'); ?>
                 </p>
                 <a href="/contact"
-                    class="inline-flex items-center gap-2 bg-[#98C441] text-[#1F3131] px-4 py-2 mt-4 font-medium text-base lg:text-lg shadow-md rounded-0 hover:bg-[#8AB738] focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#98C441] transition"
-                    role="button" aria-label="Schedule a consultation">
+                    class="inline-flex items-center gap-2 bg-[#98C441] text-[#1F3131] px-4 py-2 mt-4 font-bold text-base shadow-md rounded-0 hover:bg-[#8AB738] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#98C441] focus:ring-offset-[#1F3131] transition-colors duration-200"
+                    aria-label="Schedule a consultation - opens contact form">
                     <span>Schedule a Consultation</span>
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                        stroke="currentColor" class="w-6 h-6" aria-hidden="true" focusable="false">
+                        stroke="currentColor" class="w-6 h-6" aria-hidden="true">
                         <path stroke-linecap="round" stroke-linejoin="round"
                             d="M17.25 8.25 21 12m0 0-3.75 3.75M21 12H3" />
                     </svg>
@@ -43,209 +46,238 @@ get_header();
     </div>
 </header>
 
-<main id="maincontent" tabindex="-1">
+<main id="maincontent">
 
     <section class="bg-white lg:pt-0 pt-10" aria-labelledby="why-piedmont-title">
         <div class="max-w-7xl mx-auto px-6 lg:px-0 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
 
             <!-- Left side: Title and Description -->
-            <article>
-                <h2 id="why-piedmont-title" class="text-2xl mt-4 md:text-4xl lg:text-5xl max-w-sm font-bold mb-6" data-aos="fade-up" data-aos-delay="100">
-                    Why Piedmont Global
+            <div>
+                <h2 id="why-piedmont-title" class="text-2xl mt-4 md:text-4xl lg:text-5xl max-w-sm font-bold mb-6"
+                    data-aos="fade-up" data-aos-duration="400">
+                    <?php the_field('why_piedmont_global_title'); ?>
                 </h2>
-                <p class="text-base md:text-lg text-black max-w-xl mb-6" data-aos="fade-up" data-aos-delay="200">
-                    Why Piedmont Global description goes here. Provide context, highlight impact, or explain the relevance
-                    of the service/product in this space.
-                </p>
-                <p class="text-base md:text-lg text-black max-w-xl mb-6" data-aos="fade-up" data-aos-delay="300">
-                    Why Piedmont Global description goes here. Provide context, highlight impact, or explain the relevance
-                    of the service/product in this space.
-                </p>
-            </article>
+                <div class="text-base md:text-lg text-black max-w-xl mb-6 prose" data-aos="fade-up" data-aos-duration="400" data-aos-delay="50">
+                    <?php echo wp_kses_post(get_field('why_piedmont_global_description')); ?>
+                </div>
+            </div>
 
             <!-- Right side: Image -->
-            <figure class="flex justify-center lg:justify-end" data-aos="fade-up" data-aos-delay="400">
-                <img src="/wp-content/uploads/iStock-1454186321-1.png" alt="Illustration showing industry-related graphics"
+            <div class="flex justify-center lg:justify-end" data-aos="fade-up" data-aos-duration="400" data-aos-delay="100">
+                <?php 
+                $why_piedmont_photo = get_field('why_piedmont_global_photo');
+                $industry_title = get_the_title();
+                ?>
+                <img src="<?php echo esc_url($why_piedmont_photo); ?>"
+                    alt="Piedmont Global team working with <?php echo esc_attr($industry_title); ?> clients" 
                     class="max-w-full h-auto" />
-            </figure>
+            </div>
 
         </div>
     </section>
 
-    <section class="max-w-7xl mx-auto flex flex-col md:flex-row gap-12 w-full px-8 py-24 lg:px-0" aria-labelledby="industry-challenge-title">
+    <section class="max-w-7xl mx-auto flex flex-col md:flex-row gap-12 w-full px-8 py-24 lg:px-0"
+        aria-labelledby="industry-challenge-title">
         <!-- Left -->
-        <article class="w-full md:w-[38%] text-start" data-aos="fade-up" data-aos-delay="100">
+        <div class="w-full md:w-[38%] text-start" data-aos="fade-up" data-aos-duration="400">
             <div class="flex flex-col justify-between p-10 lg:p-16 w-full h-full"
                 style="background: linear-gradient(144.23deg, rgba(223, 218, 212, 0.3) 13.38%, rgba(152, 196, 65, 0.3) 148.4%);">
                 <h2 id="industry-challenge-title" class="text-lg font-medium text-[#1F3131]">Industry Challenge</h2>
                 <div class="h-20 lg:h-36" aria-hidden="true"></div>
-                <p class="text-lg lg:text-2xl text-[#1F3131] mt-8 font-bold">Industry Challenge description goes here.</p>
+                <div class="text-lg lg:text-2xl text-[#1F3131] mt-8 font-bold">
+                    <?php echo wp_kses_post(get_field('gradient_section_description')); ?>
+                </div>
             </div>
-        </article>
+        </div>
 
         <!-- Middle -->
         <div class="hidden lg:block w-full md:w-[12%] text-center" aria-hidden="true"></div>
 
         <!-- Right -->
-        <article class="w-full md:w-[50%] text-start relative" data-aos="fade-up" data-aos-delay="200" aria-labelledby="secondary-title">
-            <h2 id="secondary-title" class="text-2xl mt-4 md:text-4xl lg:text-5xl max-w-sm font-bold mb-6">
-                Secondary Title
+        <div class="w-full md:w-[50%] text-start relative" data-aos="fade-up" data-aos-duration="400" data-aos-delay="50"
+            aria-labelledby="secondary-title">
+            <h2 id="secondary-title" class="text-2xl mt-4 md:text-4xl lg:text-5xl max-w-md font-bold mb-6">
+                <?php the_field('secondary_title'); ?>
             </h2>
-            <p class="text-base lg:text-lg text-black max-w-xl mb-6">
-                Secondary Title description goes here. Provide context, highlight impact, or explain the relevance
-                of the service/product in this space.
-            </p>
-            <p class="text-base lg:text-lg text-black max-w-xl mb-6">
-                Secondary Title description goes here. Provide context, highlight impact, or explain the relevance
-                of the service/product in this space.
-            </p>
+            <div class="text-base lg:text-lg prose text-black max-w-xl mb-6">
+                <?php echo wp_kses_post(get_field('secondary_description')); ?>
+            </div>
 
-            <a href="#"
-                class="lg:absolute lg:bottom-10 inline-flex items-center text-base lg:text-lg font-medium border-b-2 border-[#D16555] hover:border-[#D16555] transition-colors duration-300"
-                aria-label="Explore full capabilities">
+            <a href="/contact"
+                class="lg:absolute lg:bottom-10 inline-flex items-center text-base lg:text-lg font-medium border-b-2 border-[#D16555] hover:border-[#D16555] focus:outline-none focus:ring-2 focus:ring-[#D16555] focus:ring-offset-2 transition-colors duration-200"
+                aria-label="Explore full capabilities - opens contact form">
                 Explore full capabilities
                 <span class="ml-1 text-lg" aria-hidden="true">→</span>
             </a>
-        </article>
-    </section>
-
-    <section class="bg-[#1F3131] bg-cover bg-center relative" style="background-image: url('<?php echo esc_url(get_template_directory_uri() . '/assets/icons/industries.svg'); ?>');" aria-labelledby="strategic-approach-title" role="region">
-        <div class="max-w-7xl mx-auto py-20">
-            <header class="text-center space-y-4">
-                <h2 id="strategic-approach-subtitle" class="text-lg text-[#F9F8F6]" data-aos="fade-up" data-aos-delay="100">Green Repeater Section Title</h2>
-                <h3 id="strategic-approach-title" class="font-bold text-2xl mt-4 md:text-4xl lg:text-5xl leading-[98%] tracking-[-0.02em] text-[#F9F8F6]" data-aos="fade-up" data-aos-delay="200">Our Strategic Approach</h3>
-                <p class="text-base md:text-lg leading-[140%] tracking-[-0.02em] font-normal text-[#F9F8F6]" data-aos="fade-up" data-aos-delay="300">
-                    Green Repeater Section Description goes here.
-                </p>
-            </header>
-
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 py-20 px-6 lg:px-0">
-                <?php for ($i = 0; $i < 6; $i++) { ?>
-                <article
-                    class="bg-[#006155] shadow-lg p-6 text-white flex flex-col items-start transition-transform duration-300 hover:scale-95 hover:shadow-xl"
-                    data-aos="fade-up" data-aos-delay="<?php echo 400 + $i * 100; ?>" tabindex="0" aria-label="Strategic Approach Card <?php echo $i + 1; ?>">
-                    <!-- Icon -->
-                    <div class="mb-6" aria-hidden="true">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10" fill="none" viewBox="0 0 24 24"
-                            stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
-                        </svg>
-                    </div>
-
-                    <div class="h-24" aria-hidden="true"></div>
-
-                    <!-- Title -->
-                    <h3 class="text-2xl font-semibold mb-2">Card Title</h3>
-
-                    <!-- Description -->
-                    <p class="text-base opacity-90">
-                        This is a short description that explains what this card is about. Keep it concise and clear.
-                    </p>
-                </article>
-                <?php } ?>
-            </div>
         </div>
     </section>
 
-    <section style="background: linear-gradient(to bottom, #F7F7F5 0%, #F7F7F5 90%, #98C44180 100%);" aria-labelledby="case-study-title">
-        <div class="max-w-7xl mx-auto px-4 py-24 grid grid-cols-1 md:grid-cols-12 gap-6" role="region">
+    <section class="bg-[#1F3131] bg-cover bg-center relative"
+        style="background-image: url('<?php echo esc_url(get_template_directory_uri() . '/assets/icons/1.svg'); ?>');"
+        aria-labelledby="strategic-approach-title">
+        <div class="max-w-7xl mx-auto py-20">
+            <header class="text-center space-y-4">
+                <p class="text-lg text-[#F9F8F6]" data-aos="fade-up" data-aos-duration="400">
+                    <?php the_field('our_strategic_approach_small_title'); ?>
+                </p>
+                <h2 id="strategic-approach-title"
+                    class="font-bold text-2xl mt-4 md:text-4xl lg:text-5xl leading-[98%] tracking-[-0.02em] text-[#F9F8F6]"
+                    data-aos="fade-up" data-aos-duration="400" data-aos-delay="50">
+                    <?php the_field('our_strategic_approach_big_title'); ?>
+                </h2>
+                <p class="text-base md:text-lg leading-[160%] tracking-[-0.02em] max-w-3xl mx-auto font-normal text-[#F9F8F6]"
+                    data-aos="fade-up" data-aos-duration="400" data-aos-delay="100">
+                    <?php the_field('our_strategic_approach_description'); ?>
+                </p>
+            </header>
+
+            <?php if (have_rows('green_cards_repeater')): ?>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 py-20 px-6 lg:px-0">
+                <?php $card_index = 0; ?>
+                <?php while (have_rows('green_cards_repeater')): the_row(); ?>
+                <?php $card_index++; ?>
+                <div class="bg-[#006155] shadow-lg p-6 text-white flex flex-col items-start transition-transform duration-200 hover:scale-95 hover:shadow-xl focus-within:ring-2 focus-within:ring-[#98C441] focus-within:ring-offset-2 focus-within:ring-offset-[#1F3131]"
+                    data-aos="fade-up" data-aos-duration="400" data-aos-delay="<?php echo $card_index * 50; ?>">
+                    
+                    <?php $image_url = get_sub_field('icon'); ?>
+                    <?php if ($image_url): ?>
+                    <div class="mb-6" aria-hidden="true">
+                        <img src="<?php echo esc_url($image_url); ?>" 
+                             alt="" 
+                             class="w-8 h-8 object-contain" />
+                    </div>
+                    <?php endif; ?>
+
+                    <div class="h-24" aria-hidden="true"></div>
+
+                    <h3 class="text-2xl font-semibold mb-2">
+                        <?php the_sub_field('title'); ?>
+                    </h3>
+
+                    <p class="text-base opacity-90">
+                        <?php the_sub_field('description'); ?>
+                    </p>
+                </div>
+                <?php endwhile; ?>
+            </div>
+            <?php endif; ?>
+
+        </div>
+    </section>
+
+    <section style="background: linear-gradient(to bottom, #F7F7F5 0%, #F7F7F5 90%, #98C44180 100%);"
+        aria-labelledby="case-study-title">
+        <?php if (have_rows('case_study')): ?>
+        <div class="max-w-7xl mx-auto px-4 py-24 grid grid-cols-1 md:grid-cols-12 gap-6">
+            <?php while (have_rows('case_study')): the_row(); ?>
             <!-- Left Card (1/3 width) -->
-            <article class="bg-[#8BC34A] p-8 flex flex-col justify-between text-white md:col-span-4" data-aos="fade-up" data-aos-delay="100">
+            <div class="bg-[#8BC34A] p-8 flex flex-col justify-between text-white md:col-span-4" 
+                 data-aos="fade-up" data-aos-duration="400">
                 <div>
-                    <p class="text-base font-medium mb-4 text-[#1F3131]" aria-label="Section type">Case Study</p>
+                    <p class="text-base font-medium mb-4 text-[#1F3131]">Case Study</p>
                     <h2 id="case-study-title" class="text-2xl md:text-3xl font-bold mb-6 text-white">
-                        Scaling Access with GT Independence
+                        <?php the_sub_field('title'); ?>
                     </h2>
                 </div>
 
                 <div class="h-24" aria-hidden="true"></div>
+
                 <p class="text-base text-[#1F3131] leading-relaxed opacity-90">
-                    How Piedmont Global helped a leading Medicaid provider transition to a full-scale language
-                    access strategy—improving onboarding, lowering readmissions, and delivering multilingual
-                    support across 150,000+ users.
+                    <?php the_sub_field('description'); ?>
                 </p>
-            </article>
+            </div>
 
             <!-- Right Card (2/3 width) -->
-            <article class="bg-[#DFDAD433] border-[1px] border-[#DFDAD4] p-8 flex flex-col justify-between md:col-span-8" data-aos="fade-up" data-aos-delay="200" aria-label="Testimonial from Healthcare Network Director">
+            <div class="bg-[#DFDAD433] border-[1px] border-[#DFDAD4] p-8 flex flex-col justify-between md:col-span-8"
+                 data-aos="fade-up" data-aos-duration="400" data-aos-delay="50">
                 <div>
-                    <img src="<?php echo esc_url(get_template_directory_uri() . '/assets/icons/quote.svg'); ?>" alt="" class="h-20 w-20 mb-4" aria-hidden="true" />
+                    <img src="<?php echo esc_url(get_template_directory_uri() . '/assets/icons/quote.svg'); ?>" 
+                         alt="" 
+                         class="h-20 w-20 mb-4" 
+                         aria-hidden="true" />
                     <blockquote>
                         <p class="text-2xl md:text-3xl font-normal leading-snug text-gray-800 mb-6">
-                            Piedmont Global helped us move from reactive fixes to a proactive strategy—one
-                            that supports both compliance and care.
+                            "<?php the_sub_field('testimonial_description'); ?>"
                         </p>
                     </blockquote>
                 </div>
                 <footer class="flex flex-col md:flex-row md:items-center md:justify-between mt-auto gap-4">
-                    <p class="text-base font-semibold text-gray-900">Director of Member Experience</p>
-                    <a href="#"
-                        class="inline-flex items-center w-auto text-base font-medium border-b-2 border-[#D16555] hover:border-[#D16555] transition-colors duration-300"
-                        aria-label="Explore full capabilities">
+                    <cite class="text-base font-semibold text-gray-900 not-italic">
+                        <?php the_sub_field('testimonial_source'); ?>
+                    </cite>
+                    <?php $link = get_sub_field('case_study_link'); ?>
+                    <?php if ($link): ?>
+                    <a href="<?php echo esc_url($link); ?>"
+                        class="inline-flex items-center w-auto text-base font-medium border-b-2 border-[#D16555] hover:border-[#D16555] focus:outline-none focus:ring-2 focus:ring-[#D16555] focus:ring-offset-2 transition-colors duration-200"
+                        aria-label="Read full case study">
                         Explore full capabilities
                         <span class="ml-1 text-lg" aria-hidden="true">→</span>
                     </a>
+                    <?php endif; ?>
                 </footer>
-            </article>
+            </div>
+            <?php endwhile; ?>
         </div>
+        <?php endif; ?>
 
-        <div class="max-w-7xl mx-auto px-6 pb-24 grid grid-cols-1 lg:grid-cols-2 gap-10 items-stretch" role="region" aria-label="Compliance logos and program benefits">
+        <div class="max-w-7xl mx-auto px-6 pb-24 grid grid-cols-1 lg:grid-cols-2 gap-10 items-stretch" 
+             aria-labelledby="compliance-title">
             <!-- Left Box (Images Only) -->
-            <div class="border border-[#DFDAD4] rounded-lg p-10 grid grid-cols-2 gap-6 place-items-center h-full" aria-label="Compliance logos" role="list">
-                <!-- Section 1557 logos -->
-                <?php for ($i = 0; $i < 5; $i++) { ?>
-                    <img src="<?php echo esc_url(get_template_directory_uri() . '/assets/icons/section-logo.svg'); ?>" alt="Section 1557 compliance logo <?php echo $i + 1; ?>"
-                        class="h-12 lg:h-20 object-contain" role="listitem" />
-                <?php } ?>
+            <div class="border border-[#DFDAD4] rounded-lg p-10 grid grid-cols-2 gap-6 place-items-center h-full"
+                 aria-labelledby="compliance-logos-heading">
+                <h3 id="compliance-logos-heading" class="sr-only">Compliance and certification logos</h3>
+                <?php
+                $logos = get_field('compliance_logos');
+                if ($logos):
+                    foreach ($logos as $index => $logo_url): ?>
+                <img src="<?php echo esc_url($logo_url); ?>" 
+                     alt="Compliance certification logo <?php echo $index + 1; ?>"
+                     class="h-12 lg:h-20 object-contain" />
+                <?php endforeach;
+                endif; ?>
             </div>
 
             <!-- Right Content -->
-            <div class="h-full flex flex-col justify-center" data-aos="fade-up" data-aos-delay="300">
-                <h2 class="text-2xl mt-4 md:text-4xl lg:text-5xl font-bold leading-tight text-gray-900 mb-6">
-                    Operational Confidence.<br />
-                    Patient Trust.<br />
-                    Scalable Impact.
+            <div class="h-full flex flex-col justify-center" data-aos="fade-up" data-aos-duration="400">
+                <h2 id="compliance-title" class="text-2xl mt-4 md:text-4xl lg:text-5xl max-w-md font-bold leading-tight text-gray-900 mb-6">
+                    <?php the_field('compliance_title'); ?>
                 </h2>
-                <p class="text-lg text-gray-700 mb-6">
-                    Our programs align with ADA, ACA, and Section 1557 regulations to ensure your language
-                    access plan is compliant, efficient, and equity-driven. Some of our outcomes &amp; benefits:
-                </p>
-                <ul class="space-y-3 text-gray-800 text-lg" aria-label="Benefits of language access program">
-                    <li class="flex items-start"><span class="text-[#3B7F7A] mr-2" aria-hidden="true">•</span> Fewer care delays and adverse events</li>
-                    <li class="flex items-start"><span class="text-[#3B7F7A] mr-2" aria-hidden="true">•</span> Improved CMS HCAHPS and STAR ratings</li>
-                    <li class="flex items-start"><span class="text-[#3B7F7A] mr-2" aria-hidden="true">•</span> Reduced risk and greater compliance</li>
-                    <li class="flex items-start"><span class="text-[#3B7F7A] mr-2" aria-hidden="true">•</span> Higher patient satisfaction and engagement</li>
-                    <li class="flex items-start"><span class="text-[#3B7F7A] mr-2" aria-hidden="true">•</span> Equitable access for every community you serve</li>
-                </ul>
+                <div class="text-lg prose text-gray-700 mb-6">
+                    <?php echo wp_kses_post(get_field('compliance_description')); ?>
+                </div>
             </div>
         </div>
     </section>
 
 </main>
 
-<section class="bg-[#1F3131] py-28 text-center" role="region" aria-labelledby="industry-cta-title">
+<section class="bg-[#1F3131] py-28 text-center" aria-labelledby="industry-cta-title">
     <div class="max-w-3xl mx-auto px-4">
         <!-- Heading -->
-        <h1 id="industry-cta-title" class="text-3xl sm:text-4xl md:text-5xl font-bold text-[#F9F8F6] tracking-tight" data-aos="fade-up" data-aos-delay="100" data-aos-duration="800" tabindex="0">
-            Industry CTA Title Goes Here
-        </h1>
+        <h2 id="industry-cta-title" class="text-3xl sm:text-4xl md:text-5xl font-bold text-[#F9F8F6] tracking-tight"
+            data-aos="fade-up" data-aos-duration="400">
+           <?php the_field('industry_cta_title'); ?>
+        </h2>
 
         <!-- Subheading -->
-        <p class="mt-6 text-base lg:text-lg text-[#F9F8F6] leading-relaxed" data-aos="fade-up" data-aos-delay="200" data-aos-duration="600">
-            Industry CTA description goes here. A brief, compelling statement that encourages users to take action.
+        <p class="mt-6 text-base lg:text-lg text-[#F9F8F6] leading-relaxed" 
+           data-aos="fade-up" data-aos-duration="400" data-aos-delay="50">
+           <?php the_field('industry_cta_description'); ?>
         </p>
 
         <!-- CTA Buttons -->
-        <div class="mt-10 flex flex-col sm:flex-row items-center justify-center gap-6" data-aos="fade-up" data-aos-delay="400" data-aos-duration="700">
-            <a href="#"
-                class="bg-[#8DC63F] hover:bg-[#7AB22E] text-black font-medium px-6 py-3 text-base lg:text-lg transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#7AB22E]"
-                role="button" aria-label="Schedule a Consultation">
+        <div class="mt-10 flex flex-col sm:flex-row items-center justify-center gap-6" 
+             data-aos="fade-up" data-aos-duration="400" data-aos-delay="100">
+            <a href="/contact"
+                class="bg-[#8DC63F] hover:bg-[#7AB22E] text-black font-medium px-6 py-3 text-base lg:text-lg transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-[#7AB22E] focus:ring-offset-2 focus:ring-offset-[#1F3131]"
+                aria-label="Schedule a consultation - opens contact form">
                 Schedule a Consultation
             </a>
-            <a href="#" class="flex items-center text-[#F9F8F6] font-medium text-base lg:text-lg hover:underline" aria-label="Download Language Access Guide">
-                Download Language Access Guide
+            <a href="<?php the_field('industry_cta_secondary_button_link'); ?>" 
+               class="flex items-center text-[#F9F8F6] font-medium text-base lg:text-lg hover:underline focus:outline-none focus:ring-2 focus:ring-[#F9F8F6] focus:ring-offset-2 focus:ring-offset-[#1F3131] transition-colors duration-200">
+                <?php the_field('industry_cta_secondary_button_title'); ?>
                 <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 ml-2" fill="none" viewBox="0 0 24 24"
-                    stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false">
+                    stroke="currentColor" stroke-width="2" aria-hidden="true">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
                 </svg>
             </a>
