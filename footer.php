@@ -250,6 +250,33 @@ jQuery(document).ready(function($) {
 </script>
 
 
+<script>
+jQuery(document).ready(function($) {
+    $('.aboutus-carousel').owlCarousel({
+        loop: true,
+        margin: 10,
+        nav: false,
+        dots: false,
+        autoplay: true,
+        autoplayTimeout: 3000,
+        autoplayHoverPause: true,
+        responsiveClass: true,
+        responsive: {
+            0: {
+                items: 1
+            },
+            640: {
+                items: 3
+            },
+            1024: {
+                items:4.5
+            }
+        }
+    });
+});
+</script>
+
+
 
 <script>
 jQuery(document).ready(function($) {
