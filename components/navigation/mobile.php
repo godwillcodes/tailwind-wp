@@ -73,14 +73,7 @@
                             <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
                         </svg>
                     </button>
-                    <?php
-                $menu_items = wp_get_nav_menu_items(5);
-                if ($menu_items) {
-                    foreach ($menu_items as $menu_item) {
-                        echo '<a href="' . esc_url($menu_item->url) . '" class="block text-base font-semibold text-white hover:text-[#98C441] transition">' . esc_html($menu_item->title) . '</a>';
-                    }
-                }
-                ?>
+                   
                 </nav>
 
                 <div class="mt-6">
@@ -121,8 +114,8 @@
                         <?php echo esc_html($term->name); ?>
                     </a>
                     <?php endforeach; endif; ?>
-                    <a href="#"
-                        class="block text-base my-8 font-semibold text-white hover:text-[#98C441] transition">Explore
+                    <a href=/solutions"
+                        class="block text-base my-12 font-semibold text-white hover:text-[#98C441] transition">Explore
                         All Solutions</a>
                 </div>
 
@@ -142,7 +135,7 @@
                     wp_reset_postdata();
                 }
                 ?>
-                    <a href="#" class="block text-base font-semibold text-white hover:text-[#98C441] transition">Explore
+                    <a href="/industries" class="block text-base font-semibold text-white hover:text-[#98C441] my-12 transition">Explore
                         All Industries</a>
                 </div>
 
@@ -171,7 +164,7 @@
                 </div>
 
                 <div class="mt-6">
-                    <a href="#"
+                    <a href="/contact"
                         class="block w-full text-center bg-[#98C441] text-[#1F3131] font-medium py-2 rounded-lg hover:bg-[#8ABF3B] transition">Request
                         Demo</a>
                 </div>
