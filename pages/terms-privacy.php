@@ -40,4 +40,3 @@ get_header();
 <?php
 get_template_part( 'components/common/cta' ); 
 get_footer(); 
-?>
