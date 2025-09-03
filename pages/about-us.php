@@ -269,7 +269,8 @@ get_header();
                                 $top_percent = $total_items > 1 ? (($count - 1) * 100 / ($total_items - 1)) : 0;
                         ?>
                     <div class="absolute left-1/2 w-3 h-3 rounded-full -translate-x-1/2"
-                        style="top:<?= $top_percent ?>%;background: linear-gradient(180deg, #006155 0%, #98C441 100%);"></div>
+                        style="top:<?= $top_percent ?>%;background: linear-gradient(180deg, #006155 0%, #98C441 100%);">
+                    </div>
                     <?php endwhile; endif; ?>
                 </div>
             </div>
@@ -365,13 +366,15 @@ get_header();
         </div>
     </div>
 </section>
-<section class="bg-[#1F3131]  pt-20 md:pt-20 px-6 lg:px-0">
+<section class="bg-[#1F3131]  pt-20 md:pt-20 px-6 lg:px-0 ">
     <div class="max-w-xl mx-auto text-center">
         <h2 class=" text-4xl md:text-5xl text-white font-semibold mb-4">Build What’s Next, With a Partner Who Gets It
         </h2>
         <p class="text-white mb-0 mt-4 text-base md:text-[24px]">Whether you're scaling internationally or strengthening
             local services, we help align your strategy with the people you serve.</p>
-        <!-- //form goes here -->
+        <script src="https://js.hsforms.net/forms/embed/22423917.js" defer></script>
+        <div class="hs-form-frame" data-region="na1" data-form-id="e33d9cc7-c17e-48bc-921e-e3a457ca71ee"
+            data-portal-id="22423917"></div>
     </div>
 </section>
 

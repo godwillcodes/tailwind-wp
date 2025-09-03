@@ -358,3 +358,84 @@ if ( defined( 'JETPACK__VERSION' ) ) {
 if ( class_exists( 'WooCommerce' ) ) {
 	require get_template_directory() . '/inc/woocommerce.php';
 }
+
+// Table of Contents
+function pg_generate_toc($content) {
+    if (is_single()) {
+        $matches = [];
+        // Match all headings from h2 to h6
+        preg_match_all('/<h([2-6])(.*?)>(.*?)<\/h[2-6]>/', $content, $matches, PREG_SET_ORDER);
+
+        if ($matches) {
+            $toc = '<ul class="space-y-2">';
+            foreach ($matches as $i => $heading) {
+                $title = wp_strip_all_tags($heading[3]);
+                $id = 'toc-' . $i;
+				$toc .= '<li class="pb-4 pt-2 border-b border-[#1F3131]/30">
+				<a href="#' . esc_attr($id) . '" class="toc-link hover:font-bold   duration-300 text-lg font-medium text-[#1F3131] transition">' . esc_html($title) . '</a>
+			 </li>';
+	
+
+                // Inject ID into heading tag
+                $content = preg_replace(
+                    '/'.preg_quote($heading[0], '/').'/',
+                    '<h'.$heading[1].' id="'.$id.'"'.$heading[2].'>'.$heading[3].'</h'.$heading[1].'>',
+                    $content,
+                    1
+                );
+            }
+            $GLOBALS['pg_toc'] = $toc . '</ul>';
+        }
+    }
+    return $content;
+}
+add_filter('the_content', 'pg_generate_toc');
+
+function pg_load_more_posts() {
+    $paged = isset($_POST['page']) ? intval($_POST['page']) : 1;
+
+    $args = [
+        'post_type'      => 'post',
+        'post_status'    => 'publish',
+        'orderby'        => 'date',
+        'order'          => 'DESC',
+        'category_name'  => 'blog',
+        'posts_per_page' => 6,
+        'paged'          => $paged
+    ];
+
+    $query = new WP_Query($args);
+
+    if ($query->have_posts()) {
+        while ($query->have_posts()) {
+            $query->the_post(); ?>
+            
+            <article class="shadow-md rounded border border-[#ffffff] rounded-t-[4px]">
+              <img src="<?php the_post_thumbnail_url(); ?>" class="w-full h-60 object-cover object-top" alt="<?php the_title(); ?>">
+              <div class="p-8 bg-white">
+                <div class="text-gray-500 text-sm mb-2"><?php echo get_the_date(); ?></div>
+                <h3 class="text-2xl font-semibold text-[#1F3131] mb-2"><?php the_title(); ?></h3>
+                <div class="h-6 md:h-10"></div>
+                <a href="<?php the_permalink(); ?>" class="inline-flex items-center text-base font-medium border-b-2 border-[#D16555] hover:border-[#D16555] transition-colors duration-300">
+                  Read More <span class="ml-1 text-lg">→</span>
+                </a>
+              </div>
+            </article>
+
+        <?php }
+        wp_reset_postdata();
+    }
+
+    wp_die();
+}
+add_action('wp_ajax_pg_load_more_posts', 'pg_load_more_posts');
+add_action('wp_ajax_nopriv_pg_load_more_posts', 'pg_load_more_posts');
+
+
+function pg_enqueue_scripts() {
+    wp_enqueue_script('pg-infinite-scroll', get_template_directory_uri() . '/js/infinite-scroll.js', ['jquery'], null, true);
+    wp_localize_script('pg-infinite-scroll', 'pg_ajax', [
+        'ajax_url' => admin_url('admin-ajax.php')
+    ]);
+}
+add_action('wp_enqueue_scripts', 'pg_enqueue_scripts');
