@@ -1,15 +1,20 @@
 <div
     class="max-w-7xl mx-auto px-6 py-6 fixed top-0 w-full z-50 bg-[#1F3131] flex lg:hidden justify-between items-center">
     <div class="flex items-center">
-        <?php
-    $custom_logo_id = get_theme_mod('custom_logo');
-    if ($custom_logo_id) {
-      $logo = wp_get_attachment_image_src($custom_logo_id, 'full');
-      echo '<img src="' . esc_url($logo[0]) . '" alt="' . get_bloginfo('name') . '" class="h-8 w-auto" />';
-    } else {
-      echo '<span class="text-xl font-bold">' . get_bloginfo('name') . '</span>';
-    }
-    ?>
+    <?php
+$custom_logo_id = get_theme_mod('custom_logo');
+$home_url = esc_url(home_url('/'));
+
+if ($custom_logo_id) {
+  $logo = wp_get_attachment_image_src($custom_logo_id, 'full');
+  echo '<a href="' . $home_url . '" class="inline-block">
+          <img src="' . esc_url($logo[0]) . '" alt="' . get_bloginfo('name') . '" class="h-8 w-auto" />
+        </a>';
+} else {
+  echo '<a href="' . $home_url . '" class="text-xl font-bold">' . get_bloginfo('name') . '</a>';
+}
+?>
+
     </div>
 
     <div x-data="{ open: false, submenu: null }" @keydown.escape.window="open = false; submenu = null" x-cloak>

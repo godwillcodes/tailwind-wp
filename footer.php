@@ -12,7 +12,7 @@
 ?>
 
 <footer class="bg-[linear-gradient(to_bottom,_#1F3131_50%,_#006155_100%)] text-white pt-24 overflow-hidden">
-    <div class="max-w-7xl mx-auto px-12 md:px-8">
+    <div class="max-w-7xl mx-auto px-6 lg:px-0">
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 pb-12">
 
             <!-- Column 1 -->

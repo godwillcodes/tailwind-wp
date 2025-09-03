@@ -362,7 +362,7 @@ get_template_part( 'components/banner/primary' );
         <div class="md:col-span-2 bg-white rounded border border-[#DFDAD4] p-8 shadow-sm flex flex-col">
             <img src="<?php echo esc_url(get_template_directory_uri() . '/assets/icons/quote.svg'); ?>"
                 alt="<?php echo esc_html($random['title']); ?>" class="h-10 w-10 mb-4" />
-            <p class="text-3xl text-gray-800 font-medium flex-grow max-w-xl">
+            <p class="text-base md:text-3xl text-gray-800 font-medium flex-grow max-w-xl">
                 <?php echo esc_html($random['description']); ?>
             </p>
             <div class="mt-6">
