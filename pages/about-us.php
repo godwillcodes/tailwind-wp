@@ -61,7 +61,7 @@ get_header();
                     <?php echo wp_kses_post(get_field('introduction_title')); ?>
                 </h2>
             </div>
-            <div class="prose text-lg lg:text-xl font-normal space-y-4" data-aos="fade-down" data-aos-duration="700"
+            <div class="prose text-lg lg:text-2xl font-normal space-y-4" data-aos="fade-down" data-aos-duration="700"
                 data-aos-easing="ease-out-cubic">
                 <?php echo wp_kses_post(get_field('introduction_content_section_1')); ?>
             </div>
@@ -76,7 +76,7 @@ get_header();
             <!-- Sticky Content -->
             <div class="relative" data-aos="fade-up" data-aos-duration="700" data-aos-easing="ease-out-cubic">
                 <div class="sticky top-24">
-                    <div class="prose text-lg lg:text-xl font-normal space-y-4">
+                    <div class="prose text-lg lg:text-2xl font-normal space-y-4">
                         <?php echo wp_kses_post(get_field('introduction_content_section_2')); ?>
                     </div>
                 </div>
@@ -151,7 +151,7 @@ get_header();
 
             <div class="h-48" aria-hidden="true"></div>
             <?php if($description): ?>
-            <p class="text-base opacity-90 transition-opacity duration-500 group-hover:opacity-100">
+            <p class="text-lg opacity-90 max-w-sm transition-opacity duration-500 group-hover:opacity-100">
                 <?php echo esc_html($description); ?>
             </p>
             <?php endif; ?>
@@ -300,7 +300,7 @@ get_header();
                 <?php endif; ?>
                 <div class="h-12"></div>
                 <?php if ($icon): ?>
-                <img src="<?= esc_url($icon); ?>" alt="<?= esc_attr($title); ?>" class="w-6 h-6 mt-auto">
+                <img src="<?= esc_url($icon); ?>" alt="<?= esc_attr($title); ?>" class="w-8 h-8 mt-auto">
                 <?php endif; ?>
             </div>
         </div>
