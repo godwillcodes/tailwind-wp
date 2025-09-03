@@ -188,7 +188,7 @@
                     class="absolute left-1/2 top-full z-40 mt-4 w-80 -translate-x-1/2 rounded bg-gradient-to-b from-white/95 to-white/90 backdrop-blur-3xl shadow-[0_4px_30px_rgba(0,0,0,0.1)] p-6 overflow-hidden"
                     @click.away="openAbout = false" role="menu" aria-label="About menu">
 
-                    <div class="space-y-3">
+                    <div class="space-y-6">
                         <?php
             $menu_items = wp_get_nav_menu_items(13); // About menu
             if ($menu_items) {
@@ -225,7 +225,7 @@
                     class="absolute left-1/2 top-full z-40 mt-4 w-96 -translate-x-1/2 rounded bg-gradient-to-b from-white/95 to-white/90 backdrop-blur-3xl shadow-[0_4px_30px_rgba(0,0,0,0.1)] p-6 overflow-hidden"
                     @click.away="openResources = false" role="menu" aria-label="Resources menu">
 
-                    <div class="space-y-3">
+                    <div class="space-y-6">
                         <?php
             $menu_items = wp_get_nav_menu_items(14); // Resources menu
             if ($menu_items) {
