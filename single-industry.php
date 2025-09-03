@@ -21,7 +21,7 @@ get_header();
 
         <!-- Content container -->
         <div class="relative z-10 h-full flex items-center">
-            <div class="max-w-7xl mx-auto w-full px-10 lg:px-0 pb-4 md:pb-12 lg:pb-12 text-white">
+            <div class="max-w-7xl mx-auto w-full px-6 lg:px-0 pb-4 md:pb-12 lg:pb-12 text-white">
                 <p class="text-lg font-medium text-[#F9F8F6]" data-aos="fade-up" data-aos-duration="400">
                     <?php the_title(); ?>
                 </p>
@@ -115,7 +115,7 @@ get_header();
     <section class="bg-[#1F3131] bg-cover bg-center relative"
         style="background-image: url('<?php echo esc_url(get_template_directory_uri() . '/assets/icons/1.svg'); ?>');"
         aria-labelledby="strategic-approach-title">
-        <div class="max-w-7xl mx-auto py-20">
+        <div class="max-w-7xl mx-auto py-20 px-6 lg:px-0">
             <header class="text-center space-y-4">
                 <p class="text-lg text-[#F9F8F6]" data-aos="fade-up" data-aos-duration="400">
                     <?php the_field('our_strategic_approach_small_title'); ?>
@@ -196,7 +196,7 @@ get_header();
                          class="h-20 w-20 mb-4" 
                          aria-hidden="true" />
                     <blockquote>
-                        <p class="text-2xl md:text-3xl font-normal leading-snug text-gray-800 mb-6">
+                        <p class="text-xl md:text-3xl font-normal leading-snug text-gray-800 mb-6">
                             "<?php the_sub_field('testimonial_description'); ?>"
                         </p>
                     </blockquote>
@@ -213,6 +213,7 @@ get_header();
                         Explore full capabilities
                         <span class="ml-1 text-lg" aria-hidden="true">→</span>
                     </a>
+                    
                     <?php endif; ?>
                 </footer>
             </div>

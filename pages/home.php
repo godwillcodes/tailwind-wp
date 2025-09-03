@@ -429,7 +429,7 @@ endif;
     style="background-image: url('<?php echo esc_url( get_template_directory_uri() . '/assets/icons/pattern-2.svg' ); ?>')">
 </section>
 
-<section class="h-[100vh] py-24 relative overflow-hidden"
+<section class="h-auto md:h-[100vh] py-24 relative overflow-hidden"
     style="background: linear-gradient(to bottom, #F7F7F5 0%, #F7F7F5 70%, #98C44180 85%, #00615580 100%);">
 
     <div class="max-w-7xl mx-auto relative z-10 h-full flex flex-col">
