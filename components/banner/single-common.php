@@ -22,12 +22,6 @@
                 <h1 class="text-4xl lg:text-5xl font-bold mb-10" data-aos="fade-up" data-aos-duration="400" data-aos-delay="50">
                 <?php the_title(); ?>
                 </h1>
-
-                <?php if (get_the_content() && !is_single()): ?>
-                <div class="text-base lg:text-lg prose-invert mb-4 max-w-4xl text-[#F9F8F6]">
-                    <?php the_content(); ?>
-                </div>
-                <?php endif; ?>
                 
                 <a href="/contact"
                     class="inline-flex items-center gap-2 bg-[#98C441] text-[#1F3131] px-4 py-2 mt-4 font-bold text-base shadow-md rounded-0 hover:bg-[#8AB738] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#98C441] focus:ring-offset-[#1F3131] transition-colors duration-200"
