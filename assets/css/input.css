@@ -82,12 +82,12 @@ button, input, textarea, select {
 }
 
 .prose a {
-  color: #006155;
+  color: #D16555;
   text-decoration: underline;
   transition: color 0.2s ease;
 }
 .prose a:hover {
-  color: #004c44;
+  color: #b65648;
 }
 
 .prose blockquote {
