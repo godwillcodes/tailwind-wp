@@ -7,41 +7,36 @@ get_header();
 ?>
 <header class="shadow-sm relative bg-cover bg-no-repeat bg-bottom" role="banner"
     style="background-image: url('<?php echo esc_url(get_template_directory_uri() . '/assets/icons/3.svg'); ?>');">
-    <div class="bg-[#1F3131] pt-6 pb-8 md:pt-8 md:pb-12">
-        <nav aria-label="Primary desktop navigation" >
+    <div class="bg-[#1F3131] pt-4 sm:pt-6 pb-6 sm:pb-8 md:pt-8 md:pb-12">
+        <nav aria-label="Primary desktop navigation" class="hidden md:block">
             <?php get_template_part('components/navigation/desktop'); ?>
         </nav>
-        <nav aria-label="Primary mobile navigation">
+        <nav aria-label="Primary mobile navigation" class="block md:hidden">
             <?php get_template_part('components/navigation/mobile'); ?>
         </nav>
     </div>
 
     <div class="relative">
-        <!-- Content container -->
         <div class="relative z-10 flex items-center">
-            <div class="max-w-6xl mx-auto w-full px-6 md:px-10 lg:px-0 text-white">
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-10 items-center lg:mt-6 lg:mb-48">
-                    <!-- Row 1 -->
+            <div class="max-w-6xl mx-auto w-full px-4 sm:px-6 md:px-10 lg:px-0 text-white py-32 lg:py-32">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10 items-center about-header lg:mt-6 lg:mb-48">
                     <div>
-                        <div class="text-3xl lg:text-6xl font-bold leading-tight">
+                        <div class="text-3xl  lg:text-6xl font-bold leading-tight">
                             <?php echo wp_kses_post(get_field('primary_page_title')); ?>
                         </div>
                     </div>
-                    <div class="flex justify-center">
-                        <?php if( get_field('primary_page_image') ): ?>
+                    <div class="hidden lg:flex justify-center">
+                        <?php if (get_field('primary_page_image')) : ?>
                         <img src="<?php the_field('primary_page_image'); ?>"
-                            class=" object-cover w-full h-[200px] object-top">
+                            class="object-cover w-full h-40 sm:h-48 md:h-[200px] object-top max-w-full" />
                         <?php endif; ?>
                     </div>
-                    <!-- Row 2 -->
-                    <div class="flex justify-center">
-                        <?php if( get_field('secondary_page_image') ): ?>
 
+                    <div class="hidden lg:flex justify-center">
+                        <?php if (get_field('secondary_page_image')) : ?>
                         <img src="<?php the_field('secondary_page_image'); ?>"
-                            class=" object-cover w-full h-[200px] object-top">
-
+                            class="object-cover w-full h-40 sm:h-48 md:h-[200px] object-top max-w-full" />
                         <?php endif; ?>
-
                     </div>
                     <div>
                         <div class="text-3xl lg:text-6xl font-bold leading-tight">
@@ -55,16 +50,19 @@ get_header();
 </header>
 
 
+
 <section class="py-12 md:py-20 bg-[#F9F8F6]">
     <div class="max-w-7xl mx-auto w-full px-6 md:px-10 lg:px-0 text-[#1F3131]">
         <div class="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 items-center">
             <!-- Row 1 -->
             <div>
-                <h2 class="text-3xl sm:text-5xl md:text-6xl font-bold" data-aos="fade-up" data-aos-duration="700" data-aos-easing="ease-out-cubic">
+                <h2 class="text-3xl sm:text-5xl md:text-6xl font-bold" data-aos="fade-up" data-aos-duration="700"
+                    data-aos-easing="ease-out-cubic">
                     <?php echo wp_kses_post(get_field('introduction_title')); ?>
                 </h2>
             </div>
-            <div class="prose text-lg lg:text-xl font-normal space-y-4"  data-aos="fade-down" data-aos-duration="700" data-aos-easing="ease-out-cubic">
+            <div class="prose text-lg lg:text-xl font-normal space-y-4" data-aos="fade-down" data-aos-duration="700"
+                data-aos-easing="ease-out-cubic">
                 <?php echo wp_kses_post(get_field('introduction_content_section_1')); ?>
             </div>
         </div>
@@ -106,7 +104,7 @@ get_header();
         <div class="grid grid-cols-1 md:grid-cols-2 gap-20 md:gap-32 items-center">
             <div data-aos="fade-up" data-aos-duration="700" data-aos-easing="ease-out-cubic">
                 <img src="<?php echo wp_kses_post(get_field('call_to_action_image')); ?>" alt="Illustration"
-                    class="rounded-lg shadow-md object-cover object-top-[-30px] w-full max-h-[300px] lg:max-h-[500px]">
+                    class=" shadow-md object-cover object-top-[-30px] w-full max-h-[300px] lg:max-h-[500px]">
             </div>
             <!-- Row 1 -->
             <div data-aos="fade-down" data-aos-duration="700" data-aos-easing="ease-out-cubic">
@@ -200,36 +198,41 @@ get_header();
                 style="background-image: url('<?php echo esc_url($image_url); ?>'); background-size: cover; background-position: center;">
                 <div class="absolute inset-0 bg-black/30 rounded-[4px]"></div>
                 <div class="relative z-10 flex flex-col justify-end h-full w-[65%]">
-                    <div class="bg-[#006155] px-8 py-8 text-white shadow-md">
-                        <h3 class="text-2xl font-bold mb-6"><?php echo esc_html($title); ?></h3>
+                    <div class="bg-[#006155] p-8 flex flex-col justify-between text-[#F9F8F6] shadow-lg  min-h-48">
+                        <h3 class="text-2xl font-bold"><?php echo esc_html($title); ?></h3>
                         <p class="text-base leading-relaxed"><?php echo esc_html($description); ?></p>
                     </div>
+
                 </div>
             </div>
             <?php elseif ( $counter % 3 == 1 ): 
                 // Second item: Card (text) on left, image block on right; actually, for grid formatting, output card here
                 ?>
+            <div class="bg-[#AB9DBA] p-8 flex flex-col justify-between text-white shadow-lg rounded-[4px] min-h-48">
+                <h3 class="text-2xl font-bold"><?php echo esc_html($title); ?></h3>
+                <p class="text-base leading-relaxed"><?php echo esc_html($description); ?></p>
+            </div>
+
             <div class="relative overflow-hidden shadow-lg rounded-[4px] min-h-48">
                 <img src="<?php echo esc_url($image_url); ?>" alt="<?php echo esc_attr($title); ?>"
                     class="w-full h-full object-cover transition-transform duration-500 hover:scale-105">
                 <div class="absolute inset-0 bg-black/10 rounded-2xl"></div>
             </div>
-            <div class="bg-[#DFDAD4] p-8 flex flex-col justify-center text-black shadow-lg rounded-[4px] min-h-48">
-                <h3 class="text-2xl font-bold mb-6"><?php echo esc_html($title); ?></h3>
-                <p class="text-base leading-relaxed"><?php echo esc_html($description); ?></p>
-            </div>
+
             <?php elseif ( $counter % 3 == 2 ):
                 // Third item: Image block
                 ?>
-            <div class="bg-[#DFDAD4] p-8 flex flex-col justify-center text-black shadow-lg rounded-[4px] min-h-48">
-                <h3 class="text-2xl font-bold mb-6"><?php echo esc_html($title); ?></h3>
-                <p class="text-base leading-relaxed"><?php echo esc_html($description); ?></p>
-            </div>
+
             <div class="relative overflow-hidden shadow-lg rounded-[4px] min-h-48">
                 <img src="<?php echo esc_url($image_url); ?>" alt="<?php echo esc_attr($title); ?>"
                     class="w-full h-full object-cover transition-transform duration-500 hover:scale-105">
                 <div class="absolute inset-0 bg-black/10 rounded-2xl"></div>
             </div>
+            <div class="bg-[#550061] p-8 flex flex-col justify-between text-white shadow-lg rounded-[4px] min-h-48">
+                <h3 class="text-2xl font-bold"><?php echo esc_html($title); ?></h3>
+                <p class="text-base leading-relaxed"><?php echo esc_html($description); ?></p>
+            </div>
+
             <?php endif; ?>
             <?php 
             $counter++;
@@ -251,7 +254,7 @@ get_header();
     <!-- 25%: Vertical Timeline -->
     <div class="lg:col-span-5">
         <div class="lg:sticky lg:top-32">
-            <p class="text-lg text-left lg:text-center mx-auto font-bold leading-tight mb-8">Milestones along the way
+            <p class="text-base text-left lg:text-center mx-auto font-bold leading-tight mb-8">Milestones along the way
             </p>
 
             <!-- Timeline bar -->
@@ -265,8 +268,8 @@ get_header();
                                 $count++;
                                 $top_percent = $total_items > 1 ? (($count - 1) * 100 / ($total_items - 1)) : 0;
                         ?>
-                    <div class="absolute left-1/2 w-3 h-3 bg-[#550061] rounded-full -translate-x-1/2"
-                        style="top:<?= $top_percent ?>%;"></div>
+                    <div class="absolute left-1/2 w-3 h-3 rounded-full -translate-x-1/2"
+                        style="top:<?= $top_percent ?>%;background: linear-gradient(180deg, #006155 0%, #98C441 100%);"></div>
                     <?php endwhile; endif; ?>
                 </div>
             </div>
@@ -284,20 +287,20 @@ get_header();
             ?>
         <div class="relative">
             <div class="hidden lg:block absolute -left-2 top-1/2 transform -translate-y-1/2 w-0 h-0 border-t-[12px] border-t-transparent border-b-[12px] border-b-transparent border-r-[16px] border-r-[#550061] text-[#550061]"
-                            style="
+                style="
                 color: #550061;
             "></div>
             <div
-                class="bg-[#550061] text-white p-6 md:p-8 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 flex flex-col gap-4">
+                class="bg-[#550061] text-[#F9F8F6] p-6 md:p-8 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 flex flex-col gap-4">
                 <?php if ($title): ?>
                 <h3 class="text-xl md:text-2xl font-bold"><?= esc_html($title); ?></h3>
                 <?php endif; ?>
                 <?php if ($description): ?>
-                <p class="text-purple-100 text-base md:text-lg"><?= esc_html($description); ?></p>
+                <p class="text-[#F9F8F6] text-base md:text-lg"><?= esc_html($description); ?></p>
                 <?php endif; ?>
                 <div class="h-12"></div>
                 <?php if ($icon): ?>
-                <img src="<?= esc_url($icon); ?>" alt="<?= esc_attr($title); ?>" class="w-8 h-8 mt-auto">
+                <img src="<?= esc_url($icon); ?>" alt="<?= esc_attr($title); ?>" class="w-6 h-6 mt-auto">
                 <?php endif; ?>
             </div>
         </div>
@@ -323,18 +326,20 @@ get_header();
                     }
                 }
             ?>
-            <div class="grid grid-cols-2 gap-6 items-start">
+            <div class="grid grid-cols-2 gap-6 items-center">
                 <!-- Column 1 -->
                 <div class="lg:space-y-16 space-y-6 lg:pt-24">
                     <?php foreach ($col1 as $img): ?>
-                    <img src="<?= esc_url($img); ?>" alt="" class=" h-[70px] w-[70px] lg:h-[150px] lg:w-[150px] object-contain transition duration-300 ease-in-out grayscale hover:grayscale-0">
+                    <img src="<?= esc_url($img); ?>" alt=""
+                        class=" h-[70px] w-[70px] lg:h-[150px] lg:w-[150px] object-contain transition duration-300 ease-in-out grayscale hover:grayscale-0">
                     <?php endforeach; ?>
                 </div>
 
                 <!-- Column 2 -->
                 <div class="lg:space-y-16 space-y-6">
                     <?php foreach ($col2 as $img): ?>
-                    <img src="<?= esc_url($img); ?>" alt="" class="mx-auto h-[70px] w-[70px] lg:h-[150px] lg:w-[150px] object-contain transition duration-300 ease-in-out grayscale hover:grayscale-0">
+                    <img src="<?= esc_url($img); ?>" alt=""
+                        class="mx-auto h-[70px] w-[70px] lg:h-[150px] lg:w-[150px] object-contain transition duration-300 ease-in-out grayscale hover:grayscale-0">
                     <?php endforeach; ?>
                 </div>
             </div>
@@ -353,7 +358,8 @@ get_header();
 
             <div class="flex flex-wrap md:flex-nowrap gap-4 items-center mt-10">
                 <?php foreach ($certifications as $cert): ?>
-                <img src="<?php echo esc_url($cert); ?>" alt="" class="w-24 h-24 object-cover object-center transition duration-300 ease-in-out grayscale hover:grayscale-0">
+                <img src="<?php echo esc_url($cert); ?>" alt=""
+                    class="w-24 h-24 object-contain object-center transition duration-300 ease-in-out grayscale hover:grayscale-0">
                 <?php endforeach; ?>
             </div>
         </div>
@@ -361,9 +367,11 @@ get_header();
 </section>
 <section class="bg-[#1F3131]  pt-20 md:pt-20 px-6 lg:px-0">
     <div class="max-w-xl mx-auto text-center">
-        <h2 class=" text-4xl md:text-5xl text-white font-semibold mb-4">Build What’s Next, With a Partner Who Gets It</h2>
-        <p class="text-white mb-0 mt-4 text-base md:text-[24px]">Whether you're scaling internationally or strengthening local services, we help align your strategy with the people you serve.</p>
-       <!-- //form goes here -->
+        <h2 class=" text-4xl md:text-5xl text-white font-semibold mb-4">Build What’s Next, With a Partner Who Gets It
+        </h2>
+        <p class="text-white mb-0 mt-4 text-base md:text-[24px]">Whether you're scaling internationally or strengthening
+            local services, we help align your strategy with the people you serve.</p>
+        <!-- //form goes here -->
     </div>
 </section>
 
@@ -382,6 +390,10 @@ get_header();
 .fade-word.highlight.visible {
     color: #D16555;
     /* highlight in soft red */
+}
+
+.about-header span {
+    color: #D16555 !important;
 }
 </style>
 
