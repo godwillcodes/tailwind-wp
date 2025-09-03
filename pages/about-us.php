@@ -60,11 +60,11 @@ get_header();
         <div class="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 items-center">
             <!-- Row 1 -->
             <div>
-                <h2 class="text-3xl sm:text-5xl md:text-6xl font-bold">
+                <h2 class="text-3xl sm:text-5xl md:text-6xl font-bold" data-aos="fade-up" data-aos-duration="700" data-aos-easing="ease-out-cubic">
                     <?php echo wp_kses_post(get_field('introduction_title')); ?>
                 </h2>
             </div>
-            <div class="prose text-lg lg:text-xl font-normal space-y-4">
+            <div class="prose text-lg lg:text-xl font-normal space-y-4"  data-aos="fade-down" data-aos-duration="700" data-aos-easing="ease-out-cubic">
                 <?php echo wp_kses_post(get_field('introduction_content_section_1')); ?>
             </div>
         </div>
@@ -76,7 +76,7 @@ get_header();
         <div class="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 items-start">
 
             <!-- Sticky Content -->
-            <div class="relative">
+            <div class="relative" data-aos="fade-up" data-aos-duration="700" data-aos-easing="ease-out-cubic">
                 <div class="sticky top-24">
                     <div class="prose text-lg lg:text-xl font-normal space-y-4">
                         <?php echo wp_kses_post(get_field('introduction_content_section_2')); ?>
@@ -85,7 +85,7 @@ get_header();
             </div>
 
             <!-- Scrollable Image -->
-            <div>
+            <div data-aos="fade-down" data-aos-duration="700" data-aos-easing="ease-out-cubic">
                 <img src="<?php echo wp_kses_post(get_field('mohameds_image')); ?>" alt="Globalization illustration"
                     class="shadow-md object-cover w-full max-h-[500px] sm:max-h-[500px]" loading="lazy"
                     decoding="async">
@@ -104,12 +104,12 @@ get_header();
 <section class="pb-12 md:pb-20 bg-[#F9F8F6]">
     <div class="max-w-7xl mx-auto w-full px-6 md:px-10 lg:px-0 text-black">
         <div class="grid grid-cols-1 md:grid-cols-2 gap-20 md:gap-32 items-center">
-            <div>
+            <div data-aos="fade-up" data-aos-duration="700" data-aos-easing="ease-out-cubic">
                 <img src="<?php echo wp_kses_post(get_field('call_to_action_image')); ?>" alt="Illustration"
                     class="rounded-lg shadow-md object-cover object-top-[-30px] w-full max-h-[300px] lg:max-h-[500px]">
             </div>
             <!-- Row 1 -->
-            <div>
+            <div data-aos="fade-down" data-aos-duration="700" data-aos-easing="ease-out-cubic">
                 <p class="text-lg font-medium text-gray-700 mb-6">
                     <?php echo wp_kses_post(get_field('call_to_action_subtitle')); ?></p>
 
@@ -284,9 +284,9 @@ get_header();
             ?>
         <div class="relative">
             <div class="hidden lg:block absolute -left-2 top-1/2 transform -translate-y-1/2 w-0 h-0 border-t-[12px] border-t-transparent border-b-[12px] border-b-transparent border-r-[16px] border-r-[#550061] text-[#550061]"
-                style="
-    color: #550061;
-"></div>
+                            style="
+                color: #550061;
+            "></div>
             <div
                 class="bg-[#550061] text-white p-6 md:p-8 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 flex flex-col gap-4">
                 <?php if ($title): ?>
@@ -359,7 +359,13 @@ get_header();
         </div>
     </div>
 </section>
-
+<section class="bg-[#1F3131]  pt-20 md:pt-20 px-6 lg:px-0">
+    <div class="max-w-xl mx-auto text-center">
+        <h2 class=" text-4xl md:text-5xl text-white font-semibold mb-4">Build What’s Next, With a Partner Who Gets It</h2>
+        <p class="text-white mb-0 mt-4 text-base md:text-[24px]">Whether you're scaling internationally or strengthening local services, we help align your strategy with the people you serve.</p>
+       <!-- //form goes here -->
+    </div>
+</section>
 
 <style>
 .fade-word {
