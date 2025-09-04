@@ -124,7 +124,7 @@ get_header();
                         $bullet_index++;
                     ?>
                     <div class="flex gap-4 mt-3" 
-                         data-aos="fade-left" data-aos-duration="500" data-aos-delay="<?php echo 400 + ($bullet_index * 100); ?>">
+                         data-aos="fade-up" data-aos-duration="500" data-aos-delay="<?php echo 400 + ($bullet_index * 100); ?>">
                         <img src="<?php echo get_template_directory_uri(); ?>/assets/icons/dot3.svg" alt="Bullet point"
                             class="w-4 h-4 mt-1">
                         <?php if ($title): ?>
@@ -140,7 +140,7 @@ get_header();
             </div>
 
             <!-- Scrollable Image -->
-            <div data-aos="fade-left" data-aos-duration="800" data-aos-delay="200" data-aos-easing="ease-out-cubic">
+            <div data-aos="fade-down" data-aos-duration="800" data-aos-delay="200" data-aos-easing="ease-out-cubic">
                 <?php if (get_field('section_2_image')): ?>
                 <img src="<?php echo esc_url(get_field('section_2_image')); ?>" alt="Section illustration"
                     class="shadow-md object-cover w-full h-[300px] md:h-[500px]" loading="lazy" decoding="async">
@@ -221,7 +221,7 @@ get_header();
         ?>
         <!-- 2/3 Column -->
         <div class="md:col-span-2 bg-[#DFDAD433] rounded border border-[#DFDAD4] p-8 shadow-sm flex flex-col"
-             data-aos="fade-right" data-aos-duration="800" data-aos-delay="<?php echo $testimonial_index * 200; ?>" data-aos-easing="ease-out-cubic">
+             data-aos="fade-up" data-aos-duration="800" data-aos-delay="<?php echo $testimonial_index * 200; ?>" data-aos-easing="ease-out-cubic">
             <img src="<?php echo esc_url(get_template_directory_uri() . '/assets/icons/quote.svg'); ?>" alt="Quote Icon"
                 class="h-10 w-10 mb-4">
             <div class="h-24"></div>
@@ -234,7 +234,7 @@ get_header();
 
         <!-- 1/3 Column -->
         <div class="bg-[#006155] rounded border border-[#DFDAD4] overflow-hidden shadow-sm"
-             data-aos="fade-left" data-aos-duration="800" data-aos-delay="<?php echo ($testimonial_index * 200) + 100; ?>" data-aos-easing="ease-out-cubic">
+             data-aos="fade-down" data-aos-duration="800" data-aos-delay="<?php echo ($testimonial_index * 200) + 100; ?>" data-aos-easing="ease-out-cubic">
             <div class="py-6 px-8 space-y-1 text-white">
                 <?php if ($logo): ?>
                 <img src="<?php echo esc_url($logo); ?>" class="w-32 h-auto object-contain mb-4"
