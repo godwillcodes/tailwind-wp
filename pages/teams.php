@@ -6,17 +6,25 @@
 get_header();
 get_template_part( 'components/banner/single-common' );
 ?>
-<section class="px-6 lg:px-0 py-20 bg-[#F9F8F6]">
+<section class="px-6 lg:px-0 py-20"     style="background: linear-gradient(to bottom, #F7F7F5 0%, #F7F7F5 70%, #98C44180 85%, #00615580 100%);">
+
   <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-x-12 gap-y-12 items-stretch">
 
     <?php if (have_rows('team_repeater')): ?>
-      <?php while (have_rows('team_repeater')): the_row(); 
+      <?php 
+      $counter = 0; // Counter for staggered delays
+      while (have_rows('team_repeater')): the_row(); 
         $name        = get_sub_field('name');
         $designation = get_sub_field('designation');
         $photo       = get_sub_field('photo');
         $linkedin    = get_sub_field('linkedin_url'); // optional field
+        $delay = $counter * 100; // 100ms delay between each card
       ?>
-        <div class="bg-white shadow-sm overflow-hidden flex flex-col w-[300px] mx-auto transition-transform duration-300 hover:-translate-y-1 hover:shadow-lg">
+        <div class="bg-white shadow-sm overflow-hidden flex flex-col w-[300px] mx-auto transition-transform duration-300 hover:-translate-y-1 hover:shadow-lg" 
+             data-aos="fade-up" 
+             data-aos-duration=300" 
+             data-aos-delay="<?php echo $delay; ?>"
+             data-aos-easing="ease-out">
           
           <!-- Image -->
           <?php if ($photo && is_array($photo) && isset($photo['url'])): ?>
@@ -37,7 +45,7 @@ get_template_part( 'components/banner/single-common' );
               <div>
                 <h3 class="text-lg font-semibold"><?php echo esc_html($name ?: 'Team Member Name'); ?></h3>
                 <?php if ($designation): ?>
-                  <span class="block text-sm text-gray-500 font-normal"><?php echo esc_html($designation); ?></span>
+                  <span class="block text-sm text-gray-500 font-normal max-w-[170px] line-clamp-2"><?php echo esc_html($designation); ?></span>
                 <?php endif; ?>
               </div>
 
@@ -49,7 +57,10 @@ get_template_part( 'components/banner/single-common' );
             </div>
           </div>
         </div>
-      <?php endwhile; ?>
+      <?php 
+        $counter++; // Increment counter for next iteration
+        endwhile; 
+      ?>
     <?php else: ?>
       <!-- Fallback if no team members -->
       <div class="col-span-full text-center py-12">

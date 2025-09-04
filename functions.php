@@ -407,10 +407,17 @@ function pg_load_more_posts() {
     $query = new WP_Query($args);
 
     if ($query->have_posts()) {
+        $counter = 0; // Counter for staggered delays
         while ($query->have_posts()) {
-            $query->the_post(); ?>
+            $query->the_post(); 
+            $delay = $counter * 100; // 100ms delay between each card
+            ?>
             
-            <article class="shadow-md rounded border border-[#ffffff] rounded-t-[4px]">
+            <article class="shadow-md rounded border border-[#ffffff]/40 rounded-t-[4px]" 
+                     data-aos="fade-up" 
+                     data-aos-duration="400" 
+                     data-aos-delay="<?php echo $delay; ?>"
+                     data-aos-easing="ease-out">
               <img src="<?php the_post_thumbnail_url(); ?>" class="w-full h-60 object-cover object-top" alt="<?php the_title(); ?>">
               <div class="p-8 bg-white">
                 <div class="text-gray-500 text-sm mb-2"><?php echo get_the_date(); ?></div>
@@ -422,7 +429,9 @@ function pg_load_more_posts() {
               </div>
             </article>
 
-        <?php }
+        <?php 
+            $counter++; // Increment counter for next iteration
+        }
         wp_reset_postdata();
     }
 
@@ -433,7 +442,7 @@ add_action('wp_ajax_nopriv_pg_load_more_posts', 'pg_load_more_posts');
 
 
 function pg_enqueue_scripts() {
-    wp_enqueue_script('pg-infinite-scroll', get_template_directory_uri() . '/js/infinite-scroll.js', ['jquery'], null, true);
+    wp_enqueue_script('pg-infinite-scroll', get_template_directory_uri() . '/js/infinite-scroll.js', ['pg-jquery'], null, true);
     wp_localize_script('pg-infinite-scroll', 'pg_ajax', [
         'ajax_url' => admin_url('admin-ajax.php')
     ]);

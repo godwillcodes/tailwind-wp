@@ -56,7 +56,7 @@ endif;
     <ul class="testimonial-carousel owl-carousel" role="list" aria-label="Testimonials">
       <?php $i=0; foreach ($testimonials as $testimonial): $i++; ?>
       <article 
-        class="relative bg-[#006155] border border-[#F9F8F6] rounded-xl my-10 p-10 flex flex-col shadow-md transition duration-300 hover:shadow-xl hover:-translate-y-1 min-h-[400px]"
+        class="relative bg-[linear-gradient(to_bottom,_#1F3131_50%,_#006155_100%)] border border-[#F9F8F6] rounded-xl my-10 p-10 flex flex-col shadow-md transition duration-300 hover:shadow-xl min-h-[400px]"
         data-aos="fade-up"
         data-aos-delay="<?php echo $i * 150; ?>"
         data-aos-duration="600"
@@ -64,7 +64,7 @@ endif;
         aria-label="Testimonial"
       >
         <!-- Decorative Quote -->
-        <div class="mx-auto -mt-20 mb-6 bg-[#98C441] text-white w-16 h-16 rounded-full flex items-center justify-center shadow-lg" aria-hidden="true">
+        <div class="mx-auto -mt-20 mb-6 bg-[#D16555] text-white w-16 h-16 rounded-full flex items-center justify-center shadow-lg" aria-hidden="true">
           <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="w-8 h-8" viewBox="0 0 24 24">
             <path d="M7.17 6A5.004 5.004 0 002 11v7a5 5 0 005 5h1v-8H6v-4h5V6H7.17zM18 6a5.004 5.004 0 00-5 5v7a5 5 0 005 5h1v-8h-2v-4h5V6h-4z" />
           </svg>
