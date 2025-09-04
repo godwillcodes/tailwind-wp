@@ -74,13 +74,19 @@ get_header();
             <a href="<?php the_permalink(); ?>"
                 class="group block shadow-md rounded border border-[#ffffff]/40 rounded-t-[4px] transition-transform duration-300 hover:shadow-lg">
                 <div class="overflow-hidden rounded-t-[4px]">
-                    <img src="https://pgls.com/wp-content/uploads/2024/08/The-Language-Access-Lectern-A-PGLS-Podcast.png"
+                    <img 
+    src="<?php echo get_the_post_thumbnail_url(get_the_ID(), 'full'); ?>" 
+
+
                         class="w-full h-80 object-cover object-top transition-transform duration-500 group-hover:scale-105"
                         alt="<?php the_title(); ?>">
                 </div>
                 <div class="p-8 bg-white">
-                    <div class="text-gray-500 text-sm mb-2">Hosted by Mark Byrne</div>
-                    <h3 class="text-2xl font-semibold text-[#1F3131] mb-2">The Language Access Lectern</h3>
+                    <div class="text-gray-500 text-sm mb-2">Hosted by  <?php echo wp_kses_post(get_field('hosted_by')); ?></div>
+                    <h3 class="text-2xl font-semibold text-[#1F3131] mb-2"><?php the_title(); ?></h3>
+					 <div class="text-base text-gray-800 max-w-xl md:sticky md:top-24 self-start">
+      <?php the_content(); ?>
+    </div>
                     <div class="h-6 md:h-10"></div>
                     <span class="inline-flex items-center text-base font-medium border-b-2 border-[#D16555]">
                         View Episodes <span class="ml-1 text-lg">→</span>

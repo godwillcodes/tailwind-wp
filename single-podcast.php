@@ -1,8 +1,4 @@
 <?php
-/**
- * Template Name: Podcasts
- * Description: 
- */
 get_header();
 ?>
 <header class="shadow-sm bg-[#1F3131]" role="banner">
