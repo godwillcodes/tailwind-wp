@@ -151,9 +151,9 @@ get_header();
 </section>
 
 <section>
-    <div class="max-w-7xl mx-auto w-full px-6 py-20 md:px-10 lg:px-0 text-black">
+    <div class="max-w-7xl mx-auto w-full px-6 py-20 md:px-10 lg:px-0 text-[#1F3131]">
         <?php if (get_field('section_3_subtitle')): ?>
-        <p class="text-xl font-medium text-black" 
+        <p class="text-xl font-medium text-[#1F3131]" 
            data-aos="fade-up" data-aos-duration="600" data-aos-delay="100">
             <?php echo wp_kses_post(get_field('section_3_subtitle')); ?>
         </p>
@@ -175,7 +175,7 @@ get_header();
                 $description = get_sub_field('description');
                 $section3_card_index++;
             ?>
-            <div class="bg-[#006155] shadow-lg p-6 text-white flex flex-col items-start transition-transform duration-200 hover:scale-95 hover:shadow-xl focus-within:ring-2 focus-within:ring-[#98C441] focus-within:ring-offset-2 focus-within:ring-offset-[#1F3131]"
+            <div class="bg-[#AB9DBA66] shadow-lg p-6 text-[#1F3131] flex flex-col items-start transition-transform duration-200 hover:scale-95 hover:shadow-xl focus-within:ring-2 focus-within:ring-[#98C441] focus-within:ring-offset-2 focus-within:ring-offset-[#1F3131]"
                  data-aos="zoom-in" data-aos-duration="700" data-aos-delay="<?php echo 300 + ($section3_card_index * 150); ?>" data-aos-easing="ease-out-cubic">
 
                 <?php if ($icon): ?>
