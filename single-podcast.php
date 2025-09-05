@@ -48,7 +48,7 @@ get_header();
 
 <section class="bg-[#F9F8F6] py-20">
     <div class="max-w-7xl mx-auto px-6 lg:px-0">
-        <div class="grid grid-cols-1 gap-6 mt-0 lg:-mt-56 relative z-10">
+        <div class="grid grid-cols-1 gap-12 mt-0 lg:-mt-56 relative z-10">
             <?php if( have_rows('podcast_episodes') ): 
                 $episodes = array();
 
@@ -72,13 +72,13 @@ get_header();
                 foreach ($episodes as $episode):
             ?>
             <article
-                class="group flex flex-col md:flex-row shadow-md rounded-lg border border-gray-200 overflow-hidden transition-transform duration-300 hover:shadow-lg">
+                class="group flex flex-col md:flex-row shadow-md rounded-lg  overflow-hidden transition-transform duration-300 hover:shadow-lg">
 
                 <!-- Video -->
                 <div class="w-full md:w-1/2 aspect-video md:aspect-auto">
                     <?php if ($episode['video_url']): ?>
                         <iframe 
-                            class="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105" 
+                            class="w-full h-full object-cover object-top" 
                             src="https://www.youtube.com/embed/<?php echo esc_attr( $episode['video_url'] ); ?>" 
                             title="<?php echo esc_attr( $episode['episode_title'] ); ?>" 
                             frameborder="0" 
@@ -113,9 +113,9 @@ get_header();
                     <?php endif; ?>
 
                     <?php if ($episode['episode_desc']): ?>
-                        <p class="text-gray-600 text-lg leading-relaxed">
+                        <div class="text-gray-600 prose text-xl leading-relaxed">
                             <?php echo wp_kses_post( $episode['episode_desc'] ); ?>
-                        </p>
+                        </div>
                     <?php endif; ?>
                 </div>
             </article>

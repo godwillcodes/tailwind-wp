@@ -81,7 +81,7 @@ get_header();
                 <div class="p-8 bg-white">
                     <div class="text-gray-500 text-sm mb-2">Hosted by <?php echo wp_kses_post(get_field('hosted_by')); ?></div>
                     <h3 class="text-2xl font-semibold text-[#1F3131] mb-2"><?php the_title(); ?></h3>
-                    <div class="text-base text-gray-800 max-w-xl self-start">
+                    <div class="text-base prose text-gray-800 max-w-xl self-start">
                         <?php the_content(); ?>
                     </div>
                     <div class="h-6 md:h-10"></div>
