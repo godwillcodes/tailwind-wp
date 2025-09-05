@@ -1,4 +1,5 @@
 <?php
+
 get_header();
 ?>
 <header class="shadow-sm bg-[#1F3131]" role="banner">
@@ -46,67 +47,83 @@ get_header();
 </header>
 
 <section class="bg-[#F9F8F6] py-20">
-    <?php
-    $paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
-
-    $args = [
-    'post_type'      => 'post',
-    'post_status'    => 'publish',
-    'orderby'        => 'date',
-    'order'          => 'DESC',
-    'posts_per_page' => 6,
-    'paged'          => $paged
-    ];
-
-    $query = new WP_Query($args);
-    ?>
     <div class="max-w-7xl mx-auto px-6 lg:px-0">
         <div class="grid grid-cols-1 gap-6 mt-0 lg:-mt-56 relative z-10">
-            <?php 
-      $counter = 0; 
-      while ($query->have_posts()) : $query->the_post(); 
-        $delay = $counter * 100; 
-    ?>
+            <?php if( have_rows('podcast_episodes') ): 
+                $episodes = array();
+
+                // Collect rows
+                while( have_rows('podcast_episodes') ): the_row();
+                    $episodes[] = array(
+                        'episode_number'   => get_sub_field('episode_number'),
+                        'video_url'        => get_sub_field('video_url'),
+                        'guest_name'       => get_sub_field('guest_name'),
+                        'episode_title'    => get_sub_field('episode_title'),
+                        'episode_desc'     => get_sub_field('episode_description'),
+                        'episode_image'    => get_sub_field('episode_image'),
+                    );
+                endwhile;
+
+                // Sort descending by episode_number
+                usort($episodes, function($a, $b) {
+                    return intval($b['episode_number']) <=> intval($a['episode_number']);
+                });
+
+                foreach ($episodes as $episode):
+            ?>
             <article
                 class="group flex flex-col md:flex-row shadow-md rounded-lg border border-gray-200 overflow-hidden transition-transform duration-300 hover:shadow-lg">
 
                 <!-- Video -->
                 <div class="w-full md:w-1/2 aspect-video md:aspect-auto">
-                    <iframe
-                        class="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
-                        src="https://www.youtube.com/embed/your-video-id" title="Episode <?php echo $counter + 1; ?>"
-                        frameborder="0"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                        allowfullscreen>
-                    </iframe>
+                    <?php if ($episode['video_url']): ?>
+                        <iframe 
+                            class="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105" 
+                            src="https://www.youtube.com/embed/<?php echo esc_attr( $episode['video_url'] ); ?>" 
+                            title="<?php echo esc_attr( $episode['episode_title'] ); ?>" 
+                            frameborder="0" 
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                            allowfullscreen>
+                        </iframe>
+                    <?php elseif ($episode['episode_image']): ?>
+                        <img 
+                            src="<?php echo esc_url($episode['episode_image']['url']); ?>" 
+                            alt="<?php echo esc_attr($episode['episode_title']); ?>" 
+                            class="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
+                        />
+                    <?php endif; ?>
                 </div>
 
                 <!-- Content -->
                 <div class="p-6 md:p-8 bg-white w-full md:w-1/2 flex flex-col justify-center">
-                    <div class="text-lg text-[#D16555] font-bold mb-2">
-                        Episode <?php echo $counter + 1; ?>
-                    </div>
-                    <div class="text-gray-500 text-base mb-2">Mark Byrne</div>
-                    <h3 class="text-xl font-semibold text-[#1F3131] mb-3">The Language Access Lectern</h3>
-                    <p class="text-gray-600 text-base leading-relaxed">
-                        In Episode 2 of The eLearning Lounge, we had the distinct pleasure of hosting Dr. Jeanine
-                        DeFalco, a pioneering expert in adaptive training technologies and ethical AI design. Dr.
-                        DeFalco, who has been recognized with awards like the NTSA Modeling Simulation Award and
-                        acknowledgment at the I/ITSEC conference, shared invaluable insights into her work, from her
-                        groundbreaking contributions to the Generalized Intelligent Framework for Tutoring (GIFT) to her
-                        current role in developing innovative training solutions for the U.S. Navy’s Electric Boat
-                        division.
-                    </p>
+                    <?php if ($episode['episode_number']): ?>
+                        <div class="text-xl text-[#D16555] font-bold mb-3">
+                            Episode <?php echo esc_html($episode['episode_number']); ?>
+                        </div>
+                    <?php endif; ?>
+
+                    <?php if ($episode['guest_name']): ?>
+                        <div class="text-gray-500 text-lg mb-3"><?php echo esc_html($episode['guest_name']); ?></div>
+                    <?php endif; ?>
+
+                    <?php if ($episode['episode_title']): ?>
+                        <h3 class="text-2xl font-semibold text-[#1F3131] mb-4">
+                            <?php echo esc_html($episode['episode_title']); ?>
+                        </h3>
+                    <?php endif; ?>
+
+                    <?php if ($episode['episode_desc']): ?>
+                        <p class="text-gray-600 text-lg leading-relaxed">
+                            <?php echo wp_kses_post( $episode['episode_desc'] ); ?>
+                        </p>
+                    <?php endif; ?>
                 </div>
             </article>
-            <?php 
-      $counter++; 
-      endwhile; 
-    ?>
+            <?php endforeach; endif; ?>
         </div>
     </div>
-
 </section>
+
 
 <section class="pb-40 pt-20"
     style="background: linear-gradient(to bottom, #F7F7F5 0%, #F7F7F5 70%, #98C44180 85%, #00615580 100%);">

@@ -74,19 +74,16 @@ get_header();
             <a href="<?php the_permalink(); ?>"
                 class="group block shadow-md rounded border border-[#ffffff]/40 rounded-t-[4px] transition-transform duration-300 hover:shadow-lg">
                 <div class="overflow-hidden rounded-t-[4px]">
-                    <img 
-    src="<?php echo get_the_post_thumbnail_url(get_the_ID(), 'full'); ?>" 
-
-
+                    <img src="<?php echo get_the_post_thumbnail_url(get_the_ID(), 'full'); ?>"
                         class="w-full h-80 object-cover object-top transition-transform duration-500 group-hover:scale-105"
                         alt="<?php the_title(); ?>">
                 </div>
                 <div class="p-8 bg-white">
-                    <div class="text-gray-500 text-sm mb-2">Hosted by  <?php echo wp_kses_post(get_field('hosted_by')); ?></div>
+                    <div class="text-gray-500 text-sm mb-2">Hosted by <?php echo wp_kses_post(get_field('hosted_by')); ?></div>
                     <h3 class="text-2xl font-semibold text-[#1F3131] mb-2"><?php the_title(); ?></h3>
-					 <div class="text-base text-gray-800 max-w-xl md:sticky md:top-24 self-start">
-      <?php the_content(); ?>
-    </div>
+                    <div class="text-base text-gray-800 max-w-xl self-start">
+                        <?php the_content(); ?>
+                    </div>
                     <div class="h-6 md:h-10"></div>
                     <span class="inline-flex items-center text-base font-medium border-b-2 border-[#D16555]">
                         View Episodes <span class="ml-1 text-lg">→</span>
@@ -101,7 +98,8 @@ get_header();
     </div>
 </section>
 
-<section class="pb-40 pt-20" style="background: linear-gradient(to bottom, #F7F7F5 0%, #F7F7F5 70%, #98C44180 85%, #00615580 100%);">
+<section class="pb-40 pt-20"
+    style="background: linear-gradient(to bottom, #F7F7F5 0%, #F7F7F5 70%, #98C44180 85%, #00615580 100%);">
     <div class="max-w-3xl mx-auto px-8 lg:px-0 text-center">
         <h2 class="text-3xl lg:text-5xl font-bold text-black mb-6" data-aos="fade-up" data-aos-duration="200"
             data-aos-delay="200" data-aos-easing="ease-out">
