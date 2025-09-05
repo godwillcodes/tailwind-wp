@@ -1,5 +1,5 @@
 <section 
-    class="relative h-auto lg:h-[80vh] w-full text-white overflow-hidden bg-no-repeat bg-cover bg-center"
+    class="relative h-auto lg:h-[80vh] w-full text-white overflow-hidden bg-no-repeat bg-cover bg-bottom"
     style="background-image: url('<?php echo esc_url(get_template_directory_uri() . '/assets/icons/primary-bg.svg'); ?>');">
     
     <!-- Navigation -->

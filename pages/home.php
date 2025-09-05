@@ -15,7 +15,7 @@ get_template_part( 'components/banner/primary' );
             <?php while (have_rows('what_brings_you_here_today')): the_row(); 
             $title       = get_sub_field('title');
             $description = get_sub_field('description');
-            $link        = get_sub_field('link');
+            $link        = get_sub_field('link_');
             $size        = get_sub_field('size_of_card'); // only "small"
             if (strtolower($size) !== 'small') {
                 continue;
@@ -52,15 +52,16 @@ get_template_part( 'components/banner/primary' );
                 <!-- Hover Content -->
                 <div
                     class="absolute inset-0 z-20 flex flex-col items-center justify-center text-center px-6 opacity-0 group-hover:opacity-100 transition-all duration-100 ease-out bg-[linear-gradient(180deg,_rgba(152,196,65,0)_46.15%,_rgba(152,196,65,0.5)_80%,_rgba(0,97,85,0.5)_100%)] scale-95 group-hover:scale-100">
-                    <a href="<?php echo esc_url($link); ?>"
-                        class="text-xl md:text-2xl px-6 md:px-20 font-semibold inline-flex items-center gap-2 text-black mb-6 transition-transform duration-500 ease-in-out group-hover:translate-y-1">
-                        Explore our Approach
-                    </a>
+                    <a href="<?php echo esc_url($link); ?>" 
+   class="flex flex-col items-center justify-center gap-6 text-center text-xl md:text-2xl px-6 md:px-20 font-semibold text-black mb-6 transition-transform duration-500 ease-in-out group-hover:translate-y-1">
 
+    <span>Explore our Approach</span>
 
-                    <img src="<?php echo esc_url(get_template_directory_uri() . '/assets/icons/arrow-side.svg'); ?>"
-                        alt="Arrow Icon"
-                        class="h-10 w-10 text-white bg-black p-3 rounded-full transition-transform duration-500 ease-in-out group-hover:scale-110">
+    <img src="<?php echo esc_url(get_template_directory_uri() . '/assets/icons/arrow-side.svg'); ?>"
+        alt="Arrow Icon"
+        class="h-10 w-10 text-white bg-black p-3 rounded-full transition-transform duration-500 ease-in-out group-hover:scale-110">
+</a>
+
                 </div>
             </div>
             <?php endwhile; ?>
@@ -73,7 +74,7 @@ get_template_part( 'components/banner/primary' );
         <?php while (have_rows('what_brings_you_here_today')): the_row(); 
         $title       = get_sub_field('title');
         $description = get_sub_field('description');
-        $link        = get_sub_field('link');
+        $link        = get_sub_field('link_');
         $size        = get_sub_field('size_of_card'); // only "big"
         if (strtolower($size) !== 'big') {
             continue;
@@ -111,15 +112,15 @@ get_template_part( 'components/banner/primary' );
                         bg-[linear-gradient(180deg,_rgba(152,196,65,0)_46.15%,_rgba(152,196,65,0.5)_80%,_rgba(0,97,85,0.5)_100%)] scale-95 group-hover:scale-100">
 
 
-                <a href="<?php echo esc_url($link); ?>"
-                    class="text-xl md:text-2xl max-w-xs mx-auto font-semibold inline-flex items-center gap-2 text-black mb-6 transition-transform duration-500 ease-in-out group-hover:translate-y-1">
-                    Explore Our Approach
-                </a>
+                 <a href="<?php echo esc_url($link); ?>" 
+   class="flex flex-col items-center justify-center gap-6 text-center text-xl md:text-2xl px-6 md:px-20 font-semibold text-black mb-6 transition-transform duration-500 ease-in-out group-hover:translate-y-1">
 
+    <span>Explore our Approach</span>
 
-                <img src="<?php echo esc_url(get_template_directory_uri() . '/assets/icons/arrow-side.svg'); ?>"
-                    alt="Arrow Icon"
-                    class="h-10 w-10 text-white bg-black p-3 rounded-full transition-transform duration-500 ease-in-out group-hover:scale-110">
+    <img src="<?php echo esc_url(get_template_directory_uri() . '/assets/icons/arrow-side.svg'); ?>"
+        alt="Arrow Icon"
+        class="h-10 w-10 text-white bg-black p-3 rounded-full transition-transform duration-500 ease-in-out group-hover:scale-110">
+</a>
             </div>
         </div>
         <?php endwhile; ?>
@@ -264,9 +265,8 @@ get_template_part( 'components/banner/primary' );
             </div>
 
             <div class="" data-aos="fade-down" data-aos-delay="100">
-                <div class="rounded-[8px] overflow-hidden mx-6 md:mx-0" style="
-        background: linear-gradient(0deg, #550061, #550061),
-        linear-gradient(0.03deg, #D16555 0.04%, rgba(171, 157, 186, 0) 50.01%);
+                <div class="rounded-[4px] overflow-hidden mx-6 md:mx-0" style="background: linear-gradient(180deg, #550061 0%, #550061 70%, #D16555 100%);
+
       ">
                     <img src="/wp-content/uploads/Rectangle-21027.png" alt="Team collaboration"
                         class=" h-full w-full object-cover rounded-[6px] p-6 md:p-20 " />
@@ -425,7 +425,7 @@ endif;
     </div>
 </section>
 
-<section class="h-[200px] bg-repeat-x bg-top pb-10 bg-[#F9F8F6]"
+<section class="h-[450px] bg-repeat-x bg-top pb-10 bg-[#F9F8F6]"
     style="background-image: url('<?php echo esc_url( get_template_directory_uri() . '/assets/icons/pattern-2.svg' ); ?>')">
 </section>
 
