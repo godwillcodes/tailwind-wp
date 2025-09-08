@@ -393,13 +393,14 @@ add_filter('the_content', 'pg_generate_toc');
 
 function pg_load_more_posts() {
     $paged = isset($_POST['page']) ? intval($_POST['page']) : 1;
+    $category = isset($_POST['category']) ? sanitize_text_field($_POST['category']) : 'blog';
 
     $args = [
         'post_type'      => 'post',
         'post_status'    => 'publish',
         'orderby'        => 'date',
         'order'          => 'DESC',
-        'category_name'  => 'blog',
+        'category_name'  => $category,
         'posts_per_page' => 6,
         'paged'          => $paged
     ];
@@ -413,21 +414,26 @@ function pg_load_more_posts() {
             $delay = $counter * 100; // 100ms delay between each card
             ?>
             
-            <article class="shadow-md rounded border border-[#ffffff]/40 rounded-t-[4px]" 
-                     data-aos="fade-up" 
-                     data-aos-duration="400" 
-                     data-aos-delay="<?php echo $delay; ?>"
-                     data-aos-easing="ease-out">
-              <img src="<?php the_post_thumbnail_url(); ?>" class="w-full h-60 object-cover object-top" alt="<?php the_title(); ?>">
+            <a href="<?php the_permalink(); ?>" 
+               class="group block shadow-md rounded border border-[#ffffff]/40 rounded-t-[4px] transition-transform duration-300 hover:shadow-lg"
+               data-aos="fade-up" 
+               data-aos-duration="400" 
+               data-aos-delay="<?php echo $delay; ?>"
+               data-aos-easing="ease-out">
+              <div class="overflow-hidden rounded-t-[4px]">
+                <img src="<?php the_post_thumbnail_url(); ?>" 
+                     class="w-full h-60 object-cover object-top transition-transform duration-500 group-hover:scale-105" 
+                     alt="<?php the_title(); ?>">
+              </div>
               <div class="p-8 bg-white">
                 <div class="text-gray-500 text-sm mb-2"><?php echo get_the_date(); ?></div>
                 <h3 class="text-2xl font-semibold text-[#1F3131] mb-2"><?php the_title(); ?></h3>
                 <div class="h-6 md:h-10"></div>
-                <a href="<?php the_permalink(); ?>" class="inline-flex items-center text-base font-medium border-b-2 border-[#D16555] hover:border-[#D16555] transition-colors duration-300">
+                <span class="inline-flex items-center text-base font-medium border-b-2 border-[#D16555]">
                   Read More <span class="ml-1 text-lg">→</span>
-                </a>
+                </span>
               </div>
-            </article>
+            </a>
 
         <?php 
             $counter++; // Increment counter for next iteration
@@ -440,6 +446,70 @@ function pg_load_more_posts() {
 add_action('wp_ajax_pg_load_more_posts', 'pg_load_more_posts');
 add_action('wp_ajax_nopriv_pg_load_more_posts', 'pg_load_more_posts');
 
+function pg_load_more_ebooks() {
+    $paged = isset($_POST['page']) ? intval($_POST['page']) : 1;
+
+    // Check if 'ebook' post type exists, fallback to 'post' with 'ebook' category
+    $post_type = 'ebook';
+    if (!post_type_exists('ebook')) {
+        $post_type = 'post';
+    }
+
+    $args = [
+        'post_type'      => $post_type,
+        'post_status'    => 'publish',
+        'orderby'        => 'date',
+        'order'          => 'DESC',
+        'posts_per_page' => 6,
+        'paged'          => $paged
+    ];
+
+    // If ebook post type doesn't exist, filter by category instead
+    if (!post_type_exists('ebook')) {
+        $args['category_name'] = 'ebook';
+    }
+
+    $query = new WP_Query($args);
+
+    if ($query->have_posts()) {
+        $counter = 0; // Counter for staggered delays
+        while ($query->have_posts()) {
+            $query->the_post(); 
+            $delay = $counter * 100; // 100ms delay between each card
+            ?>
+            
+            <a href="<?php the_permalink(); ?>"
+                class="group block shadow-md rounded border border-[#ffffff]/40 rounded-t-[4px] transition-transform duration-300 hover:shadow-lg"
+                data-aos="fade-up" 
+                data-aos-duration="400" 
+                data-aos-delay="<?php echo $delay; ?>"
+                data-aos-easing="ease-out">
+                <div class="overflow-hidden rounded-t-[4px]">
+                    <img src="<?php the_post_thumbnail_url(); ?>"
+                        class="w-full h-60 object-cover object-top transition-transform duration-500 group-hover:scale-105"
+                        alt="<?php the_title(); ?>">
+                </div>
+                <div class="p-8 bg-white">
+                    <h3 class="text-2xl font-semibold text-[#1F3131] mb-2"><?php the_title(); ?></h3>
+                    <div class="text-gray-500 text-sm mb-2"><?php echo wp_trim_words(get_the_content(), 20); ?></div>
+                    <div class="h-6 md:h-10"></div>
+                    <span class="inline-flex items-center text-base font-medium border-b-2 border-[#D16555]">
+                        Get <?php the_title(); ?> eBook <span class="ml-1 text-lg">→</span>
+                    </span>
+                </div>
+            </a>
+
+        <?php 
+            $counter++; // Increment counter for next iteration
+        }
+        wp_reset_postdata();
+    }
+
+    wp_die();
+}
+add_action('wp_ajax_pg_load_more_ebooks', 'pg_load_more_ebooks');
+add_action('wp_ajax_nopriv_pg_load_more_ebooks', 'pg_load_more_ebooks');
+
 
 function pg_enqueue_scripts() {
     wp_enqueue_script('pg-infinite-scroll', get_template_directory_uri() . '/js/infinite-scroll.js', ['pg-jquery'], null, true);
@@ -448,3 +518,114 @@ function pg_enqueue_scripts() {
     ]);
 }
 add_action('wp_enqueue_scripts', 'pg_enqueue_scripts');
+
+
+// Send page-specific Ebook PDF after Forminator submission
+add_action('forminator_custom_form_after_handle_submit', function($form_id, $response) {
+
+    // Only for this specific form
+    if ($form_id !== 530) {
+        return;
+    }
+
+    // Get the current page ID from the form submission context
+    // Try multiple methods to get the page ID
+    $page_id = null;
+    
+    // Method 1: Try to get from global post
+    if (is_singular() && get_the_ID()) {
+        $page_id = get_the_ID();
+    }
+    
+    // Method 2: Try to get from form submission data
+    if (!$page_id && isset($response['data'])) {
+        foreach ($response['data'] as $field) {
+            if (isset($field['name']) && $field['name'] === 'page_id') {
+                $page_id = intval($field['value']);
+                break;
+            }
+        }
+    }
+    
+    // Method 3: Try to get from referrer URL
+    if (!$page_id && isset($_SERVER['HTTP_REFERER'])) {
+        $referrer = $_SERVER['HTTP_REFERER'];
+        $page_id = url_to_postid($referrer);
+    }
+
+    if (!$page_id) {
+        error_log('Ebook PDF: Could not determine page ID');
+        return;
+    }
+
+    // Get ACF file field (returns array)
+    $pdf_file = get_field('ebook_pdf', $page_id);
+    if (empty($pdf_file) || empty($pdf_file['ID'])) {
+        error_log('Ebook PDF: No PDF file found for page ID: ' . $page_id);
+        return;
+    }
+
+    // Get server path for attachment
+    $pdf_path = get_attached_file($pdf_file['ID']);
+    if (!file_exists($pdf_path)) {
+        error_log('Ebook PDF: File does not exist: ' . $pdf_path);
+        return;
+    }
+
+    // Extract submitted email from Forminator data
+    $submitted_data = $response['data'];
+    $user_email = '';
+    $user_name = '';
+    
+    foreach ($submitted_data as $field) {
+        if (isset($field['name']) && $field['name'] === 'email') {
+            $user_email = sanitize_email($field['value']);
+        }
+        if (isset($field['name']) && ($field['name'] === 'name' || $field['name'] === 'first-name')) {
+            $user_name = sanitize_text_field($field['value']);
+        }
+    }
+
+    if (empty($user_email)) {
+        error_log('Ebook PDF: No email address found in form submission');
+        return;
+    }
+
+    // Get ebook title
+    $ebook_title = get_the_title($page_id);
+    $ebook_title = str_replace(' Ebook', '', $ebook_title); // Remove "Ebook" suffix if present
+
+    // Email content with better formatting
+    $subject = 'Your requested eBook: ' . $ebook_title;
+    
+    $message = '<html><body style="font-family: Arial, sans-serif; line-height: 1.6; color: #333;">';
+    $message .= '<div style="max-width: 600px; margin: 0 auto; padding: 20px;">';
+    $message .= '<h2 style="color: #1F3131; margin-bottom: 20px;">Thank you for your interest!</h2>';
+    
+    if (!empty($user_name)) {
+        $message .= '<p>Hi ' . esc_html($user_name) . ',</p>';
+    } else {
+        $message .= '<p>Hi there,</p>';
+    }
+    
+    $message .= '<p>Thank you for requesting our eBook: <strong>' . esc_html($ebook_title) . '</strong></p>';
+    $message .= '<p>Please find your free copy attached to this email.</p>';
+    $message .= '<p>If you have any questions or would like to learn more about our services, feel free to reach out to us.</p>';
+    $message .= '<p>Best regards,<br>The Piedmont Global Team</p>';
+    $message .= '</div></body></html>';
+
+    $headers = [
+        'Content-Type: text/html; charset=UTF-8',
+        'From: Piedmont Global <noreply@piedmontglobal.com>'
+    ];
+
+    // Send email with attachment
+    $mail_sent = wp_mail($user_email, $subject, $message, $headers, [$pdf_path]);
+    
+    if ($mail_sent) {
+        error_log('Ebook PDF: Successfully sent to ' . $user_email);
+    } else {
+        error_log('Ebook PDF: Failed to send email to ' . $user_email);
+    }
+
+}, 10, 2);

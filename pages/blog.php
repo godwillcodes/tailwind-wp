@@ -46,7 +46,7 @@ $query = new WP_Query($args);
         $delay = $counter * 100; // 100ms delay between each card
       ?>
        <a href="<?php the_permalink(); ?>" 
-   class="group block shadow-md rounded border border-[#ffffff]/40 rounded-t-[4px] transition-transform duration-300 hover:shadow-lg">
+   class="group block shadow-md rounded border bg-white border-[#ffffff]/40 rounded-t-[4px] transition-transform duration-300 hover:shadow-lg">
   <div class="overflow-hidden rounded-t-[4px]">
     <img src="<?php the_post_thumbnail_url(); ?>" 
          class="w-full h-60 object-cover object-top transition-transform duration-500 group-hover:scale-105" 
@@ -65,6 +65,13 @@ $query = new WP_Query($args);
         $counter++; // Increment counter for next iteration
         endwhile; 
       ?>
+    </div>
+    
+    <!-- Load More Button -->
+    <div class="text-center mt-12">
+      <button class="load-more-btn bg-[#98C441] text-black px-8 py-3 font-bold text-base transition-colors duration-200 hover:bg-[#7BA035] focus:outline-none focus:ring-2 focus:ring-[#98C441] focus:ring-offset-2">
+        Load More Posts
+      </button>
     </div>
   </div>
 </section>
