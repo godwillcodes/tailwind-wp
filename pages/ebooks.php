@@ -67,7 +67,7 @@ $query = new WP_Query($args);
                 </div>
                 <div class="p-8 bg-white shadow">
                     <h3 class="text-2xl font-semibold text-[#1F3131] mb-2"><?php the_title(); ?></h3>
-                    <div class="text-gray-500 text-sm mb-2"><?php echo wp_trim_words(get_the_content(), 20); ?></div>
+                    <div class="text-gray-500 text-base mb-2"><?php echo wp_trim_words(get_the_content(), 30); ?></div>
                     <div class="h-6 md:h-10"></div>
                     <span class="inline-flex items-center text-base font-medium border-b-2 border-[#D16555]">
                         Get <?php the_title(); ?> eBook <span class="ml-1 text-lg">→</span>
