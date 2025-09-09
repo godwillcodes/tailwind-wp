@@ -52,7 +52,7 @@ linear-gradient(1.48deg, rgba(0, 97, 85, 0) 72.24%, #006155 135.34%);
                     <!-- <p class="text-white mb-2 text-lg">sent on email instantly</p> -->
                     <p class="text-white mb-2 text-lg">Provide your email and receive the eBook instantly delivered straight to your inbox, no waiting, no extra steps required.</p>
 
-                    <?php echo do_shortcode('[forminator_form id="530"]'); ?>
+                    <?php echo do_shortcode('[forminator_form id="533"]'); ?>
                 </div>
 
                 <!-- Right Column: PNG Image with Hover Actions -->

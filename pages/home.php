@@ -379,7 +379,7 @@ get_template_part( 'components/banner/primary' );
         <?php
 $args = [
     'post_type'      => 'case_study',
-    'posts_per_page' => -1,
+    'posts_per_page' => 1,
 ];
 
 $query = new WP_Query($args);
@@ -402,11 +402,9 @@ if ($query->have_posts()):
                 </p>
                 <?php endif; ?>
 
-                <?php if (get_the_title()): ?>
                 <p class="text-gray-700 mb-4 text-lg max-w-xs">
-                    <?php echo esc_html(get_the_title()); ?>
+                    <?php the_field('title'); ?>
                 </p>
-                <?php endif; ?>
 
                 <a href="<?php echo esc_url($link); ?>"
                     class="inline-flex items-center mt-10 text-base font-medium border-b-2 border-[#D16555] hover:border-[#D16555] transition-colors duration-300"

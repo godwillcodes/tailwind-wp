@@ -556,7 +556,7 @@ add_action('phpmailer_init', function($phpmailer) {
  * Handles unauthenticated (public) submissions.
  */
 add_action('wp_ajax_nopriv_forminator_submit_form_custom-forms', function() {
-    if (isset($_POST['form_id']) && $_POST['form_id'] == 530) {
+    if (isset($_POST['form_id']) && $_POST['form_id'] == 533) {
         pg_process_ebook_pdf($_POST);
     }
 }, 5);
@@ -565,7 +565,7 @@ add_action('wp_ajax_nopriv_forminator_submit_form_custom-forms', function() {
  * Handles authenticated (logged-in) submissions.
  */
 add_action('wp_ajax_forminator_submit_form_custom-forms', function() {
-    if (isset($_POST['form_id']) && $_POST['form_id'] == 530) {
+    if (isset($_POST['form_id']) && $_POST['form_id'] == 533) {
         pg_process_ebook_pdf($_POST);
     }
 }, 5);

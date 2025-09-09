@@ -47,13 +47,13 @@ $query = new WP_Query($args);
        <a href="<?php the_permalink(); ?>" 
    class="group block shadow-md rounded border bg-white border-[#ffffff]/40 rounded-t-[4px] transition-transform duration-300 hover:shadow-lg">
   <div class="overflow-hidden rounded-t-[4px]">
-    <img src="https://pgls.com/wp-content/uploads/2025/01/GT-Independence-Client-Logo.png" 
+    <img src="<?php the_field('logo'); ?>" 
          class="w-[70%] h-60 object-contain mx-auto object-center transition-transform duration-500 group-hover:scale-105" 
          alt="<?php the_title(); ?>">
   </div>
   <div class="p-8 bg-white">
-    <div class="text-gray-500 text-base mb-2">Healthcare</div>
-    <h3 class="text-2xl font-semibold text-[#1F3131] mb-2"><?php the_title(); ?></h3>
+    <div class="text-gray-500 text-base mb-2"><?php the_field('industry'); ?></div>
+    <h3 class="text-2xl font-semibold text-[#1F3131] mb-2"><?php the_field('title'); ?></h3>
     <div class="h-6 md:h-10"></div>
     <span class="inline-flex items-center text-base font-medium border-b-2 border-[#D16555]">
       Read Case Study <span class="ml-1 text-lg">→</span>
