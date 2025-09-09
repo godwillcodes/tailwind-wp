@@ -62,7 +62,10 @@ linear-gradient(1.48deg, rgba(0, 97, 85, 0) 72.24%, #006155 135.34%);
       $content = get_post_field('post_content', get_the_ID());
       $word_count = str_word_count( wp_strip_all_tags( $content ) );
       $min_words_for_toc = 500; 
-      $has_toc = ($word_count >= $min_words_for_toc && !empty($GLOBALS['pg_toc']));
+      
+      // Check if content has headings (h2-h6) for TOC
+      $has_headings = preg_match('/<h([2-6])(.*?)>(.*?)<\/h[2-6]>/', $content);
+      $has_toc = ($word_count >= $min_words_for_toc && $has_headings);
     ?>
 
         <div class="grid grid-cols-1 <?php echo $has_toc ? 'lg:grid-cols-3 gap-12 lg:gap-20' : ''; ?>">
@@ -71,7 +74,13 @@ linear-gradient(1.48deg, rgba(0, 97, 85, 0) 72.24%, #006155 135.34%);
             <?php if ($has_toc): ?>
             <aside class="lg:col-span-1 lg:sticky lg:top-32 self-start order-1 lg:order-1">
                 <div class="table-of-contents bg-white p-6">
-                    <?php echo $GLOBALS['pg_toc']; ?>
+                    <?php 
+                    // Generate TOC if not already generated
+                    if (empty($GLOBALS['pg_toc'])) {
+                        pg_generate_toc($content);
+                    }
+                    echo $GLOBALS['pg_toc']; 
+                    ?>
                 </div>
             </aside>
             <?php endif; ?>
@@ -107,6 +116,17 @@ linear-gradient(1.48deg, rgba(0, 97, 85, 0) 72.24%, #006155 135.34%);
 html {
     scroll-behavior: smooth;
 }
+
+/* Account for sticky header when scrolling to headings */
+h2[id^="toc-"], h3[id^="toc-"], h4[id^="toc-"], h5[id^="toc-"], h6[id^="toc-"] {
+    scroll-margin-top: 120px; /* Desktop - increased for better visibility */
+}
+
+@media (max-width: 1023px) {
+    h2[id^="toc-"], h3[id^="toc-"], h4[id^="toc-"], h5[id^="toc-"], h6[id^="toc-"] {
+        scroll-margin-top: 140px; /* Mobile - increased for better visibility */
+    }
+}
 </style>
 
 <script>
@@ -116,11 +136,18 @@ document.addEventListener("DOMContentLoaded", () => {
         const id = link.getAttribute("href");
         return document.querySelector(id);
     });
+    
+    // Debug: Log TOC elements found
+    console.log('TOC Links found:', links.length);
+    console.log('TOC Sections found:', sections.length);
 
     function onScroll() {
         let currentIndex = 0;
+        // Account for sticky header - use responsive offset
+        const headerOffset = window.innerWidth >= 1024 ? 120 : 140; // Increased values for better visibility
+        
         sections.forEach((section, i) => {
-            if (section && section.offsetTop <= window.scrollY + 150) {
+            if (section && section.offsetTop <= window.scrollY + headerOffset) {
                 currentIndex = i;
             }
         });
@@ -130,6 +157,9 @@ document.addEventListener("DOMContentLoaded", () => {
             links[currentIndex].classList.add("font-bold");
         }
     }
+
+    // Also handle window resize to recalculate on orientation change
+    window.addEventListener('resize', onScroll);
 
     window.addEventListener("scroll", onScroll);
     onScroll();

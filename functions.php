@@ -361,7 +361,8 @@ if ( class_exists( 'WooCommerce' ) ) {
 
 // Table of Contents
 function pg_generate_toc($content) {
-    if (is_single()) {
+    // Check if we're on a single post or if content is provided directly
+    if (is_single() || !empty($content)) {
         $matches = [];
         // Match all headings from h2 to h6
         preg_match_all('/<h([2-6])(.*?)>(.*?)<\/h[2-6]>/', $content, $matches, PREG_SET_ORDER);
