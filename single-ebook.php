@@ -87,13 +87,12 @@ linear-gradient(1.48deg, rgba(0, 97, 85, 0) 72.24%, #006155 135.34%);
 
 
 <style>
-#forminator-module-530 .forminator-label {
+ .forminator-label {
     color: #fff;
     font-size: 16px !important;
     font-weight: 700;
 }
-
-#forminator-module-530 .forminator-input {
+ .forminator-input {
     background-color: #fff;
     color: #000;
     font-size: 16px;
@@ -101,14 +100,13 @@ linear-gradient(1.48deg, rgba(0, 97, 85, 0) 72.24%, #006155 135.34%);
     border-radius: 5px;
 }
 
-.forminator-ui#forminator-module-530.forminator-design--default .forminator-button-submit {
+.forminator-design--default .forminator-button-submit {
     background-color: #98C441 !important;
     color: #006155;
     font-size: 16px !important;
     font-weight: 700;
 }
-
-#forminator-module-530 .forminator-submit:hover {
+ .forminator-submit:hover {
     background-color: #7BA035;
 }
 </style>

@@ -519,88 +519,132 @@ function pg_enqueue_scripts() {
 }
 add_action('wp_enqueue_scripts', 'pg_enqueue_scripts');
 
+/**
+ * Local Email Handling + Custom Forminator Hook for eBook PDF Delivery
+ *
+ * - Configures WordPress PHPMailer to route email through MailHog in local dev.
+ * - Hooks into Forminator AJAX submission for a specific eBook download form.
+ * - Processes form data, retrieves the correct eBook PDF, and emails it to the user.
+ */
 
-// Send page-specific Ebook PDF after Forminator submission
-add_action('forminator_custom_form_after_handle_submit', function($form_id, $response) {
+// --- Configure WordPress to use MailHog in local environment ---
+add_action('phpmailer_init', function($phpmailer) {
+    /**
+     * Only apply SMTP settings if:
+     * - The site is running in "local" environment.
+     * - Required SMTP constants are defined in wp-config.php (SMTP_HOST, SMTP_PORT, etc.).
+     */
+    if (
+        defined('WP_ENVIRONMENT_TYPE') && WP_ENVIRONMENT_TYPE === 'local'
+        && defined('SMTP_HOST') && defined('SMTP_PORT')
+    ) {
+        $phpmailer->isSMTP();
+        $phpmailer->Host       = SMTP_HOST;
+        $phpmailer->Port       = SMTP_PORT;
+        $phpmailer->SMTPAuth   = SMTP_AUTH;
+        $phpmailer->Username   = SMTP_USER;
+        $phpmailer->Password   = SMTP_PASS;
+        $phpmailer->SMTPSecure = SMTP_SECURE;
+    }
+});
 
-    // Only for this specific form
-    if ($form_id !== 530) {
-        return;
-    }
 
-    // Get the current page ID from the form submission context
-    // Try multiple methods to get the page ID
-    $page_id = null;
-    
-    // Method 1: Try to get from global post
-    if (is_singular() && get_the_ID()) {
-        $page_id = get_the_ID();
-    }
-    
-    // Method 2: Try to get from form submission data
-    if (!$page_id && isset($response['data'])) {
-        foreach ($response['data'] as $field) {
-            if (isset($field['name']) && $field['name'] === 'page_id') {
-                $page_id = intval($field['value']);
-                break;
-            }
-        }
-    }
-    
-    // Method 3: Try to get from referrer URL
-    if (!$page_id && isset($_SERVER['HTTP_REFERER'])) {
-        $referrer = $_SERVER['HTTP_REFERER'];
-        $page_id = url_to_postid($referrer);
-    }
+// --- Hook Forminator AJAX submission for eBook form (ID: 530) ---
 
-    if (!$page_id) {
-        error_log('Ebook PDF: Could not determine page ID');
-        return;
+/**
+ * Handles unauthenticated (public) submissions.
+ */
+add_action('wp_ajax_nopriv_forminator_submit_form_custom-forms', function() {
+    if (isset($_POST['form_id']) && $_POST['form_id'] == 530) {
+        pg_process_ebook_pdf($_POST);
     }
+}, 5);
 
-    // Get ACF file field (returns array)
-    $pdf_file = get_field('ebook_pdf', $page_id);
-    if (empty($pdf_file) || empty($pdf_file['ID'])) {
-        error_log('Ebook PDF: No PDF file found for page ID: ' . $page_id);
-        return;
+/**
+ * Handles authenticated (logged-in) submissions.
+ */
+add_action('wp_ajax_forminator_submit_form_custom-forms', function() {
+    if (isset($_POST['form_id']) && $_POST['form_id'] == 530) {
+        pg_process_ebook_pdf($_POST);
     }
+}, 5);
 
-    // Get server path for attachment
-    $pdf_path = get_attached_file($pdf_file['ID']);
-    if (!file_exists($pdf_path)) {
-        error_log('Ebook PDF: File does not exist: ' . $pdf_path);
-        return;
-    }
 
-    // Extract submitted email from Forminator data
-    $submitted_data = $response['data'];
+// --- Core function: process eBook form submission ---
+/**
+ * Process the Forminator form data and send eBook PDF to the user.
+ *
+ * Steps:
+ *  1. Extract user data (first name, last name, email) from $_POST.
+ *  2. Identify which eBook to send based on current page ID.
+ *  3. Fetch the eBook PDF (from ACF field) and validate file existence.
+ *  4. Build and send a styled HTML email with the PDF attached.
+ *  5. Log success or failure to debug.log for troubleshooting.
+ *
+ * @param array $post_data Raw $_POST data from AJAX submission.
+ */
+function pg_process_ebook_pdf($post_data) {
     $user_email = '';
-    $user_name = '';
+    $first_name = '';
+    $last_name  = '';
     
-    foreach ($submitted_data as $field) {
-        if (isset($field['name']) && $field['name'] === 'email') {
-            $user_email = sanitize_email($field['value']);
-        }
-        if (isset($field['name']) && ($field['name'] === 'name' || $field['name'] === 'first-name')) {
-            $user_name = sanitize_text_field($field['value']);
-        }
+    // --- Extract and sanitize form fields ---
+    if (isset($post_data['email-1'])) {
+        $user_email = sanitize_email($post_data['email-1']);
     }
-
-    if (empty($user_email)) {
-        error_log('Ebook PDF: No email address found in form submission');
+    if (isset($post_data['name-1'])) {
+        $first_name = sanitize_text_field($post_data['name-1']);
+    }
+    if (isset($post_data['name-2'])) {
+        $last_name = sanitize_text_field($post_data['name-2']);
+    }
+    
+    // --- Identify which eBook to send (based on the page the form was submitted from) ---
+    $page_id  = isset($post_data['page_id']) ? intval($post_data['page_id']) : 0;
+    $ebook_id = $page_id;
+    
+    if ($page_id <= 0) {
+        error_log('EBOOK PDF ERROR: No page ID found');
         return;
     }
-
-    // Get ebook title
-    $ebook_title = get_the_title($page_id);
-    $ebook_title = str_replace(' Ebook', '', $ebook_title); // Remove "Ebook" suffix if present
-
-    // Email content with better formatting
+    
+    $user_name = trim($first_name . ' ' . $last_name);
+    
+    // --- Validate essential inputs ---
+    if (empty($user_email)) {
+        error_log('EBOOK PDF ERROR: No email provided');
+        return;
+    }
+    if (empty($ebook_id)) {
+        error_log('EBOOK PDF ERROR: No Ebook ID provided');
+        return;
+    }
+    
+    // --- Fetch eBook PDF file from ACF field on Ebook CPT ---
+    $pdf_file = get_field('ebook_pdf', $ebook_id);
+    
+    if (empty($pdf_file) || empty($pdf_file['ID'])) {
+        error_log('EBOOK PDF ERROR: No PDF file found for Ebook ID: ' . $ebook_id);
+        return;
+    }
+    
+    $pdf_path = get_attached_file($pdf_file['ID']);
+    
+    if (!file_exists($pdf_path)) {
+        error_log('EBOOK PDF ERROR: PDF file does not exist at path: ' . $pdf_path);
+        return;
+    }
+    
+    // --- Format eBook title (strip trailing "Ebook") ---
+    $ebook_title = get_the_title($ebook_id);
+    $ebook_title = str_replace(' Ebook', '', $ebook_title);
+    
+    // --- Compose HTML email body ---
     $subject = 'Your requested eBook: ' . $ebook_title;
     
-    $message = '<html><body style="font-family: Arial, sans-serif; line-height: 1.6; color: #333;">';
-    $message .= '<div style="max-width: 600px; margin: 0 auto; padding: 20px;">';
-    $message .= '<h2 style="color: #1F3131; margin-bottom: 20px;">Thank you for your interest!</h2>';
+    $message  = '<html><body style="font-family: Arial, sans-serif; line-height: 1.6; color: #333;">';
+    $message .= '<div style="max-width:600px; margin:0 auto; padding:20px;">';
+    $message .= '<h2 style="color:#1F3131; margin-bottom:20px;">Thank you for your interest!</h2>';
     
     if (!empty($user_name)) {
         $message .= '<p>Hi ' . esc_html($user_name) . ',</p>';
@@ -613,19 +657,22 @@ add_action('forminator_custom_form_after_handle_submit', function($form_id, $res
     $message .= '<p>If you have any questions or would like to learn more about our services, feel free to reach out to us.</p>';
     $message .= '<p>Best regards,<br>The Piedmont Global Team</p>';
     $message .= '</div></body></html>';
-
+    
     $headers = [
         'Content-Type: text/html; charset=UTF-8',
         'From: Piedmont Global <noreply@piedmontglobal.com>'
     ];
-
-    // Send email with attachment
+    
+    // --- Send email with PDF attachment ---
     $mail_sent = wp_mail($user_email, $subject, $message, $headers, [$pdf_path]);
     
     if ($mail_sent) {
-        error_log('Ebook PDF: Successfully sent to ' . $user_email);
+        error_log('EBOOK PDF SUCCESS: Email successfully sent to ' . $user_email);
     } else {
-        error_log('Ebook PDF: Failed to send email to ' . $user_email);
+        error_log('EBOOK PDF ERROR: Failed to send email to ' . $user_email);
     }
+}
 
-}, 10, 2);
+
+
+
