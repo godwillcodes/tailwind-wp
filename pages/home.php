@@ -380,7 +380,7 @@ get_template_part( 'components/banner/primary' );
         <?php
 $args = [
     'post_type'      => 'case_study',
-    'posts_per_page' => 3,
+    'posts_per_page' => 1,
 ];
 
 $query = new WP_Query($args);
@@ -393,22 +393,23 @@ if ($query->have_posts()):
         $logo        = get_field('logo');       // ACF image field
         $link        = get_permalink();
 ?>
-         <a href="<?php the_permalink(); ?>" 
-   class="group block shadow-md rounded border bg-white border-[#ffffff]/40 rounded-t-[4px] transition-transform duration-300 hover:shadow-lg">
-  <div class="overflow-hidden rounded-t-[4px]">
-    <img src="<?php the_field('logo'); ?>" 
-         class="w-[70%] h-60 object-contain mx-auto object-center transition-transform duration-500 group-hover:scale-105" 
-         alt="<?php the_title(); ?>">
-  </div>
-  <div class="p-8 bg-white">
-    <div class="text-gray-500 text-base mb-2"><?php the_field('industry'); ?></div>
-    <h3 class="text-2xl font-semibold text-[#1F3131] mb-2"><?php the_field('title'); ?></h3>
-    <div class="h-6 md:h-10"></div>
-    <span class="inline-flex items-center text-base font-medium border-b-2 border-[#D16555]">
-      Read Case Study <span class="ml-1 text-lg transform transition-transform duration-300 group-hover:translate-x-1">→</span>
-    </span>
-  </div>
-</a>
+        <a href="<?php the_permalink(); ?>"
+            class="group block bg-white rounded border border-[#DFDAD4] p-8 shadow-sm rounded-t-[4px] transition-transform duration-300 hover:shadow-lg">
+            <div class="overflow-hidden rounded-t-[4px]">
+                <img src="<?php the_field('logo'); ?>"
+                    class="w-[70%] h-60 object-contain mx-auto object-center transition-transform duration-500 group-hover:scale-105"
+                    alt="<?php the_title(); ?>">
+            </div>
+            <div class="p-8 bg-white">
+                <div class="text-gray-500 text-base mb-2"><?php the_field('industry'); ?></div>
+                <h3 class="text-2xl font-semibold text-[#1F3131] mb-2"><?php the_field('title'); ?></h3>
+                <div class="h-6 md:h-10"></div>
+                <span class="inline-flex items-center text-base font-medium border-b-2 border-[#D16555]">
+                    Read Case Study <span
+                        class="ml-1 text-lg transform transition-transform duration-300 group-hover:translate-x-1">→</span>
+                </span>
+            </div>
+        </a>
         <?php
     endwhile;
     wp_reset_postdata();
