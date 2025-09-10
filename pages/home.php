@@ -13,57 +13,59 @@ get_template_part( 'components/banner/primary' );
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
             <?php if (have_rows('what_brings_you_here_today')): ?>
             <?php while (have_rows('what_brings_you_here_today')): the_row(); 
-            $title       = get_sub_field('title');
-            $description = get_sub_field('description');
-            $link        = get_sub_field('link_');
-            $size        = get_sub_field('size_of_card'); // only "small"
-            if (strtolower($size) !== 'small') {
-                continue;
-            }
-        ?>
-            <div class="relative group overflow-hidden rounded shadow-md h-full bg-[#F9F8F6] text-black p-10"
-                data-aos="fade-up" data-aos-duration="800" data-aos-easing="ease-out-cubic">
+                $title       = get_sub_field('title');
+                $description = get_sub_field('description');
+                $link        = get_sub_field('link_');
+                $size        = get_sub_field('size_of_card'); // only "small"
+                if (strtolower($size) !== 'small') {
+                    continue;
+                }
+            ?>
 
-                <!-- Default Content -->
-                <div class="relative z-10 text-start group-hover:opacity-0 transition-opacity duration-500 ease-in-out">
-                    <?php if ($title): ?>
-                    <h3
-                        class="text-2xl font-semibold transition-transform duration-500 group-hover:-translate-y-2 max-w-[250px]">
-                        <?php echo esc_html($title); ?>
-                    </h3>
-                    <?php endif; ?>
+            <a href="<?php echo esc_url($link); ?>" class="block h-full">
+                <div class="relative group overflow-hidden rounded shadow-md h-full bg-[#F9F8F6] text-black p-10"
+                    data-aos="fade-up" data-aos-duration="800" data-aos-easing="ease-out-cubic">
 
-                    <?php if ($description): ?>
-                    <p class="text-gray-700 mt-4 transition-opacity duration-500">
-                        <?php echo esc_html($description); ?>
-                    </p>
-                    <?php endif; ?>
+                    <!-- Default Content -->
+                    <div
+                        class="relative z-10 text-start group-hover:opacity-0 transition-opacity duration-500 ease-in-out">
+                        <?php if ($title): ?>
+                        <h3
+                            class="text-2xl font-semibold transition-transform duration-500 group-hover:-translate-y-2 max-w-[250px]">
+                            <?php echo esc_html($title); ?>
+                        </h3>
+                        <?php endif; ?>
 
-                    <div class="h-20 md:h-40"></div>
+                        <?php if ($description): ?>
+                        <p class="text-gray-700 mt-4 transition-opacity duration-500">
+                            <?php echo esc_html($description); ?>
+                        </p>
+                        <?php endif; ?>
 
+                        <div class="h-20 md:h-40"></div>
 
-                    <a href="<?php echo esc_url($link); ?>"
-                        class="inline-flex items-center gap-1 text-sm font-medium mt-6 border-b-2 border-[#D16555] hover:border-[#D16555] transition-colors duration-300">
-                        Learn more <span class="text-lg">→</span>
-                    </a>
+                        <span
+                            class="inline-flex items-center gap-1 text-sm font-medium mt-6 border-b-2 border-[#D16555] hover:border-[#D16555] transition-colors duration-300">
+                            Learn more <span class="text-lg">→</span>
+                        </span>
+                    </div>
 
+                    <!-- Hover Content -->
+                    <div
+                        class="absolute inset-0 z-20 flex flex-col items-center justify-center text-center px-6 opacity-0 group-hover:opacity-100 transition-all duration-100 ease-out bg-[linear-gradient(180deg,_rgba(152,196,65,0)_46.15%,_rgba(152,196,65,0.5)_80%,_rgba(0,97,85,0.5)_100%)] scale-95 group-hover:scale-100">
+                        <div
+                            class="flex flex-col items-center justify-center gap-6 text-center text-xl md:text-2xl px-6 md:px-20 font-semibold text-black mb-6 transition-transform duration-500 ease-in-out group-hover:translate-y-1">
+
+                            <span>Explore our Approach</span>
+
+                            <img src="<?php echo esc_url(get_template_directory_uri() . '/assets/icons/arrow-side.svg'); ?>"
+                                alt="Arrow Icon"
+                                class="h-10 w-10 text-white bg-black p-3 rounded-full transition-transform duration-500 ease-in-out group-hover:scale-110">
+                        </div>
+                    </div>
                 </div>
+            </a>
 
-                <!-- Hover Content -->
-                <div
-                    class="absolute inset-0 z-20 flex flex-col items-center justify-center text-center px-6 opacity-0 group-hover:opacity-100 transition-all duration-100 ease-out bg-[linear-gradient(180deg,_rgba(152,196,65,0)_46.15%,_rgba(152,196,65,0.5)_80%,_rgba(0,97,85,0.5)_100%)] scale-95 group-hover:scale-100">
-                    <a href="<?php echo esc_url($link); ?>" 
-   class="flex flex-col items-center justify-center gap-6 text-center text-xl md:text-2xl px-6 md:px-20 font-semibold text-black mb-6 transition-transform duration-500 ease-in-out group-hover:translate-y-1">
-
-    <span>Explore our Approach</span>
-
-    <img src="<?php echo esc_url(get_template_directory_uri() . '/assets/icons/arrow-side.svg'); ?>"
-        alt="Arrow Icon"
-        class="h-10 w-10 text-white bg-black p-3 rounded-full transition-transform duration-500 ease-in-out group-hover:scale-110">
-</a>
-
-                </div>
-            </div>
             <?php endwhile; ?>
             <?php endif; ?>
         </div>
@@ -72,57 +74,58 @@ get_template_part( 'components/banner/primary' );
         <!-- Government CTA -->
         <?php if (have_rows('what_brings_you_here_today')): ?>
         <?php while (have_rows('what_brings_you_here_today')): the_row(); 
-        $title       = get_sub_field('title');
-        $description = get_sub_field('description');
-        $link        = get_sub_field('link_');
-        $size        = get_sub_field('size_of_card'); // only "big"
-        if (strtolower($size) !== 'big') {
-            continue;
-        }
-    ?>
-        <div class="bg-[#F9F8F6] text-black mt-12 rounded-lg p-8 text-center group relative overflow-hidden"
-            data-aos="fade-up" data-aos-duration="800" data-aos-easing="ease-out-cubic">
+            $title       = get_sub_field('title');
+            $description = get_sub_field('description');
+            $link        = get_sub_field('link_');
+            $size        = get_sub_field('size_of_card'); // only "big"
+            if (strtolower($size) !== 'big') {
+                continue;
+            }
+        ?>
+        <a href="<?php echo esc_url($link); ?>" class="block h-full">
+            <div class="bg-[#F9F8F6] text-black mt-12 rounded-lg p-8 text-center group relative overflow-hidden"
+                data-aos="fade-up" data-aos-duration="800" data-aos-easing="ease-out-cubic">
 
-            <div class="relative z-10 transition-opacity duration-500 ease-in-out group-hover:opacity-0">
-                <?php if ($title): ?>
-                <h3 class="text-2xl font-semibold mb-2 transition-transform duration-500 group-hover:-translate-y-2">
-                    <?php echo esc_html($title); ?>
-                </h3>
-                <?php endif; ?>
+                <div class="relative z-10 transition-opacity duration-500 ease-in-out group-hover:opacity-0">
+                    <?php if ($title): ?>
+                    <h3
+                        class="text-2xl font-semibold mb-2 transition-transform duration-500 group-hover:-translate-y-2">
+                        <?php echo esc_html($title); ?>
+                    </h3>
+                    <?php endif; ?>
 
-                <?php if ($description): ?>
-                <p class="text-gray-700 mb-4 transition-opacity duration-500">
-                    <?php echo esc_html($description); ?>
-                </p>
-                <?php endif; ?>
+                    <?php if ($description): ?>
+                    <p class="text-gray-700 mb-4 transition-opacity duration-500">
+                        <?php echo esc_html($description); ?>
+                    </p>
+                    <?php endif; ?>
 
-                <div class="h-20"></div>
+                    <div class="h-20"></div>
 
+                    <span
+                        class="inline-flex items-center gap-1 text-sm font-medium mt-6 border-b-2 border-[#D16555] hover:border-[#D16555] transition-colors duration-300">
+                        Learn More <span class="text-lg">→</span>
+                    </span>
+                </div>
 
-                <a href="<?php echo esc_url($link); ?>"
-                    class="inline-flex items-center gap-1 text-sm font-medium mt-6 border-b-2 border-[#D16555] hover:border-[#D16555] transition-colors duration-300">
-                    Learn More <span class="text-lg">→</span>
-                </a>
+                <div
+                    class="absolute inset-0 z-20 flex flex-col items-center justify-center px-6 text-center
+                    opacity-0 group-hover:opacity-100 transition-all duration-200 ease-out
+                    bg-[linear-gradient(180deg,_rgba(152,196,65,0)_46.15%,_rgba(152,196,65,0.5)_80%,_rgba(0,97,85,0.5)_100%)] scale-95 group-hover:scale-100">
 
+                    <div
+                        class="flex flex-col items-center justify-center gap-6 text-center text-xl md:text-2xl px-6 md:px-20 font-semibold text-black mb-6 transition-transform duration-500 ease-in-out group-hover:translate-y-1">
+
+                        <span>Explore our Approach</span>
+
+                        <img src="<?php echo esc_url(get_template_directory_uri() . '/assets/icons/arrow-side.svg'); ?>"
+                            alt="Arrow Icon"
+                            class="h-10 w-10 text-white bg-black p-3 rounded-full transition-transform duration-500 ease-in-out group-hover:scale-110">
+                    </div>
+                </div>
             </div>
+        </a>
 
-            <div
-                class="absolute inset-0 z-20 flex flex-col items-center justify-center px-6 text-center
-                        opacity-0 group-hover:opacity-100 transition-all duration-200 ease-out
-                        bg-[linear-gradient(180deg,_rgba(152,196,65,0)_46.15%,_rgba(152,196,65,0.5)_80%,_rgba(0,97,85,0.5)_100%)] scale-95 group-hover:scale-100">
-
-
-                 <a href="<?php echo esc_url($link); ?>" 
-   class="flex flex-col items-center justify-center gap-6 text-center text-xl md:text-2xl px-6 md:px-20 font-semibold text-black mb-6 transition-transform duration-500 ease-in-out group-hover:translate-y-1">
-
-    <span>Explore our Approach</span>
-
-    <img src="<?php echo esc_url(get_template_directory_uri() . '/assets/icons/arrow-side.svg'); ?>"
-        alt="Arrow Icon"
-        class="h-10 w-10 text-white bg-black p-3 rounded-full transition-transform duration-500 ease-in-out group-hover:scale-110">
-</a>
-            </div>
-        </div>
         <?php endwhile; ?>
         <?php endif; ?>
 
@@ -146,19 +149,14 @@ get_template_part( 'components/banner/primary' );
             <?php while (have_rows('partners_repeater', 'option')): the_row(); ?>
             <div class="item">
                 <a href="<?php the_sub_field('url'); ?>" target="_blank" rel="noopener">
-                   <img src="<?php the_sub_field('partner_logo'); ?>" 
-     alt="Piedmont Global Partner"
-     class="h-24 w-auto mx-auto object-contain transition duration-300 ease-in-out grayscale hover:grayscale-0" />
+                    <img src="<?php the_sub_field('partner_logo'); ?>" alt="Piedmont Global Partner"
+                        class="h-24 w-auto mx-auto object-contain transition duration-300 ease-in-out grayscale hover:grayscale-0" />
 
                 </a>
             </div>
             <?php endwhile; ?>
         </div>
         <?php endif; ?>
-
-
-
-
 
         <div class="grid gap-6 md:grid-cols-2 mb-8">
             <?php if (have_rows('the_trusted_partner_for_local_and_global_growth_cards')): ?>
@@ -190,9 +188,6 @@ get_template_part( 'components/banner/primary' );
             <?php endif; ?>
         </div>
 
-
-
-
         <div class=" rounded-lg border border-[#DFDAD4] p-8 md:p-12 shadow-md">
             <h3 class="text-2xl md:text-3xl text-[#1F3131] font-semibold mb-8">
                 We’ve been recognized
@@ -204,9 +199,8 @@ get_template_part( 'components/banner/primary' );
                     <span
                         class="flex items-center justify-center h-32 w-32 rounded-full bg-gradient-to-b from-gray-100 to-green-100 shadow-sm"
                         aria-label="Piedmont Global Recognition">
-                       <img src="<?php the_sub_field('logo'); ?>" 
-                        alt="Piedmont Global Recognition"
-                        class="max-h-24 max-w-24 object-contain transition duration-300 ease-in-out grayscale hover:grayscale-0" />
+                        <img src="<?php the_sub_field('logo'); ?>" alt="Piedmont Global Recognition"
+                            class="max-h-24 max-w-24 object-contain transition duration-300 ease-in-out grayscale hover:grayscale-0" />
 
                     </span>
                 </a>
@@ -214,10 +208,6 @@ get_template_part( 'components/banner/primary' );
             </div>
             <?php endif; ?>
         </div>
-
-
-
-
     </div>
 </section>
 
@@ -228,10 +218,13 @@ get_template_part( 'components/banner/primary' );
                 From translation to<br />transformation
             </h2>
             <a href="#"
-                class="inline-flex items-center text-lg font-medium border-b-2 border-[#D16555] hover:border-[#D16555] transition-colors duration-300"
+                class="group inline-flex items-center text-lg font-medium border-b-2 border-[#D16555] hover:border-[#D16555] transition-colors duration-300"
                 data-aos="fade-left" data-aos-delay="100">
-                Explore full capabilities <span class="ml-1 text-lg">→</span>
+                Explore full capabilities
+                <span
+                    class="ml-1 text-lg transform transition-transform duration-300 group-hover:translate-x-1">→</span>
             </a>
+
         </div>
         <div class="grid grid-cols-1 md:grid-cols-2  gap-10 lg:gap-32">
             <div data-aos="fade-up" data-aos-delay="150" class="flex-1 ">
@@ -293,11 +286,14 @@ get_template_part( 'components/banner/primary' );
             <h2 class="text-3xl md:text-5xl font-bold text-white max-w-lg" data-aos="fade-right">
                 Deep industry insight. Proven across sectors.
             </h2>
-            <a href="#"
-                class="inline-flex items-center text-lg font-medium border-b-2 border-[#D16555] hover:border-[#D16555] transition-colors duration-300"
+            <a href="/industries"
+                class="group inline-flex items-center text-lg font-medium border-b-2 border-[#D16555] hover:border-[#D16555] transition-colors duration-300"
                 data-aos="fade-left" data-aos-delay="100">
-                Explore industry solutions <span class="ml-1 text-lg">→</span>
+                Explore industry solutions
+                <span
+                    class="ml-1 text-lg transform transition-transform duration-300 group-hover:translate-x-1">→</span>
             </a>
+
         </div>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             <?php
@@ -315,13 +311,17 @@ get_template_part( 'components/banner/primary' );
                     $icon = get_field('industry_icon');
                     $tagline = get_field('industry_tagline');
             ?>
-            <a href="<?php the_permalink(); ?>" class="group">
-                <div class="bg-[#006155] text-white rounded-[4px] shadow-md p-10 flex flex-col justify-between transition-transform duration-300 transform group-hover:scale-95"
-                    data-aos="fade-up" data-aos-delay="<?= $i * 50 ?>">
+            <a href="<?php the_permalink(); ?>" class="group block">
+                <div class="bg-[#006155] text-white rounded-[4px] shadow-md p-10 flex flex-col justify-between 
+                transform transition-all duration-500 ease-out 
+                group-hover:scale-[1.01] " data-aos="fade-up" data-aos-delay="<?= $i * 50 ?>">
+
                     <?php if ($icon) : ?>
-                    <img src=" <?php echo wp_kses_post($icon); ?>" class="mb-6 h-16 w-16" alt="">
+                    <img src="<?php echo wp_kses_post($icon); ?>" class="mb-6 h-16 w-16" alt="">
                     <?php endif; ?>
+
                     <h3 class="text-xl text-white font-semibold mb-4"><?php the_title(); ?></h3>
+
                     <?php if ($tagline) : ?>
                     <p class="text-white mb-3 mt-8 font-normal text-lg">
                         <?php echo wp_kses_post($tagline); ?>
@@ -329,6 +329,7 @@ get_template_part( 'components/banner/primary' );
                     <?php endif; ?>
                 </div>
             </a>
+
             <?php
                     $i++; // Increment the counter
                 endwhile;
@@ -361,8 +362,8 @@ get_template_part( 'components/banner/primary' );
         <?php if (!empty($random)): ?>
         <div class="md:col-span-2 bg-white rounded border border-[#DFDAD4] p-8 shadow-sm flex flex-col">
             <img src="<?php echo esc_url(get_template_directory_uri() . '/assets/icons/quote.svg'); ?>"
-                alt="<?php echo esc_html($random['title']); ?>" class="h-10 w-10 mb-4" />
-            <p class="text-base md:text-3xl text-gray-800 font-medium flex-grow max-w-xl">
+                alt="<?php echo esc_html($random['title']); ?>" class="h-16 w-16 mb-4" />
+            <p class="text-base md:text-xl text-gray-800 font-medium flex-grow max-w-2xl">
                 <?php echo esc_html($random['description']); ?>
             </p>
             <div class="mt-6">
@@ -379,7 +380,7 @@ get_template_part( 'components/banner/primary' );
         <?php
 $args = [
     'post_type'      => 'case_study',
-    'posts_per_page' => 1,
+    'posts_per_page' => 3,
 ];
 
 $query = new WP_Query($args);
@@ -389,30 +390,25 @@ if ($query->have_posts()):
         $percentage  = get_field('value');   // ACF field
         $description = get_field('description'); // ACF field
         $image       = get_field('image');       // ACF image field
+        $logo        = get_field('logo');       // ACF image field
         $link        = get_permalink();
 ?>
-        <div class="bg-white rounded border border-[#DFDAD4] overflow-hidden shadow-sm">
-            <?php if (has_post_thumbnail()): ?>
-            <?php the_post_thumbnail('large', ['class' => 'w-full h-48 object-cover', 'alt' => get_the_title()]); ?>
-            <?php endif; ?>
-            <div class="py-6 px-8">
-                <?php if ($percentage): ?>
-                <p class="text-6xl font-bold text-gray-900 mb-4">
-                    <?php echo esc_html($percentage); ?>
-                </p>
-                <?php endif; ?>
-
-                <p class="text-gray-700 mb-4 text-lg max-w-xs">
-                    <?php the_field('title'); ?>
-                </p>
-
-                <a href="<?php echo esc_url($link); ?>"
-                    class="inline-flex items-center mt-10 text-base font-medium border-b-2 border-[#D16555] hover:border-[#D16555] transition-colors duration-300"
-                    data-aos="fade-left" data-aos-delay="100">
-                    View Case Study <span class="ml-1 text-lg">→</span>
-                </a>
-            </div>
-        </div>
+         <a href="<?php the_permalink(); ?>" 
+   class="group block shadow-md rounded border bg-white border-[#ffffff]/40 rounded-t-[4px] transition-transform duration-300 hover:shadow-lg">
+  <div class="overflow-hidden rounded-t-[4px]">
+    <img src="<?php the_field('logo'); ?>" 
+         class="w-[70%] h-60 object-contain mx-auto object-center transition-transform duration-500 group-hover:scale-105" 
+         alt="<?php the_title(); ?>">
+  </div>
+  <div class="p-8 bg-white">
+    <div class="text-gray-500 text-base mb-2"><?php the_field('industry'); ?></div>
+    <h3 class="text-2xl font-semibold text-[#1F3131] mb-2"><?php the_field('title'); ?></h3>
+    <div class="h-6 md:h-10"></div>
+    <span class="inline-flex items-center text-base font-medium border-b-2 border-[#D16555]">
+      Read Case Study <span class="ml-1 text-lg transform transition-transform duration-300 group-hover:translate-x-1">→</span>
+    </span>
+  </div>
+</a>
         <?php
     endwhile;
     wp_reset_postdata();
@@ -437,8 +433,8 @@ endif;
             <h2 class="text-4xl md:text-5xl font-semibold mb-8">
                 <?php echo esc_html( get_field('visual_moment_title') ); ?> </h2>
             <div class="text-[#1F3131] text-lg space-y-6">
-    <?php echo wp_kses_post( get_field('visual_moment_subtitle') ); ?>
-<div>
+                <?php echo wp_kses_post( get_field('visual_moment_subtitle') ); ?>
+                <div>
 
         </header>
 
@@ -468,11 +464,9 @@ endif;
     </div>
 
     <!-- Side images -->
-    <img src=/wp-content/uploads/Rectangle-21027.png" alt="Left visual"
-        id="imageLeft"
+    <img src=/wp-content/uploads/Rectangle-21027.png" alt="Left visual" id="imageLeft"
         class="absolute top-1/2 left-12 w-[177px] h-[177px] object-contain  z-5 transition-transform duration-700" />
-    <img src=/wp-content/uploads/Rectangle-21027.png" alt="Right visual"
-        id="imageRight"
+    <img src=/wp-content/uploads/Rectangle-21027.png" alt="Right visual" id="imageRight"
         class="absolute top-1/2 right-12 w-[177px] h-[177px] object-contain z-5 transition-transform duration-700" />
 </section>
 
@@ -501,10 +495,11 @@ endif;
             <h2 class="text-3xl md:text-5xl font-bold text-gray-900 max-w-2xl" data-aos="fade-right">
                 Solutions built for your moment and your mission
             </h2>
-            <a href="#"
+            <a href="/solutions"
                 class="inline-flex items-center text-lg font-medium border-b-2 border-[#D16555] hover:border-[#D16555] transition-colors duration-300"
                 data-aos="fade-left" data-aos-delay="100">
-                Explore full capabilities <span class="ml-1 text-lg">→</span>
+                Explore full capabilities <span
+                    class="ml-1 text-lg transform transition-transform duration-300 group-hover:translate-x-1">→</span>
             </a>
         </div>
 

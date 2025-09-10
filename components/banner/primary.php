@@ -1,5 +1,4 @@
-<section 
-    class="relative h-auto lg:h-[80vh] w-full text-white overflow-hidden bg-no-repeat bg-cover bg-bottom"
+<section class="relative h-auto w-full text-white overflow-hidden bg-no-repeat bg-cover bg-bottom"
     style="background-image: url('<?php echo esc_url(get_template_directory_uri() . '/assets/icons/primary-bg.svg'); ?>');">
     
     <!-- Navigation -->
@@ -7,8 +6,8 @@
     <?php get_template_part('components/navigation/mobile'); ?>
 
 
-    <div class="w-full px-6 md:px-12 relative z-20">
-        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-20 items-center mt-28">
+    <div class="w-full px-6 md:px-12 relative z-20 mt-10">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-20 items-center my-28">
             <!-- Left Column -->
             <div class="md:col-span-7 space-y-6 order-1">
                 <div class="text-3xl md:text-5xl leading-[40px] md:leading-[50px] font-semibold"
@@ -27,11 +26,13 @@
                         <?php echo wp_kses_post(get_field('primary_button_title')); ?>
                     </a>
                     <a href="<?php echo wp_kses_post(get_field('secondary_button_link')); ?>"
-                       class="flex items-center text-white text-base font-semibold hover:underline">
-                        <?php echo wp_kses_post(get_field('secondary_button_title')); ?>
-                        <img src="<?php echo esc_url(get_template_directory_uri() . '/assets/icons/arrow-right.svg'); ?>"
-                             class="ml-2 h-6 w-6" alt="">
-                    </a>
+   class="group flex items-center text-white text-base font-semibold">
+    <?php echo wp_kses_post(get_field('secondary_button_title')); ?>
+    <img src="<?php echo esc_url(get_template_directory_uri() . '/assets/icons/arrow-right.svg'); ?>"
+         class="ml-2 h-6 w-6 transform transition-transform duration-300 group-hover:translate-x-1"
+         alt="">
+</a>
+
                 </div>
             </div>
 

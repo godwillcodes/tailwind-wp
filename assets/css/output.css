@@ -405,6 +405,9 @@
   .my-12 {
     margin-block: calc(var(--spacing) * 12);
   }
+  .my-28 {
+    margin-block: calc(var(--spacing) * 28);
+  }
   .-mt-20 {
     margin-top: calc(var(--spacing) * -20);
   }
@@ -2106,10 +2109,24 @@
       }
     }
   }
+  .group-hover\:scale-\[1\.01\] {
+    &:is(:where(.group):hover *) {
+      @media (hover: hover) {
+        scale: 1.01;
+      }
+    }
+  }
   .group-hover\:scale-\[1\.02\] {
     &:is(:where(.group):hover *) {
       @media (hover: hover) {
         scale: 1.02;
+      }
+    }
+  }
+  .group-hover\:scale-\[1\.03\] {
+    &:is(:where(.group):hover *) {
+      @media (hover: hover) {
+        scale: 1.03;
       }
     }
   }
