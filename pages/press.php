@@ -68,12 +68,6 @@ $query = new WP_Query($args);
       ?>
     </div>
     
-    <!-- Load More Button -->
-    <div class="text-center mt-12">
-      <button class="load-more-btn bg-[#98C441] text-black px-8 py-3 font-bold text-lg transition-colors duration-200 hover:bg-[#7BA035] focus:outline-none focus:ring-2 focus:ring-[#98C441] focus:ring-offset-2">
-        Load More Posts
-      </button>
-    </div>
   </div>
 </section>
 

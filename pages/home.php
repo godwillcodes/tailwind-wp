@@ -391,13 +391,13 @@ if ($query->have_posts()):
         $description = get_field('description'); // ACF field
         $image       = get_field('image');       // ACF image field
         $logo        = get_field('logo');       // ACF image field
-        $link        = get_permalink();
+        $link        = get_permalink();         
 ?>
         <a href="<?php the_permalink(); ?>"
-            class="group block bg-white rounded border border-[#DFDAD4] p-8 shadow-sm rounded-t-[4px] transition-transform duration-300 hover:shadow-lg">
+            class="group block bg-white rounded border border-[#DFDAD4] p-5 shadow-sm rounded-t-[4px] transition-transform duration-300 hover:shadow-lg">
             <div class="overflow-hidden rounded-t-[4px]">
                 <img src="<?php the_field('logo'); ?>"
-                    class="w-[70%] h-60 object-contain mx-auto object-center transition-transform duration-500 group-hover:scale-105"
+                    class="w-[70%] h-40 object-contain mx-auto object-center transition-transform duration-500 group-hover:scale-105"
                     alt="<?php the_title(); ?>">
             </div>
             <div class="p-8 bg-white">
@@ -424,64 +424,234 @@ endif;
     style="background-image: url('<?php echo esc_url( get_template_directory_uri() . '/assets/icons/pattern-2.svg' ); ?>')">
 </section>
 
-<section class="h-auto md:h-[100vh] py-24 relative overflow-hidden"
-    style="background: linear-gradient(to bottom, #F7F7F5 0%, #F7F7F5 70%, #98C44180 85%, #00615580 100%);">
+<!-- Visual Moment Section -->
+<section 
+    class="h-auto py-24 relative overflow-hidden"
+    x-data="visualMoment()" 
+    x-init="init()"
+    style="background: linear-gradient(to bottom, #F7F7F5 0%, #F7F7F5 70%, #98C44180 85%, #00615580 100%);"
+>
+    <div class="max-w-6xl mx-auto relative z-10 px-6 space-y-10">
 
-    <div class="max-w-7xl mx-auto relative z-10 h-full flex flex-col">
-
-        <!-- Sticky static header -->
-        <header class="text-center max-w-2xl mx-auto sticky top-10 bg-[#F7F7F5] z-20 p-4">
-            <h2 class="text-4xl md:text-5xl font-semibold mb-8">
-                <?php echo esc_html( get_field('visual_moment_title') ); ?> </h2>
-            <div class="text-[#1F3131] text-lg space-y-6">
+        <!-- Header -->
+        <div class="text-center space-y-6">
+            <h2 class="text-3xl font-bold text-[#1F3131] leading-tight">
+                <?php echo esc_html( get_field('visual_moment_title') ); ?>
+            </h2>
+            <div class="text-[#1F3131] prose text-base max-w-3xl mx-auto leading-relaxed opacity-90">
                 <?php echo wp_kses_post( get_field('visual_moment_subtitle') ); ?>
-                <div>
-
-        </header>
-
-        <!-- Loop items stacked absolutely -->
-        <div class="relative flex-1">
-            <?php if (have_rows('visual_moment_stories')): ?>
-            <?php $i = 0; ?>
-            <?php while (have_rows('visual_moment_stories')): the_row(); ?>
-            <?php
-        $title = get_sub_field('title');
-        $description = get_sub_field('description');
-        $active_class = $i === 0 ? 'opacity-100 pointer-events-auto active' : 'opacity-0 pointer-events-none';
-      ?>
-            <div
-                class="scroll-item absolute inset-0 max-w-2xl mx-auto text-center flex items-center justify-center flex-col transition-opacity duration-700 <?php echo $active_class; ?>">
-                <h2 class="text-xl md:text-3xl font-semibold mb-8"><?php echo esc_html($title); ?></h2>
-                <p class="text-[#1F3131] text-lg">
-                    <?php echo esc_html($description); ?>
-                </p>
             </div>
-            <?php $i++; ?>
-            <?php endwhile; ?>
+        </div>
+
+        <!-- Content -->
+        <div class="relative mt-20 shadow-sm border border-[#DFDAD4] rounded-0 p-10">
+            <?php if (have_rows('visual_moment_stories')): ?>
+                <?php $i = 0; ?>
+                <?php while (have_rows('visual_moment_stories')): the_row(); ?>
+                    <?php
+                        $title = get_sub_field('title');
+                        $description = get_sub_field('description');
+                    ?>
+                    
+                    <div 
+                        x-show="currentIndex === <?php echo $i; ?>" 
+                        
+
+                        class=" max-w-4xl mx-auto text-center flex flex-col items-center justify-center space-y-8"
+                    >
+                        <h3 class="text-xl font-bold text-[#1F3131] leading-tight max-w-4xl">
+                            <?php echo esc_html($title); ?>
+                        </h3>
+                        <p class="text-[#1F3131] text-base leading-relaxed max-w-3xl mx-auto opacity-90">
+                            <?php echo esc_html($description); ?>
+                        </p>
+                    </div>
+
+                    <?php $i++; ?>
+                <?php endwhile; ?>
             <?php endif; ?>
         </div>
 
+        <!-- Navigation -->
+        <div class="flex justify-center mt-20 space-x-6">
+            <button 
+                @click="previousSlide()" 
+                class="w-12 h-12 lg:w-14 lg:h-14 rounded-full bg-white/20 backdrop-blur-sm transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-[#98C441] focus:ring-offset-2 flex items-center justify-center group"
+                :disabled="currentIndex === 0"
+                :class="currentIndex === 0 ? 'opacity-50 cursor-not-allowed' : 'hover:scale-105 hover:bg-white/30 opacity-100'"
+            >
+                <svg class="w-5 h-5 lg:w-6 lg:h-6 text-[#1F3131] transition-colors duration-300 group-hover:text-[#98C441]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+                </svg>
+            </button>
 
+            <button 
+                @click="nextSlide()" 
+                class="w-12 h-12 lg:w-14 lg:h-14 rounded-full bg-white/20 backdrop-blur-sm transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-[#98C441] focus:ring-offset-2 flex items-center justify-center group"
+                :disabled="currentIndex === totalSlides - 1"
+                :class="currentIndex === totalSlides - 1 ? 'opacity-50 cursor-not-allowed' : 'hover:scale-105 hover:bg-white/30 opacity-100'"
+            >
+                <svg class="w-5 h-5 lg:w-6 lg:h-6 text-[#1F3131] transition-colors duration-300 group-hover:text-[#98C441]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                </svg>
+            </button>
+        </div>
     </div>
 
-    <!-- Side images -->
-    <img src=/wp-content/uploads/Rectangle-21027.png" alt="Left visual" id="imageLeft"
-        class="absolute top-1/2 left-12 w-[177px] h-[177px] object-contain  z-5 transition-transform duration-700" />
-    <img src=/wp-content/uploads/Rectangle-21027.png" alt="Right visual" id="imageRight"
-        class="absolute top-1/2 right-12 w-[177px] h-[177px] object-contain z-5 transition-transform duration-700" />
+    <!-- Decorative Images -->
+    <img 
+        :src="getImageSource(0)" 
+        alt="Decorative visual 1" 
+        class="absolute top-16 left-4 sm:left-8 lg:left-16 w-[60px] sm:w-[80px] lg:w-[100px] object-contain z-5 transition-all duration-700 opacity-40 hover:opacity-60"
+    />
+
+    <img 
+        :src="getImageSource(1)" 
+        alt="Decorative visual 2" 
+        class="absolute top-16 right-4 sm:right-8 lg:right-16 w-[60px] sm:w-[80px] lg:w-[100px] object-contain z-5 transition-all duration-700 opacity-40 hover:opacity-60"
+    />
+
+    <img 
+        :src="getImageSource(2)" 
+        alt="Decorative visual 3" 
+        class="absolute bottom-16 left-4 sm:left-8 lg:left-16 w-[60px] sm:w-[80px] lg:w-[100px] object-contain z-5 transition-all duration-700 opacity-40 hover:opacity-60"
+    />
+
+    <img 
+        :src="getImageSource(3)" 
+        alt="Decorative visual 4" 
+        class="absolute bottom-16 right-4 sm:right-8 lg:right-16 w-[60px] sm:w-[80px] lg:w-[100px] object-contain z-5 transition-all duration-700 opacity-40 hover:opacity-60"
+    />
 </section>
 
 
+
 <style>
-/* For accessibility and smooth transitions */
-.scroll-item {
-    transition: opacity 0.7s ease, pointer-events 0.7s ease;
+/* Minimal transitions */
+.transition-all {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.scroll-item:not(.active) {
-    pointer-events: none;
+/* Glassmorphism effects */
+.backdrop-blur-sm {
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+}
+
+/* Focus states for accessibility */
+button:focus-visible {
+    outline: 2px solid #98C441;
+    outline-offset: 2px;
+}
+
+/* Smooth step transitions */
+.step-transition {
+    transition: all 0.5s ease-in-out;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .step-indicator {
+        transform: scale(0.9);
+    }
 }
 </style>
+
+<script>
+function visualMoment() {
+    return {
+        currentIndex: 0,
+        totalSlides: 0,
+        autoPlayInterval: null,
+        isAutoPlaying: true,
+        imageSources: [
+            '/wp-content/uploads/eLearning_7-scaled-e1757603404973.jpg',
+            '/wp-content/uploads/iStock-1454186321-2.png',
+            '/wp-content/uploads/iStock-1454186321-1.png',
+            '/wp-content/uploads/7415606_Business-Presentation-Meeting-Tent-Photography-Banners-Backdrop-2.png'
+        ],
+        
+        init() {
+            // Count total slides
+            this.totalSlides = document.querySelectorAll('[x-show*="currentIndex"]').length;
+            
+            // Start auto-play
+            this.startAutoPlay();
+            
+            // Pause auto-play on hover
+            this.$el.addEventListener('mouseenter', () => this.pauseAutoPlay());
+            this.$el.addEventListener('mouseleave', () => this.resumeAutoPlay());
+            
+            // Keyboard navigation
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'ArrowRight') this.nextSlide();
+                if (e.key === 'ArrowLeft') this.previousSlide();
+                if (e.key === ' ') {
+                    e.preventDefault();
+                    this.toggleAutoPlay();
+                }
+            });
+        },
+        
+        nextSlide() {
+            if (this.currentIndex < this.totalSlides - 1) {
+                this.currentIndex++;
+                this.resetAutoPlay();
+            }
+        },
+        
+        previousSlide() {
+            if (this.currentIndex > 0) {
+                this.currentIndex--;
+                this.resetAutoPlay();
+            }
+        },
+
+        goToSlide(index) {
+            if (index >= 0 && index < this.totalSlides) {
+                this.currentIndex = index;
+                this.resetAutoPlay();
+            }
+        },
+
+        getImageSource(imageIndex) {
+            // Cycle through different images based on current slide
+            const sourceIndex = (this.currentIndex + imageIndex) % this.imageSources.length;
+            return this.imageSources[sourceIndex];
+        },
+        
+        startAutoPlay() {
+            this.autoPlayInterval = setInterval(() => {
+                if (this.isAutoPlaying) {
+                    if (this.currentIndex < this.totalSlides - 1) {
+                        this.currentIndex++;
+                    } else {
+                        // Loop back to start
+                        this.currentIndex = 0;
+                    }
+                }
+            }, 5000); // 5 seconds per step
+        },
+        
+        pauseAutoPlay() {
+            this.isAutoPlaying = false;
+        },
+        
+        resumeAutoPlay() {
+            this.isAutoPlaying = true;
+        },
+        
+        toggleAutoPlay() {
+            this.isAutoPlaying = !this.isAutoPlaying;
+        },
+        
+        resetAutoPlay() {
+            clearInterval(this.autoPlayInterval);
+            this.startAutoPlay();
+        }
+    }
+}
+</script>
 
 
 
